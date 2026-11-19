@@ -1,5 +1,7 @@
 # Farhanul Haque — Personal Portfolio
 
+> 🌐 **Live Website:** [https://farhanul-haque-portfolio.web.app](https://farhanul-haque-portfolio.web.app)
+
 A modern, professional personal portfolio website built as a university assignment for a Computer Science & Engineering student.
 
 ## 🚀 Tech Stack
