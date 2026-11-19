@@ -1,6 +1,6 @@
 // ============================================================
 // Projects Data
-// Verified from GitHub profile: https://github.com/Jinchuriki-7
+// Verified from GitHub profile & project repositories
 // ============================================================
 
 export interface Project {
@@ -23,6 +23,17 @@ export const projects: Project[] = [
     technologies: ["React", "TypeScript", "Tailwind CSS", "AI / GIS", "Firebase"],
     githubUrl: "https://github.com/Jinchuriki-7/jomi-share-landtech",
     liveUrl: "https://jomi-share-portal.web.app",
+    category: "Full-Stack & AI",
+    featured: true,
+  },
+  {
+    id: "medcore",
+    title: "MedCore — Centralized Digital Healthcare Ecosystem",
+    description:
+      "A unified, consent-driven national Electronic Health Record (EHR) and clinical workflow platform. Integrates patient portal, doctor live chamber queues, hospital administration, and diagnostic lab report synchronization with token-based verification.",
+    technologies: ["PHP", "JavaScript", "SQLite / MySQL", "Tailwind CSS", "Vercel"],
+    githubUrl: "https://github.com/rahat300809/MedCore",
+    liveUrl: "https://medcore1-tan.vercel.app/",
     category: "Full-Stack & AI",
     featured: true,
   },
@@ -84,16 +95,6 @@ export const projects: Project[] = [
     technologies: ["C++", "Algorithms", "Data Structures", "Competitive Programming"],
     githubUrl: "https://github.com/Jinchuriki-7/Codeforces-Problem-Solution",
     category: "Competitive Programming",
-    featured: false,
-  },
-  {
-    id: "portfolio",
-    title: "Personal Portfolio Website",
-    description:
-      "A responsive, modern developer portfolio built with React 19, TypeScript, Tailwind CSS, and Framer Motion showcasing projects, skills, education, and competitive programming profiles.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite"],
-    githubUrl: "https://github.com/Jinchuriki-7",
-    category: "Web Development",
     featured: false,
   },
 ];
