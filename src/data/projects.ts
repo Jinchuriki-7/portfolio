@@ -33,7 +33,7 @@ export const projects: Project[] = [
       "A unified, consent-driven national Electronic Health Record (EHR) and clinical workflow platform. Integrates patient portal, doctor live chamber queues, hospital administration, and diagnostic lab report synchronization with token-based verification.",
     technologies: ["PHP", "JavaScript", "SQLite / MySQL", "Tailwind CSS", "Vercel"],
     githubUrl: "https://github.com/rahat300809/MedCore",
-    liveUrl: "https://medcore1-tan.vercel.app/",
+    liveUrl: "https://medcore-main-2026.vercel.app/",
     category: "Full-Stack & AI",
     featured: true,
   },
