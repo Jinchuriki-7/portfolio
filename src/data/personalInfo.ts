@@ -38,13 +38,46 @@ engage in competitive programming to sharpen my analytical thinking and
 problem-solving skills.`,
 };
 
-export const incomingExperience = {
-  organization: "CodeAlpha",
-  position: "Artificial Intelligence Intern",
-  type: "Virtual Internship",
-  startDate: "November 20, 2026",
-  endDate: "December 20, 2026",
-  status: "incoming", // Not started yet
-  description:
-    "Incoming virtual internship focused on Artificial Intelligence projects and applications. Set to begin November 20, 2026.",
-};
+export interface Experience {
+  id: string;
+  organization: string;
+  organizationUrl: string;
+  position: string;
+  type: string;
+  startDate: string;
+  endDate: string;
+  status: 'current' | 'incoming' | 'completed';
+  statusLabel: string;
+  description: string;
+}
+
+export const experiences: Experience[] = [
+  {
+    id: 'biswas-it',
+    organization: 'Biswas IT Firm',
+    organizationUrl: 'https://biswasitfirm.com/',
+    position: 'Web Developer Intern',
+    type: 'Online / Remote Internship',
+    startDate: 'November 2026',
+    endDate: 'January 2027',
+    status: 'current',
+    statusLabel: 'Current Position',
+    description:
+      'Working on frontend and web development tasks, creating modern responsive user interfaces, collaborating with the development team remotely, and building practical client-facing web solutions.',
+  },
+  {
+    id: 'codealpha',
+    organization: 'CodeAlpha',
+    organizationUrl: 'https://www.codealpha.tech/',
+    position: 'Artificial Intelligence Intern',
+    type: 'Virtual Internship',
+    startDate: 'November 20, 2026',
+    endDate: 'December 20, 2026',
+    status: 'incoming',
+    statusLabel: 'Incoming Position',
+    description:
+      'Incoming virtual internship focused on Artificial Intelligence projects, machine learning models, and practical AI applications.',
+  },
+];
+
+export const incomingExperience = experiences[1];
