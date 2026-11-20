@@ -66,7 +66,7 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="section-container w-full pt-24 pb-16 md:pt-28">
+      <div className="section-container w-full pt-28 pb-16 md:pt-36 lg:pt-40">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left — Text Content */}
           <motion.div
@@ -79,7 +79,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="text-sm font-semibold uppercase tracking-widest mb-3"
+              className="text-sm font-semibold uppercase tracking-widest mb-3 block"
               style={{ color: 'var(--color-text-accent)' }}
             >
               Hello, I&apos;m
@@ -90,7 +90,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mt-2 block"
               style={{ color: 'var(--color-text-primary)' }}
             >
               Farhanul

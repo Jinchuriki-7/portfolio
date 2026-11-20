@@ -61,11 +61,15 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'glass shadow-md'
-          : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass border-b ${
+        scrolled ? 'shadow-lg shadow-black/25' : 'shadow-sm'
       }`}
+      style={{
+        background: 'var(--color-bg-card)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        borderColor: 'var(--color-border)',
+      }}
     >
       <div className="section-container">
         <nav className="flex items-center justify-between h-16 md:h-18">
