@@ -1,5 +1,5 @@
 // ============================================================
-// Skills Data
+// Skills Data — Updated categories per redesign requirements
 // ============================================================
 
 export interface Skill {
@@ -21,26 +21,38 @@ export const skillCategories: SkillCategory[] = [
       { name: "C" },
       { name: "C++" },
       { name: "Java" },
-      { name: "Python" },
+      { name: "JavaScript" },
     ],
   },
   {
-    category: "Web Technologies",
+    category: "Frontend Development",
     icon: "globe",
     skills: [
-      { name: "HTML5" },
-      { name: "CSS3" },
+      { name: "HTML" },
+      { name: "CSS" },
       { name: "JavaScript" },
       { name: "React" },
+      { name: "Tailwind CSS" },
     ],
   },
   {
-    category: "Tools & Platforms",
+    category: "Tools & Technologies",
     icon: "tool",
     skills: [
       { name: "Git" },
       { name: "GitHub" },
       { name: "VS Code" },
+      { name: "Firebase" },
+    ],
+  },
+  {
+    category: "Additional Interests",
+    icon: "brain",
+    skills: [
+      { name: "Artificial Intelligence" },
+      { name: "Machine Learning" },
+      { name: "Software Development" },
+      { name: "Competitive Programming" },
     ],
   },
 ];

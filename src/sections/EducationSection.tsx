@@ -33,31 +33,38 @@ export default function EducationSection() {
               {/* Header row */}
               <div className="flex items-start justify-between gap-3 flex-wrap">
                 <div className="flex items-center gap-2">
-                  <GraduationCap size={18} className="text-[#2563eb] flex-shrink-0" />
-                  <h3 className="font-bold text-[#0f172a] text-base">
+                  <GraduationCap size={18} style={{ color: 'var(--color-text-accent)' }} className="flex-shrink-0" />
+                  <h3 className="font-bold text-base" style={{ color: 'var(--color-text-primary)' }}>
                     {item.degree} in {item.field}
                   </h3>
                 </div>
                 <span
-                  className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
-                    item.status === 'ongoing'
-                      ? 'bg-green-50 text-green-700 border border-green-100'
-                      : 'bg-blue-50 text-blue-700 border border-blue-100'
-                  }`}
+                  className="text-xs font-semibold px-2.5 py-1 rounded-full"
+                  style={{
+                    background: item.status === 'ongoing' ? 'rgba(34, 197, 94, 0.1)' : 'var(--color-accent-soft)',
+                    color: item.status === 'ongoing' ? '#22c55e' : 'var(--color-text-accent)',
+                    border: `1px solid ${item.status === 'ongoing' ? 'rgba(34, 197, 94, 0.2)' : 'rgba(59, 130, 246, 0.15)'}`,
+                  }}
                 >
                   {item.status === 'ongoing' ? 'In Progress' : 'Completed'}
                 </span>
               </div>
 
               {/* Institution */}
-              <div className="mt-2 flex items-center gap-1.5 text-slate-500 text-sm">
+              <div
+                className="mt-2 flex items-center gap-1.5 text-sm"
+                style={{ color: 'var(--color-text-muted)' }}
+              >
                 <BookOpen size={14} />
                 <span>{item.institution}</span>
               </div>
 
               {/* Description */}
               {item.description && (
-                <p className="mt-3 text-slate-500 text-sm leading-relaxed">
+                <p
+                  className="mt-3 text-sm leading-relaxed"
+                  style={{ color: 'var(--color-text-secondary)' }}
+                >
                   {item.description}
                 </p>
               )}

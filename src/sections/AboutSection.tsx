@@ -45,7 +45,8 @@ export default function AboutSection() {
           {personalInfo.about.trim().split('\n\n').map((para, i) => (
             <p
               key={i}
-              className={`text-slate-600 leading-relaxed text-base ${i > 0 ? 'mt-4' : ''}`}
+              className={`leading-relaxed text-base ${i > 0 ? 'mt-4' : ''}`}
+              style={{ color: 'var(--color-text-secondary)' }}
             >
               {para.trim()}
             </p>
@@ -59,11 +60,23 @@ export default function AboutSection() {
               { label: 'Codeforces', value: personalInfo.codeforcesUsername },
               { label: 'Focus', value: 'Software & AI' },
             ].map(({ label, value }) => (
-              <div key={label} className="border border-slate-100 rounded-lg p-3 bg-white">
-                <p className="text-xs text-slate-400 font-medium uppercase tracking-wide">
+              <div
+                key={label}
+                className="rounded-xl p-3"
+                style={{
+                  background: 'var(--color-bg-card)',
+                  border: '1px solid var(--color-border)',
+                }}
+              >
+                <p
+                  className="text-xs font-medium uppercase tracking-wide"
+                  style={{ color: 'var(--color-text-muted)' }}
+                >
                   {label}
                 </p>
-                <p className="mt-1 font-semibold text-[#1e3a5f] text-sm">{value}</p>
+                <p className="mt-1 font-semibold text-sm" style={{ color: 'var(--color-text-accent)' }}>
+                  {value}
+                </p>
               </div>
             ))}
           </div>
@@ -80,11 +93,21 @@ export default function AboutSection() {
               transition={{ delay: idx * 0.1, duration: 0.4 }}
               className="card group"
             >
-              <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center mb-3 group-hover:bg-blue-100 transition-colors">
-                <Icon size={20} className="text-[#2563eb]" />
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-all duration-300"
+                style={{
+                  background: 'var(--color-accent-soft)',
+                  color: 'var(--color-text-accent)',
+                }}
+              >
+                <Icon size={20} />
               </div>
-              <h3 className="font-semibold text-[#0f172a] text-sm">{title}</h3>
-              <p className="mt-1.5 text-slate-500 text-xs leading-relaxed">{description}</p>
+              <h3 className="font-semibold text-sm" style={{ color: 'var(--color-text-primary)' }}>
+                {title}
+              </h3>
+              <p className="mt-1.5 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+                {description}
+              </p>
             </motion.div>
           ))}
         </div>

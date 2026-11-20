@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollSpy } from '../hooks/useScrollSpy';
 
@@ -20,28 +20,42 @@ const SECTION_IDS = NAV_ITEMS.map((item) => item.href.replace('#', ''));
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light' || saved === 'dark') return saved;
+    }
+    return 'dark';
+  });
   const activeSection = useScrollSpy(SECTION_IDS, 100);
 
-  /* Detect scroll to add shadow to navbar */
+  /* Detect scroll */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* Close menu on resize to desktop */
+  /* Close menu on resize */
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  /* Smooth scroll to section */
+  /* Toggle theme */
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', newTheme === 'dark' ? '#0a0f1c' : '#f8fafc');
+  };
+
+  /* Smooth scroll */
   const handleNavClick = (href: string) => {
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
     setMenuOpen(false);
   };
 
@@ -49,57 +63,97 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-slate-100'
+          ? 'glass shadow-md'
           : 'bg-transparent'
       }`}
     >
       <div className="section-container">
         <nav className="flex items-center justify-between h-16 md:h-18">
-          {/* Logo / Name */}
+          {/* Logo */}
           <button
             onClick={() => handleNavClick('#home')}
-            className="font-bold text-lg text-[#1e3a5f] tracking-tight hover:opacity-80 transition-opacity"
+            className="font-bold text-lg tracking-tight hover:opacity-80 transition-opacity"
+            style={{ color: 'var(--color-text-primary)' }}
             aria-label="Go to top"
           >
-            Farhanul<span className="text-[#2563eb]">.</span>
+            Farhanul<span className="text-gradient">.</span>
           </button>
 
-          {/* Desktop navigation */}
-          <ul className="hidden md:flex items-center gap-1" role="list">
-            {NAV_ITEMS.map((item) => {
-              const sectionId = item.href.replace('#', '');
-              const isActive = activeSection === sectionId;
-              return (
-                <li key={item.label}>
-                  <button
-                    onClick={() => handleNavClick(item.href)}
-                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                      isActive
-                        ? 'text-[#2563eb] bg-blue-50'
-                        : 'text-slate-600 hover:text-[#1e3a5f] hover:bg-slate-50'
-                    }`}
-                    aria-current={isActive ? 'page' : undefined}
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-1">
+            <ul className="flex items-center gap-0.5" role="list">
+              {NAV_ITEMS.map((item) => {
+                const sectionId = item.href.replace('#', '');
+                const isActive = activeSection === sectionId;
+                return (
+                  <li key={item.label}>
+                    <button
+                      onClick={() => handleNavClick(item.href)}
+                      className="relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                      style={{
+                        color: isActive ? 'var(--color-text-accent)' : 'var(--color-text-secondary)',
+                      }}
+                      aria-current={isActive ? 'page' : undefined}
+                      onMouseEnter={(e) => {
+                        if (!isActive) (e.currentTarget.style.color = 'var(--color-text-primary)');
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isActive) (e.currentTarget.style.color = 'var(--color-text-secondary)');
+                      }}
+                    >
+                      {item.label}
+                      {isActive && (
+                        <motion.div
+                          layoutId="nav-indicator"
+                          className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4/5 rounded-full"
+                          style={{ background: 'var(--color-accent)' }}
+                          transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                        />
+                      )}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
 
-          {/* Mobile menu toggle */}
-          <button
-            className="md:hidden p-2 rounded-md text-slate-600 hover:text-[#1e3a5f] hover:bg-slate-50 transition-colors"
-            onClick={() => setMenuOpen((prev) => !prev)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="ml-3 p-2 rounded-lg transition-all duration-200"
+              style={{
+                color: 'var(--color-text-secondary)',
+                background: 'var(--color-accent-soft)',
+              }}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+          </div>
+
+          {/* Mobile controls */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg transition-colors"
+              style={{ color: 'var(--color-text-secondary)' }}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
+              className="p-2 rounded-lg transition-colors"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onClick={() => setMenuOpen((prev) => !prev)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </nav>
       </div>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -107,8 +161,9 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="md:hidden bg-white border-b border-slate-100 shadow-sm overflow-hidden"
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="md:hidden glass border-t overflow-hidden"
+            style={{ borderColor: 'var(--color-border)' }}
           >
             <ul className="section-container py-3 flex flex-col gap-1" role="list">
               {NAV_ITEMS.map((item) => {
@@ -118,11 +173,11 @@ export default function Navbar() {
                   <li key={item.label}>
                     <button
                       onClick={() => handleNavClick(item.href)}
-                      className={`w-full text-left px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
-                        isActive
-                          ? 'text-[#2563eb] bg-blue-50'
-                          : 'text-slate-600 hover:text-[#1e3a5f] hover:bg-slate-50'
-                      }`}
+                      className="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
+                      style={{
+                        color: isActive ? 'var(--color-text-accent)' : 'var(--color-text-secondary)',
+                        background: isActive ? 'var(--color-accent-soft)' : 'transparent',
+                      }}
                     >
                       {item.label}
                     </button>

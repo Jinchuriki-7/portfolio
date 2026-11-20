@@ -5,12 +5,12 @@ interface SectionWrapperProps {
   id: string;
   className?: string;
   children: ReactNode;
-  alternate?: boolean; // slightly different background
+  alternate?: boolean;
 }
 
 /**
  * SectionWrapper — consistent layout wrapper for every portfolio section.
- * Provides scroll-margin, max-width centering, and entrance animation.
+ * Uses dark theme with alternating subtle background variations.
  */
 export default function SectionWrapper({
   id,
@@ -21,7 +21,10 @@ export default function SectionWrapper({
   return (
     <section
       id={id}
-      className={`section-padding ${alternate ? 'bg-white' : 'bg-[#fafafa]'} ${className}`}
+      className={`section-padding ${className}`}
+      style={{
+        backgroundColor: alternate ? 'var(--color-bg-secondary)' : 'transparent',
+      }}
     >
       <motion.div
         className="section-container"
