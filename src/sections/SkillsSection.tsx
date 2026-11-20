@@ -1,36 +1,67 @@
-import { type ComponentType } from 'react';
+import { type ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { Code, Globe, Wrench, Brain } from 'lucide-react';
 import {
-  SiC, SiCplusplus, SiJavascript, SiHtml5, SiCss, SiReact, SiTailwindcss,
-  SiGit, SiGithub, SiFirebase,
-} from 'react-icons/si';
-import { FaJava } from 'react-icons/fa';
-import { VscVscode } from 'react-icons/vsc';
+  Code, Globe, Wrench, Brain,
+  BrainCircuit, Cpu, Code2, Trophy
+} from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import SectionHeader from '../components/SectionHeader';
 import { skillCategories } from '../data/skills';
 
-const CategoryIcons: Record<string, ComponentType<{ size: number }>> = {
+const CategoryIcons: Record<string, typeof Code> = {
   code: Code,
   globe: Globe,
   tool: Wrench,
   brain: Brain,
 };
 
-const TechIcons: Record<string, ComponentType<{ size?: number; className?: string }>> = {
-  'C': SiC,
-  'C++': SiCplusplus,
-  'Java': FaJava,
-  'JavaScript': SiJavascript,
-  'HTML': SiHtml5,
-  'CSS': SiCss,
-  'React': SiReact,
-  'Tailwind CSS': SiTailwindcss,
-  'Git': SiGit,
-  'GitHub': SiGithub,
-  'VS Code': VscVscode,
-  'Firebase': SiFirebase,
+interface TechItemConfig {
+  type: 'image' | 'lucide';
+  src?: string;
+  className?: string;
+  icon?: ReactNode;
+}
+
+const TECH_CONFIG: Record<string, TechItemConfig> = {
+  // Programming Languages
+  'C': { type: 'image', src: '/tech/c.svg' },
+  'C++': { type: 'image', src: '/tech/cplusplus.svg' },
+  'Java': { type: 'image', src: '/tech/java.svg' },
+  'JavaScript': { type: 'image', src: '/tech/javascript.svg' },
+
+  // Frontend Development
+  'HTML': { type: 'image', src: '/tech/html5.svg' },
+  'CSS': { type: 'image', src: '/tech/css3.svg' },
+  'React': { type: 'image', src: '/tech/react.svg' },
+  'Tailwind CSS': { type: 'image', src: '/tech/tailwindcss.svg' },
+
+  // Tools & Technologies
+  'Git': { type: 'image', src: '/tech/git.svg' },
+  'GitHub': {
+    type: 'image',
+    src: '/tech/github.svg',
+    className: '[data-theme=dark]:invert [data-theme=dark]:brightness-125'
+  },
+  'VS Code': { type: 'image', src: '/tech/vscode.svg' },
+  'Firebase': { type: 'image', src: '/tech/firebase.svg' },
+
+  // Additional Interests (Conceptual icons)
+  'Artificial Intelligence': {
+    type: 'lucide',
+    icon: <BrainCircuit size={22} className="text-violet-500 [data-theme=dark]:text-violet-400" />,
+  },
+  'Machine Learning': {
+    type: 'lucide',
+    icon: <Cpu size={22} className="text-cyan-600 [data-theme=dark]:text-cyan-400" />,
+  },
+  'Software Development': {
+    type: 'lucide',
+    icon: <Code2 size={22} className="text-emerald-600 [data-theme=dark]:text-[#00D6A3]" />,
+  },
+  'Competitive Programming': {
+    type: 'lucide',
+    icon: <Trophy size={22} className="text-amber-500 [data-theme=dark]:text-amber-400" />,
+  },
 };
 
 export default function SkillsSection() {
@@ -66,7 +97,7 @@ export default function SkillsSection() {
               {/* Skill chips */}
               <div className="space-y-2.5">
                 {cat.skills.map(({ name }, skillIdx) => {
-                  const TechIcon = TechIcons[name];
+                  const tech = TECH_CONFIG[name];
                   return (
                     <motion.div
                       key={name}
@@ -74,14 +105,23 @@ export default function SkillsSection() {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: catIdx * 0.1 + skillIdx * 0.04 }}
-                      className="flex items-center gap-3 px-3 py-2 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:bg-[var(--bg-pill-hover)] transition-all"
+                      className="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:bg-[var(--bg-pill-hover)] transition-all cursor-default"
                     >
-                      {TechIcon ? (
-                        <TechIcon size={16} className="text-[var(--accent)] flex-shrink-0" />
-                      ) : (
-                        <span className="w-2 h-2 rounded-full bg-[var(--accent)] flex-shrink-0" />
-                      )}
-                      <span className="text-sm font-medium text-[var(--text-secondary)]">
+                      <div className="w-7 h-7 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                        {tech?.type === 'image' && tech.src ? (
+                          <img
+                            src={tech.src}
+                            alt={name}
+                            className={`w-[24px] h-[24px] max-w-[26px] max-h-[26px] object-contain drop-shadow-sm ${tech.className ?? ''}`}
+                            loading="lazy"
+                          />
+                        ) : tech?.type === 'lucide' && tech.icon ? (
+                          tech.icon
+                        ) : (
+                          <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent)]" />
+                        )}
+                      </div>
+                      <span className="text-sm font-medium text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
                         {name}
                       </span>
                     </motion.div>
