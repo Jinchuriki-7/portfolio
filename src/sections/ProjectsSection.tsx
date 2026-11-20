@@ -29,7 +29,7 @@ function ProjectCard({ project }: { project: Project }) {
         {/* Featured Badge */}
         {project.featured && (
           <div className="absolute top-3 right-3">
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 backdrop-blur-md [data-theme=light]:bg-[#16866B] [data-theme=light]:text-white [data-theme=light]:border-[#16866B]">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-[#75A2B5]/25 text-[#75A2B5] border border-[#75A2B5]/40 backdrop-blur-md [data-theme=light]:bg-[#527F93] [data-theme=light]:text-white [data-theme=light]:border-[#527F93]">
               <Sparkles size={11} />
               Featured
             </span>
@@ -84,7 +84,7 @@ function ProjectCard({ project }: { project: Project }) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#101613] [data-theme=light]:text-white bg-gradient-to-r from-[#00D6A3] to-[#39E6B0] [data-theme=light]:from-[#16866B] [data-theme=light]:to-[#20A982] hover:shadow-lg hover:shadow-[#00D6A3]/25 [data-theme=light]:hover:shadow-[#16866B]/20 px-3.5 py-2 rounded-lg transition-all"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#101613] [data-theme=light]:text-white bg-gradient-to-r from-[#75A2B5] to-[#527F93] [data-theme=light]:from-[#527F93] [data-theme=light]:to-[#75A2B5] hover:shadow-lg hover:shadow-[#75A2B5]/25 [data-theme=light]:hover:shadow-[#527F93]/20 px-3.5 py-2 rounded-lg transition-all"
               aria-label={`Live demo for ${project.title}`}
             >
               <ExternalLink size={13} />
@@ -121,7 +121,7 @@ export default function ProjectsSection() {
             onClick={() => setActiveCategory(cat)}
             className={`px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer ${
               activeCategory === cat
-                ? 'bg-gradient-to-r from-[#00D6A3] to-[#39E6B0] text-[#101613] font-bold shadow-md shadow-[#00D6A3]/20 [data-theme=light]:from-[#16866B] [data-theme=light]:to-[#20A982] [data-theme=light]:text-white [data-theme=light]:shadow-none'
+                ? 'bg-gradient-to-r from-[#75A2B5] to-[#527F93] text-[#101613] font-bold shadow-md shadow-[#75A2B5]/20 [data-theme=light]:from-[#527F93] [data-theme=light]:to-[#75A2B5] [data-theme=light]:text-white [data-theme=light]:shadow-none'
                 : 'bg-[var(--bg-pill)] text-[var(--text-muted)] border border-[var(--border-subtle)] hover:bg-[var(--bg-pill-hover)] hover:text-[var(--text-primary)]'
             }`}
           >

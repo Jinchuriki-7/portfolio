@@ -190,7 +190,7 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full bg-gradient-to-r from-[#00D6A3] to-[#39E6B0] text-[#101613] [data-theme=light]:from-[#16866B] [data-theme=light]:to-[#20A982] [data-theme=light]:text-white font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-[#00D6A3]/25 [data-theme=light]:hover:shadow-[#16866B]/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                className="w-full bg-gradient-to-r from-[#75A2B5] to-[#527F93] text-[#101613] [data-theme=light]:from-[#527F93] [data-theme=light]:to-[#75A2B5] [data-theme=light]:text-white font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-[#75A2B5]/25 [data-theme=light]:hover:shadow-[#527F93]/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
                 {status === 'submitting' ? (
                   <>
@@ -248,7 +248,7 @@ function ContactLink({ icon, label, value, href }: { icon: ReactNode; label: str
       rel="noopener noreferrer"
       className="glass-card p-4 flex items-center gap-3 hover:border-[var(--accent)] transition-all group"
     >
-      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 [data-theme=light]:bg-[#EFECE3] [data-theme=light]:text-[#16866B] [data-theme=light]:border-[#E6E2D8] flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-all">
+      <div className="w-10 h-10 rounded-xl bg-[#75A2B5]/15 border border-[#75A2B5]/30 text-[#75A2B5] [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5] flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-all">
         {icon}
       </div>
       <div className="flex-1 min-w-0">

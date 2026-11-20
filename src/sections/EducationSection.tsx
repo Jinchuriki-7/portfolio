@@ -24,7 +24,7 @@ export default function EducationSection() {
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-[#75A2B5]/15 border border-[#75A2B5]/30 text-[#75A2B5] [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5] flex items-center justify-center flex-shrink-0">
                   <GraduationCap size={24} />
                 </div>
                 <div>
@@ -38,7 +38,7 @@ export default function EducationSection() {
                 </div>
               </div>
 
-              <span className="self-start sm:self-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 [data-theme=light]:bg-[#EFECE3] [data-theme=light]:text-[#16866B] [data-theme=light]:border-[#E6E2D8]">
+              <span className="self-start sm:self-center px-3 py-1 rounded-full text-xs font-bold bg-[#75A2B5]/20 text-[#75A2B5] border border-[#75A2B5]/35 [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5]">
                 {item.status === 'ongoing' ? 'In Progress' : 'Completed'}
               </span>
             </div>

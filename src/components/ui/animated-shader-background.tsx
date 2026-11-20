@@ -76,9 +76,9 @@ export default function AnimatedShaderBackground() {
             v = p + cos(i * i + (iTime + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 + vec2(sin(iTime * 3.0 + i) * 0.003, cos(iTime * 3.5 - i) * 0.003);
             float tailNoise = fbm(v + vec2(iTime * 0.5, i)) * 0.3 * (1.0 - (i / 35.0));
             vec4 auroraColors = vec4(
-              0.02 + 0.08 * sin(i * 0.2 + iTime * 0.4),
-              0.72 + 0.28 * cos(i * 0.3 + iTime * 0.5),
-              0.48 + 0.22 * sin(i * 0.4 + iTime * 0.3),
+              0.29 + 0.16 * sin(i * 0.2 + iTime * 0.4),
+              0.48 + 0.16 * cos(i * 0.3 + iTime * 0.5),
+              0.66 + 0.15 * sin(i * 0.4 + iTime * 0.3),
               1.0
             );
             vec4 currentContribution = auroraColors * exp(sin(i * i + iTime * 0.8)) / length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));

@@ -62,7 +62,7 @@ export default function AchievementsSection() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 [data-theme=light]:bg-[#EFECE3] [data-theme=light]:text-[#16866B] [data-theme=light]:border-[#E6E2D8]">
+                <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-[#75A2B5]/15 text-[#75A2B5] border border-[#75A2B5]/30 [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5]">
                   {item.tag}
                 </span>
                 <span className="flex items-center gap-1 text-xs text-[var(--text-muted)]">

@@ -20,7 +20,7 @@
    CENTRALIZED THEME VARIABLE ARCHITECTURE
    ========================================================================== */
 
-/* Dark Mode: Premium Dark Forest Green + Charcoal + Emerald Theme */
+/* Dark Mode: Charcoal with Dusty Blue + Steel Blue Accent Theme */
 :root,
 [data-theme="dark"],
 .dark {
@@ -30,13 +30,13 @@
   --bg-card: #1C2722;
   --bg-card-hover: #222F28;
   --bg-pill: rgba(255, 255, 255, 0.04);
-  --bg-pill-hover: rgba(0, 214, 163, 0.10);
+  --bg-pill-hover: rgba(117, 162, 181, 0.12);
   --text-primary: #F1F5F2;
   --text-secondary: #A8B8AE;
   --text-muted: #82958A;
-  --accent: #00D6A3;
-  --accent-secondary: #39E6B0;
-  --accent-rgb: 0, 214, 163;
+  --accent: #75A2B5;
+  --accent-secondary: #527F93;
+  --accent-rgb: 117, 162, 181;
   --border-subtle: #2B3932;
   --border-strong: #3D5046;
   --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
@@ -47,19 +47,19 @@
   --input-placeholder: #82958A;
   --input-border: #2B3932;
   --shader-opacity: 0.50;
-  --badge-profile-bg: #00D6A3;
+  --badge-profile-bg: #75A2B5;
   --badge-profile-text: #101613;
   --badge-profile-border: #101613;
-  --profile-ring: rgba(0, 214, 163, 0.25);
-  --profile-ring-inner: rgba(0, 214, 163, 0.45);
-  --profile-glow: rgba(0, 214, 163, 0.20);
-  --profile-border: #00D6A3;
+  --profile-ring: rgba(117, 162, 181, 0.30);
+  --profile-ring-inner: rgba(117, 162, 181, 0.50);
+  --profile-glow: rgba(117, 162, 181, 0.22);
+  --profile-border: #75A2B5;
   --scrollbar-track: #101613;
   --scrollbar-thumb: rgba(43, 57, 50, 0.85);
-  --scrollbar-thumb-hover: #00D6A3;
+  --scrollbar-thumb-hover: #75A2B5;
 }
 
-/* Day Mode: Warm Ivory + Off-White + Elegant Emerald Theme */
+/* Day Mode: Warm Ivory + Off-White with Steel Blue Accent Theme */
 [data-theme="light"],
 .light {
   --bg-primary: #F4F1E9;
@@ -68,15 +68,15 @@
   --bg-card: #FFFFFF;
   --bg-card-hover: #FFFFFF;
   --bg-pill: #FCFBF7;
-  --bg-pill-hover: #EFECE3;
+  --bg-pill-hover: #EAF2F5;
   --text-primary: #252923;
   --text-secondary: #62675F;
   --text-muted: #85877F;
-  --accent: #16866B;
-  --accent-secondary: #20A982;
-  --accent-rgb: 22, 134, 107;
+  --accent: #527F93;
+  --accent-secondary: #75A2B5;
+  --accent-rgb: 82, 127, 147;
   --border-subtle: #E6E2D8;
-  --border-strong: #D8D2C4;
+  --border-strong: #C8DCE5;
   --card-shadow: 0 10px 25px -4px rgba(37, 41, 35, 0.05), 0 2px 6px -1px rgba(37, 41, 35, 0.03);
   --navbar-bg: rgba(244, 241, 233, 0.92);
   --navbar-border: #E6E2D8;
@@ -84,17 +84,17 @@
   --input-text: #252923;
   --input-placeholder: #85877F;
   --input-border: #E6E2D8;
-  --shader-opacity: 0.07;
-  --badge-profile-bg: #16866B;
+  --shader-opacity: 0.08;
+  --badge-profile-bg: #527F93;
   --badge-profile-text: #FCFBF7;
   --badge-profile-border: #F4F1E9;
-  --profile-ring: rgba(22, 134, 107, 0.22);
-  --profile-ring-inner: rgba(22, 134, 107, 0.38);
-  --profile-glow: rgba(22, 134, 107, 0.12);
-  --profile-border: #16866B;
+  --profile-ring: rgba(117, 162, 181, 0.35);
+  --profile-ring-inner: rgba(117, 162, 181, 0.55);
+  --profile-glow: rgba(117, 162, 181, 0.20);
+  --profile-border: #75A2B5;
   --scrollbar-track: #F4F1E9;
   --scrollbar-thumb: rgba(133, 135, 127, 0.35);
-  --scrollbar-thumb-hover: #16866B;
+  --scrollbar-thumb-hover: #527F93;
 }
 
 /* ==========================================================================
@@ -184,8 +184,8 @@
 }
 
 [data-theme="dark"] .glass-button:hover {
-  border-color: rgba(0, 214, 163, 0.5);
-  color: #00D6A3;
+  border-color: rgba(117, 162, 181, 0.5);
+  color: #75A2B5;
 }
 
 [data-theme="light"] .glass-button {
@@ -196,9 +196,9 @@
 }
 
 [data-theme="light"] .glass-button:hover {
-  background-color: #FCFBF7;
-  border-color: #16866B;
-  color: #16866B;
+  background-color: #EAF2F5;
+  border-color: #527F93;
+  color: #527F93;
 }
 
 .glass-button:active {
@@ -220,11 +220,11 @@
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  background-image: linear-gradient(135deg, #00D6A3, #39E6B0, #10b981);
+  background-image: linear-gradient(135deg, #75A2B5, #527F93);
 }
 
 [data-theme="light"] .text-gradient {
-  background-image: linear-gradient(135deg, #16866B, #20A982, #2d5a4c);
+  background-image: linear-gradient(135deg, #527F93, #75A2B5);
 }
 
 .text-cursive {

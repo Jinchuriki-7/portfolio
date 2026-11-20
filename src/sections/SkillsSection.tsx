@@ -56,7 +56,7 @@ const TECH_CONFIG: Record<string, TechItemConfig> = {
   },
   'Software Development': {
     type: 'lucide',
-    icon: <Code2 size={22} className="text-emerald-600 [data-theme=dark]:text-[#00D6A3]" />,
+    icon: <Code2 size={22} className="text-[#527F93] [data-theme=dark]:text-[#75A2B5]" />,
   },
   'Competitive Programming': {
     type: 'lucide',
@@ -86,7 +86,7 @@ export default function SkillsSection() {
             >
               {/* Category Header */}
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 [data-theme=light]:bg-[#EFECE3] [data-theme=light]:text-[#16866B] [data-theme=light]:border-[#E6E2D8] border border-emerald-500/20 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-[#75A2B5]/15 text-[#75A2B5] [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5] border border-[#75A2B5]/30 flex items-center justify-center">
                   <Icon size={18} />
                 </div>
                 <h3 className="font-display font-bold text-base text-[var(--text-primary)]">

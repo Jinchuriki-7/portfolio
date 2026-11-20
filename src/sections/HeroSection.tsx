@@ -42,8 +42,8 @@ export default function HeroSection() {
             className="lg:col-span-7 text-center lg:text-left"
           >
             {/* Opportunity Badge */}
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs sm:text-sm font-semibold mb-6 border border-emerald-500/20 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#75A2B5]/15 text-[#75A2B5] [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5] text-xs sm:text-sm font-semibold mb-6 border border-[#75A2B5]/30 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#75A2B5] [data-theme=light]:bg-[#527F93] animate-ping" />
               Available for new opportunities
             </span>
 
@@ -76,7 +76,7 @@ export default function HeroSection() {
             <div className="mt-8 flex flex-wrap gap-4 items-center justify-center lg:justify-start">
               <button
                 onClick={() => handleScroll('#projects')}
-                className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 [data-theme=light]:bg-[#EFECE3] [data-theme=light]:text-[#16866B] [data-theme=light]:border-[#E6E2D8] [data-theme=light]:hover:bg-[#E6E2D8] font-semibold px-6 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer active:scale-95 shadow-lg shadow-emerald-500/10 [data-theme=light]:shadow-none"
+                className="bg-[#75A2B5]/15 hover:bg-[#75A2B5]/25 text-[#75A2B5] border border-[#75A2B5]/35 [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5] [data-theme=light]:hover:bg-[#DCEAF0] font-semibold px-6 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer active:scale-95 shadow-lg shadow-[#75A2B5]/10 [data-theme=light]:shadow-none"
               >
                 <span>View Projects</span>
                 <ArrowRight size={15} />

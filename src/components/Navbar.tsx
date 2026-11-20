@@ -86,15 +86,15 @@ export default function Navbar() {
           >
             <div className={`w-8 h-8 rounded-full flex items-center justify-center font-display font-bold text-xs tracking-wider shadow-md group-hover:rotate-12 transition-transform ${
               theme === 'dark'
-                ? 'bg-gradient-to-br from-[#00D6A3] to-[#39E6B0] text-[#101613]'
-                : 'bg-gradient-to-br from-[#16866B] to-[#20A982] text-[#FCFBF7]'
+                ? 'bg-gradient-to-br from-[#75A2B5] to-[#527F93] text-[#101613]'
+                : 'bg-gradient-to-br from-[#527F93] to-[#75A2B5] text-[#FCFBF7]'
             }`}>
               FH
             </div>
             <span
               className={`font-display font-bold text-base transition-colors ${theme === 'dark'
-                ? 'text-[#F1F5F2] group-hover:text-[#00D6A3]'
-                : 'text-[#252923] group-hover:text-[#16866B]'
+                ? 'text-[#F1F5F2] group-hover:text-[#75A2B5]'
+                : 'text-[#252923] group-hover:text-[#527F93]'
                 }`}
             >
               Farhanul
@@ -112,11 +112,11 @@ export default function Navbar() {
                   onClick={() => handleNavClick(item.href)}
                   className={`px-3 py-1.5 rounded-full text-[13px] font-medium tracking-normal transition-all cursor-pointer ${isActive
                     ? theme === 'dark'
-                      ? 'text-[#00D6A3] bg-white/[0.06] shadow-sm font-semibold'
-                      : 'text-[#16866B] bg-[#16866B]/10 shadow-sm font-semibold'
+                      ? 'text-[#75A2B5] bg-white/[0.06] shadow-sm font-semibold'
+                      : 'text-[#527F93] bg-[#527F93]/10 shadow-sm font-semibold'
                     : theme === 'dark'
                       ? 'text-[#A8B8AE] hover:text-[#F1F5F2] hover:bg-white/5'
-                      : 'text-[#62675F] hover:text-[#252923] hover:bg-[#EFECE3]'
+                      : 'text-[#62675F] hover:text-[#252923] hover:bg-[#EAF2F5]'
                     }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
@@ -135,8 +135,8 @@ export default function Navbar() {
             <button
               onClick={toggleTheme}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-bold font-mono tracking-wider transition-all cursor-pointer select-none active:scale-95 ${theme === 'dark'
-                ? 'border-[#2B3932] bg-[#17201D] hover:bg-[#222F28] hover:border-[#00D6A3]/60 text-[#F1F5F2]'
-                : 'border-[#E6E2D8] bg-[#FCFBF7] hover:border-[#16866B] text-[#252923]'
+                ? 'border-[#2B3932] bg-[#17201D] hover:bg-[#222F28] hover:border-[#75A2B5]/60 text-[#F1F5F2]'
+                : 'border-[#E6E2D8] bg-[#FCFBF7] hover:border-[#527F93] text-[#252923]'
                 }`}
               aria-label={`Switch to ${theme === 'dark' ? 'Day' : 'Night'} mode`}
               title={`Switch to ${theme === 'dark' ? 'Day' : 'Night'} mode`}
@@ -148,7 +148,7 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                  <Moon size={13} className="text-[#16866B]" />
+                  <Moon size={13} className="text-[#527F93]" />
                   <span>NIGHT</span>
                 </>
               )}
@@ -160,8 +160,8 @@ export default function Navbar() {
             <button
               onClick={toggleTheme}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-bold font-mono tracking-wider transition-all cursor-pointer select-none active:scale-95 ${theme === 'dark'
-                ? 'border-[#2B3932] bg-[#17201D] hover:bg-[#222F28] hover:border-[#00D6A3]/60 text-[#F1F5F2]'
-                : 'border-[#E6E2D8] bg-[#FCFBF7] hover:border-[#16866B] text-[#252923]'
+                ? 'border-[#2B3932] bg-[#17201D] hover:bg-[#222F28] hover:border-[#75A2B5]/60 text-[#F1F5F2]'
+                : 'border-[#E6E2D8] bg-[#FCFBF7] hover:border-[#527F93] text-[#252923]'
                 }`}
               aria-label={`Switch to ${theme === 'dark' ? 'Day' : 'Night'} mode`}
             >
@@ -172,7 +172,7 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                  <Moon size={13} className="text-[#16866B]" />
+                  <Moon size={13} className="text-[#527F93]" />
                   <span>NIGHT</span>
                 </>
               )}
@@ -213,11 +213,11 @@ export default function Navbar() {
                       onClick={() => handleNavClick(item.href)}
                       className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${isActive
                         ? theme === 'dark'
-                          ? 'text-[#00D6A3] bg-white/[0.06] font-bold'
-                          : 'text-[#16866B] bg-[#16866B]/10 font-bold'
+                          ? 'text-[#75A2B5] bg-white/[0.06] font-bold'
+                          : 'text-[#527F93] bg-[#527F93]/10 font-bold'
                         : theme === 'dark'
                           ? 'text-[#A8B8AE] hover:text-[#F1F5F2] hover:bg-white/5'
-                          : 'text-[#62675F] hover:text-[#252923] hover:bg-[#EFECE3]'
+                          : 'text-[#62675F] hover:text-[#252923] hover:bg-[#EAF2F5]'
                         }`}
                     >
                       {item.label}
@@ -270,8 +270,8 @@ export default function Navbar() {
         download="Farhanul_Haque_CV.pdf"
         className={`fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all cursor-pointer ${
           theme === 'dark'
-            ? 'bg-[#00D6A3] hover:bg-[#39E6B0] text-[#101613] shadow-[#00D6A3]/25 font-bold'
-            : 'bg-[#16866B] hover:bg-[#20A982] text-[#FCFBF7] shadow-[#16866B]/25 font-bold'
+            ? 'bg-[#75A2B5] hover:bg-[#527F93] text-[#101613] shadow-[#75A2B5]/25 font-bold'
+            : 'bg-[#527F93] hover:bg-[#75A2B5] text-[#FCFBF7] shadow-[#527F93]/25 font-bold'
         }`}
         aria-label="Quick Download CV"
         title="Download CV"
