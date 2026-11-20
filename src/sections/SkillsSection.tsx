@@ -27,6 +27,7 @@ const TECH_CONFIG: Record<string, TechItemConfig> = {
   'C': { type: 'image', src: '/tech/c.svg' },
   'C++': { type: 'image', src: '/tech/cplusplus.svg' },
   'Java': { type: 'image', src: '/tech/java.svg' },
+  'Python': { type: 'image', src: '/tech/python.svg' },
   'JavaScript': { type: 'image', src: '/tech/javascript.svg' },
 
   // Frontend Development
