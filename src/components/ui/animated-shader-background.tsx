@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 /**
  * AnimatedShaderBackground (AnoAI)
- * High-performance WebGL dynamic aurora shader background inspired by rahat300809.
+ * High-performance WebGL dynamic aurora shader background.
  */
 export default function AnimatedShaderBackground() {
   const containerRef = useRef<HTMLDivElement>(null);

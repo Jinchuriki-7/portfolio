@@ -66,7 +66,7 @@ const TECH_CONFIG: Record<string, TechItemConfig> = {
 
 export default function SkillsSection() {
   return (
-    <SectionWrapper id="skills" alternate>
+    <SectionWrapper id="skills">
       <SectionHeader
         title="Technical Skills"
         subtitle="A curated set of programming languages, frameworks, developer tools, and technical competencies."

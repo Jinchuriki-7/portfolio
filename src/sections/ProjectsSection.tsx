@@ -107,7 +107,7 @@ export default function ProjectsSection() {
     : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <SectionWrapper id="projects">
+    <SectionWrapper id="projects" alternate>
       <SectionHeader
         title="Featured Projects"
         subtitle="A showcase of real-world applications, tools, and systems retrieved from my GitHub profile."

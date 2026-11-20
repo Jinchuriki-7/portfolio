@@ -29,10 +29,10 @@ export default function App() {
         <HeroSection />
         <AboutSection />
         <EducationSection />
+        <ExperienceSection />
         <SkillsSection />
         <ProjectsSection />
         <CompetitiveProgrammingSection />
-        <ExperienceSection />
         <AchievementsSection />
         <ContactSection />
       </main>
