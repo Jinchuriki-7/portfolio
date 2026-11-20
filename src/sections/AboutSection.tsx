@@ -79,7 +79,7 @@ export default function AboutSection() {
               transition={{ delay: idx * 0.1, duration: 0.4 }}
               className="glass-card p-5 group"
             >
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 [data-theme=light]:bg-blue-50 [data-theme=light]:text-blue-600 [data-theme=light]:border-blue-200 border border-emerald-500/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 [data-theme=light]:bg-[#EFECE3] [data-theme=light]:text-[#16866B] [data-theme=light]:border-[#E6E2D8] border border-emerald-500/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
                 <Icon size={19} />
               </div>
               <h3 className="font-display font-bold text-base text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">

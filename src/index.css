@@ -59,42 +59,42 @@
   --scrollbar-thumb-hover: #00D6A3;
 }
 
-/* Light Mode Theme Variables (Preserved Exactly) */
+/* Day Mode: Warm Ivory + Off-White + Elegant Emerald Theme */
 [data-theme="light"],
 .light {
-  --bg-primary: #f8fafc;
-  --bg-secondary: #ffffff;
-  --bg-alternate: #f1f5f9;
-  --bg-card: #ffffff;
-  --bg-card-hover: #ffffff;
-  --bg-pill: #f1f5f9;
-  --bg-pill-hover: #e2e8f0;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  --accent: #2563eb;
-  --accent-secondary: #0284c7;
-  --accent-rgb: 37, 99, 235;
-  --border-subtle: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --card-shadow: 0 10px 25px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
-  --navbar-bg: rgba(255, 255, 255, 0.90);
-  --navbar-border: #e2e8f0;
-  --input-bg: #ffffff;
-  --input-text: #0f172a;
-  --input-placeholder: #94a3b8;
-  --input-border: #e2e8f0;
-  --shader-opacity: 0.12;
-  --badge-profile-bg: #2563eb;
-  --badge-profile-text: #ffffff;
-  --badge-profile-border: #f8fafc;
-  --profile-ring: rgba(37, 99, 235, 0.25);
-  --profile-ring-inner: rgba(37, 99, 235, 0.40);
-  --profile-glow: rgba(37, 99, 235, 0.18);
-  --profile-border: #2563eb;
-  --scrollbar-track: #f8fafc;
-  --scrollbar-thumb: rgba(15, 23, 42, 0.15);
-  --scrollbar-thumb-hover: rgba(37, 99, 235, 0.4);
+  --bg-primary: #F4F1E9;
+  --bg-secondary: #FCFBF7;
+  --bg-alternate: #FCFBF7;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FFFFFF;
+  --bg-pill: #FCFBF7;
+  --bg-pill-hover: #EFECE3;
+  --text-primary: #252923;
+  --text-secondary: #62675F;
+  --text-muted: #85877F;
+  --accent: #16866B;
+  --accent-secondary: #20A982;
+  --accent-rgb: 22, 134, 107;
+  --border-subtle: #E6E2D8;
+  --border-strong: #D8D2C4;
+  --card-shadow: 0 10px 25px -4px rgba(37, 41, 35, 0.05), 0 2px 6px -1px rgba(37, 41, 35, 0.03);
+  --navbar-bg: rgba(244, 241, 233, 0.92);
+  --navbar-border: #E6E2D8;
+  --input-bg: #FCFBF7;
+  --input-text: #252923;
+  --input-placeholder: #85877F;
+  --input-border: #E6E2D8;
+  --shader-opacity: 0.07;
+  --badge-profile-bg: #16866B;
+  --badge-profile-text: #FCFBF7;
+  --badge-profile-border: #F4F1E9;
+  --profile-ring: rgba(22, 134, 107, 0.22);
+  --profile-ring-inner: rgba(22, 134, 107, 0.38);
+  --profile-glow: rgba(22, 134, 107, 0.12);
+  --profile-border: #16866B;
+  --scrollbar-track: #F4F1E9;
+  --scrollbar-thumb: rgba(133, 135, 127, 0.35);
+  --scrollbar-thumb-hover: #16866B;
 }
 
 /* ==========================================================================
@@ -132,7 +132,7 @@
 }
 
 [data-theme="light"] .glass {
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.07);
+  box-shadow: 0 6px 20px -3px rgba(37, 41, 35, 0.06);
 }
 
 .glass-card {
@@ -157,9 +157,9 @@
 }
 
 [data-theme="light"] .glass-card:hover {
-  background-color: #ffffff;
-  border-color: rgba(37, 99, 235, 0.35);
-  box-shadow: 0 18px 36px -4px rgba(37, 99, 235, 0.08);
+  background-color: #FFFFFF;
+  border-color: rgba(22, 134, 107, 0.38);
+  box-shadow: 0 16px 32px -4px rgba(37, 41, 35, 0.08);
 }
 
 .glass-button {
@@ -188,13 +188,21 @@
   color: #00D6A3;
 }
 
-.glass-button:active {
-  transform: scale(0.98);
+[data-theme="light"] .glass-button {
+  background-color: #FFFFFF;
+  border-color: #E6E2D8;
+  color: #252923;
+  box-shadow: 0 2px 8px rgba(37, 41, 35, 0.04);
 }
 
-[data-theme="light"] .glass-button {
-  background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+[data-theme="light"] .glass-button:hover {
+  background-color: #FCFBF7;
+  border-color: #16866B;
+  color: #16866B;
+}
+
+.glass-button:active {
+  transform: scale(0.98);
 }
 
 /* Dynamic Aurora Shader Background Controller */
@@ -204,7 +212,7 @@
 }
 
 [data-theme="light"] .shader-container {
-  filter: saturate(1.2) brightness(1.1);
+  filter: saturate(0.85) brightness(1.05);
 }
 
 /* Typography Helpers */
@@ -216,7 +224,7 @@
 }
 
 [data-theme="light"] .text-gradient {
-  background-image: linear-gradient(135deg, #2563eb, #0284c7, #0d9488);
+  background-image: linear-gradient(135deg, #16866B, #20A982, #2d5a4c);
 }
 
 .text-cursive {

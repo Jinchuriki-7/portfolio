@@ -17,19 +17,19 @@ function ProjectCard({ project }: { project: Project }) {
       className="glass-card group flex flex-col h-full overflow-hidden"
     >
       {/* Aspect-video image banner */}
-      <div className="relative aspect-video overflow-hidden border-b border-[var(--border-subtle)] bg-slate-900 [data-theme=light]:bg-slate-100">
+      <div className="relative aspect-video overflow-hidden border-b border-[var(--border-subtle)] bg-[#101613] [data-theme=light]:bg-[#EFECE3]">
         <img
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#101613] via-[#101613]/20 to-transparent [data-theme=light]:from-slate-900/40 [data-theme=light]:via-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#101613] via-[#101613]/20 to-transparent [data-theme=light]:from-[#252923]/30 [data-theme=light]:via-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
         {/* Featured Badge */}
         {project.featured && (
           <div className="absolute top-3 right-3">
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 backdrop-blur-md [data-theme=light]:bg-blue-600/90 [data-theme=light]:text-white [data-theme=light]:border-blue-700">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 backdrop-blur-md [data-theme=light]:bg-[#16866B] [data-theme=light]:text-white [data-theme=light]:border-[#16866B]">
               <Sparkles size={11} />
               Featured
             </span>
@@ -84,7 +84,7 @@ function ProjectCard({ project }: { project: Project }) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#101613] [data-theme=light]:text-white bg-gradient-to-r from-[#00D6A3] to-[#39E6B0] [data-theme=light]:from-blue-600 [data-theme=light]:to-blue-500 hover:shadow-lg hover:shadow-[#00D6A3]/25 [data-theme=light]:hover:shadow-blue-500/25 px-3.5 py-2 rounded-lg transition-all"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#101613] [data-theme=light]:text-white bg-gradient-to-r from-[#00D6A3] to-[#39E6B0] [data-theme=light]:from-[#16866B] [data-theme=light]:to-[#20A982] hover:shadow-lg hover:shadow-[#00D6A3]/25 [data-theme=light]:hover:shadow-[#16866B]/20 px-3.5 py-2 rounded-lg transition-all"
               aria-label={`Live demo for ${project.title}`}
             >
               <ExternalLink size={13} />
@@ -121,7 +121,7 @@ export default function ProjectsSection() {
             onClick={() => setActiveCategory(cat)}
             className={`px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer ${
               activeCategory === cat
-                ? 'bg-gradient-to-r from-[#00D6A3] to-[#39E6B0] text-[#101613] font-bold shadow-md shadow-[#00D6A3]/20 [data-theme=light]:from-blue-600 [data-theme=light]:to-blue-500 [data-theme=light]:text-white [data-theme=light]:shadow-blue-500/20'
+                ? 'bg-gradient-to-r from-[#00D6A3] to-[#39E6B0] text-[#101613] font-bold shadow-md shadow-[#00D6A3]/20 [data-theme=light]:from-[#16866B] [data-theme=light]:to-[#20A982] [data-theme=light]:text-white [data-theme=light]:shadow-none'
                 : 'bg-[var(--bg-pill)] text-[var(--text-muted)] border border-[var(--border-subtle)] hover:bg-[var(--bg-pill-hover)] hover:text-[var(--text-primary)]'
             }`}
           >

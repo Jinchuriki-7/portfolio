@@ -76,7 +76,7 @@ export default function HeroSection() {
             <div className="mt-8 flex flex-wrap gap-4 items-center justify-center lg:justify-start">
               <button
                 onClick={() => handleScroll('#projects')}
-                className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 [data-theme=light]:bg-blue-50 [data-theme=light]:text-blue-600 [data-theme=light]:border-blue-200 [data-theme=light]:hover:bg-blue-100 font-semibold px-6 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer active:scale-95 shadow-lg shadow-emerald-500/10 [data-theme=light]:shadow-blue-500/10"
+                className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 [data-theme=light]:bg-[#EFECE3] [data-theme=light]:text-[#16866B] [data-theme=light]:border-[#E6E2D8] [data-theme=light]:hover:bg-[#E6E2D8] font-semibold px-6 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer active:scale-95 shadow-lg shadow-emerald-500/10 [data-theme=light]:shadow-none"
               >
                 <span>View Projects</span>
                 <ArrowRight size={15} />

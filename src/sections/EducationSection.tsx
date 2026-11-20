@@ -38,7 +38,7 @@ export default function EducationSection() {
                 </div>
               </div>
 
-              <span className="self-start sm:self-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 [data-theme=light]:bg-blue-50 [data-theme=light]:text-blue-600 [data-theme=light]:border-blue-200">
+              <span className="self-start sm:self-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 [data-theme=light]:bg-[#EFECE3] [data-theme=light]:text-[#16866B] [data-theme=light]:border-[#E6E2D8]">
                 {item.status === 'ongoing' ? 'In Progress' : 'Completed'}
               </span>
             </div>

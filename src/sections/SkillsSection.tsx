@@ -55,7 +55,7 @@ export default function SkillsSection() {
             >
               {/* Category Header */}
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 [data-theme=light]:bg-blue-50 [data-theme=light]:text-blue-600 [data-theme=light]:border-blue-200 border border-emerald-500/20 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 [data-theme=light]:bg-[#EFECE3] [data-theme=light]:text-[#16866B] [data-theme=light]:border-[#E6E2D8] border border-emerald-500/20 flex items-center justify-center">
                   <Icon size={18} />
                 </div>
                 <h3 className="font-display font-bold text-base text-[var(--text-primary)]">
