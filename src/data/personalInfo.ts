@@ -73,10 +73,10 @@ export const experiences: Experience[] = [
     type: 'Virtual Internship',
     startDate: 'November 20, 2026',
     endDate: 'December 20, 2026',
-    status: 'incoming',
-    statusLabel: 'Incoming Position',
+    status: 'current',
+    statusLabel: 'Current Position',
     description:
-      'Incoming virtual internship focused on Artificial Intelligence projects, machine learning models, and practical AI applications.',
+      'Virtual internship focused on Artificial Intelligence projects, machine learning models, and practical AI applications.',
   },
 ];
 
