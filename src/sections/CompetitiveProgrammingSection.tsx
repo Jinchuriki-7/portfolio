@@ -22,7 +22,6 @@ export default function CompetitiveProgrammingSection() {
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
-    // Dynamically fetch live Codeforces data
     fetch('https://codeforces.com/api/user.info?handles=Samii-7')
       .then((res) => res.json())
       .then((data) => {
@@ -37,128 +36,90 @@ export default function CompetitiveProgrammingSection() {
           setIsLive(true);
         }
       })
-      .catch(() => {
-        // Fallback to verified baseline stats
-      });
+      .catch(() => {});
   }, []);
 
   return (
-    <SectionWrapper id="competitive-programming" alternate>
+    <SectionWrapper id="competitive-programming">
       <SectionHeader
         title="Competitive Programming"
-        subtitle="Sharpening problem-solving skills through algorithmic competitions and rated contests."
+        subtitle="Sharpening algorithmic thinking, data structures, and problem-solving speed through rated contests."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        {/* Codeforces profile card */}
+        {/* Codeforces Profile Card */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="card"
+          className="glass-card p-6 md:p-8"
         >
-          {/* Platform header */}
-          <div className="flex items-center justify-between mb-5">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center"
-                style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444' }}
-              >
+              <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center">
                 <SiCodeforces size={24} />
               </div>
               <div>
-                <h3 className="font-bold text-base" style={{ color: 'var(--color-text-primary)' }}>
-                  Codeforces
-                </h3>
-                <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                  Competitive Programming Platform
-                </p>
+                <h3 className="font-display font-bold text-lg text-white">Codeforces</h3>
+                <p className="text-xs text-slate-400">Competitive Programming</p>
               </div>
             </div>
 
-            {/* Live indicator badge */}
-            <span
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold"
-              style={{
-                background: isLive ? 'rgba(34, 197, 94, 0.1)' : 'var(--color-accent-soft)',
-                color: isLive ? '#22c55e' : 'var(--color-text-accent)',
-                border: `1px solid ${isLive ? 'rgba(34, 197, 94, 0.2)' : 'rgba(59, 130, 246, 0.15)'}`,
-              }}
-            >
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               <Activity size={12} className={isLive ? 'animate-pulse' : ''} />
               {isLive ? 'Live API Verified' : 'Verified Profile'}
             </span>
           </div>
 
           {/* Handle */}
-          <div
-            className="rounded-xl p-4 mb-4"
-            style={{
-              background: 'var(--color-bg-card)',
-              border: '1px solid var(--color-border)',
-            }}
-          >
-            <p
-              className="text-xs uppercase tracking-wide font-medium mb-1"
-              style={{ color: 'var(--color-text-muted)' }}
-            >
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10 mb-5">
+            <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">
               Handle
             </p>
-            <p className="font-bold text-2xl font-mono" style={{ color: 'var(--color-text-accent)' }}>
+            <p className="font-display font-bold text-2xl text-emerald-400">
               Samii-7
             </p>
           </div>
 
-          {/* Verified Stats Grid */}
-          <div className="grid grid-cols-2 gap-3 mb-5">
-            <div
-              className="rounded-xl p-3"
-              style={{
-                background: 'var(--color-bg-card)',
-                border: '1px solid var(--color-border)',
-              }}
-            >
-              <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>
-                <Zap size={13} style={{ color: 'var(--color-text-accent)' }} />
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-1">
+                <Zap size={13} className="text-emerald-400" />
                 <span>Current Rating</span>
               </div>
-              <p className="text-xl font-bold font-mono mt-1" style={{ color: 'var(--color-text-primary)' }}>
+              <p className="text-2xl font-display font-bold text-white">
                 {stats.rating}
               </p>
             </div>
 
-            <div
-              className="rounded-xl p-3"
-              style={{
-                background: 'var(--color-bg-card)',
-                border: '1px solid var(--color-border)',
-              }}
-            >
-              <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>
-                <Award size={13} className="text-amber-500" />
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-1">
+                <Award size={13} className="text-cyan-400" />
                 <span>Rank</span>
               </div>
-              <p className="text-xl font-bold capitalize mt-1 text-slate-400">
+              <p className="text-2xl font-display font-bold text-slate-300 capitalize">
                 {stats.rank}
               </p>
             </div>
           </div>
 
-          {/* CTA */}
+          {/* Action button */}
           <a
             href="https://codeforces.com/profile/Samii-7"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary w-full justify-center"
+            className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-emerald-500/20 transition-all flex items-center justify-center gap-2"
             aria-label="View Codeforces profile"
           >
             <ExternalLink size={15} />
-            Visit Codeforces Profile
+            <span>Visit Codeforces Profile</span>
           </a>
         </motion.div>
 
-        {/* What I do in CP */}
+        {/* Practice Breakdown */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -166,7 +127,7 @@ export default function CompetitiveProgrammingSection() {
           transition={{ duration: 0.5 }}
           className="space-y-4"
         >
-          <h3 className="font-bold text-base" style={{ color: 'var(--color-text-primary)' }}>
+          <h3 className="font-display font-bold text-lg text-white mb-2">
             What I Practice
           </h3>
 
@@ -174,17 +135,17 @@ export default function CompetitiveProgrammingSection() {
             {
               icon: Code2,
               title: 'Algorithmic Problem Solving',
-              desc: 'Working through problems in graph theory, dynamic programming, greedy algorithms, and number theory.',
+              desc: 'Working through problems in dynamic programming, graph algorithms, greedy optimization, and number theory.',
             },
             {
               icon: Award,
               title: 'Contest Participation',
-              desc: 'Participating in Codeforces Div. rounds to test problem-solving speed and accuracy under real-time constraints.',
+              desc: 'Actively participating in Codeforces Div. rated contests to enhance speed, precision, and accuracy under real-time constraints.',
             },
             {
               icon: Code2,
               title: 'Data Structures',
-              desc: 'Mastering efficient data structures including trees, heaps, segment trees, and hash maps for optimized solutions.',
+              desc: 'Mastering trees, segment trees, heaps, union-find sets, and hash maps for high-performance solutions.',
             },
           ].map(({ icon: Icon, title, desc }, i) => (
             <motion.div
@@ -193,22 +154,16 @@ export default function CompetitiveProgrammingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="card flex gap-4 items-start"
+              className="glass-card p-5 flex gap-4 items-start"
             >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{
-                  background: 'var(--color-accent-soft)',
-                  color: 'var(--color-text-accent)',
-                }}
-              >
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center flex-shrink-0">
                 <Icon size={18} />
               </div>
               <div>
-                <h4 className="font-semibold text-sm" style={{ color: 'var(--color-text-primary)' }}>
+                <h4 className="font-display font-bold text-base text-white">
                   {title}
                 </h4>
-                <p className="text-xs mt-1 leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
                   {desc}
                 </p>
               </div>

@@ -8,10 +8,6 @@ interface SectionWrapperProps {
   alternate?: boolean;
 }
 
-/**
- * SectionWrapper — consistent layout wrapper for every portfolio section.
- * Uses dark theme with alternating subtle background variations.
- */
 export default function SectionWrapper({
   id,
   className = '',
@@ -21,16 +17,15 @@ export default function SectionWrapper({
   return (
     <section
       id={id}
-      className={`section-padding ${className}`}
-      style={{
-        backgroundColor: alternate ? 'var(--color-bg-secondary)' : 'transparent',
-      }}
+      className={`section-padding relative overflow-hidden ${
+        alternate ? 'bg-slate-950/40' : 'bg-transparent'
+      } ${className}`}
     >
       <motion.div
         className="section-container"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         {children}

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HeroSection from './sections/HeroSection';
@@ -12,24 +11,13 @@ import AchievementsSection from './sections/AchievementsSection';
 import ContactSection from './sections/ContactSection';
 
 /**
- * App — Root component with theme management and all portfolio sections.
+ * App — Root component with sleek dark mode UI inspired by rahat300809.
  */
 export default function App() {
-  // Initialize theme from localStorage or default to dark
-  useEffect(() => {
-    const saved = localStorage.getItem('theme');
-    const theme = saved === 'light' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
-    // Update meta theme-color
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0a0f1c' : '#f8fafc');
-  }, []);
-
   return (
-    <div className="min-h-screen flex flex-col relative">
-      {/* Background effects */}
-      <div className="gradient-bg" aria-hidden="true" />
-      <div className="grid-pattern" aria-hidden="true" />
+    <div className="min-h-screen flex flex-col relative bg-slate-950 text-slate-200">
+      {/* Background ambient radial mesh */}
+      <div className="animate-mesh" aria-hidden="true" />
 
       {/* Fixed navigation bar */}
       <Navbar />

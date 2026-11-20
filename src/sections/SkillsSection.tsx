@@ -1,4 +1,4 @@
-import { type ComponentType, type CSSProperties } from 'react';
+import { type ComponentType } from 'react';
 import { motion } from 'framer-motion';
 import { Code, Globe, Wrench, Brain } from 'lucide-react';
 import {
@@ -11,16 +11,14 @@ import SectionWrapper from '../components/SectionWrapper';
 import SectionHeader from '../components/SectionHeader';
 import { skillCategories } from '../data/skills';
 
-// Icon map for skill categories
-const CategoryIcons: Record<string, ComponentType<{ size: number; className?: string }>> = {
+const CategoryIcons: Record<string, ComponentType<{ size: number }>> = {
   code: Code,
   globe: Globe,
   tool: Wrench,
   brain: Brain,
 };
 
-// Technology icon map — recognizable brand icons
-const TechIcons: Record<string, ComponentType<{ size?: number; className?: string; style?: CSSProperties }>> = {
+const TechIcons: Record<string, ComponentType<{ size?: number; className?: string }>> = {
   'C': SiC,
   'C++': SiCplusplus,
   'Java': FaJava,
@@ -40,7 +38,7 @@ export default function SkillsSection() {
     <SectionWrapper id="skills" alternate>
       <SectionHeader
         title="Technical Skills"
-        subtitle="A curated set of programming languages, technologies, and tools I work with."
+        subtitle="A curated set of programming languages, frameworks, developer tools, and technical competencies."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -53,26 +51,20 @@ export default function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: catIdx * 0.1, duration: 0.45 }}
-              className="card"
+              className="glass-card p-6"
             >
-              {/* Category header */}
+              {/* Category Header */}
               <div className="flex items-center gap-3 mb-5">
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{
-                    background: 'var(--color-accent-soft)',
-                    color: 'var(--color-text-accent)',
-                  }}
-                >
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center">
                   <Icon size={18} />
                 </div>
-                <h3 className="font-bold text-sm" style={{ color: 'var(--color-text-primary)' }}>
+                <h3 className="font-display font-bold text-base text-white">
                   {cat.category}
                 </h3>
               </div>
 
-              {/* Skill items with icons */}
-              <div className="space-y-3">
+              {/* Skill chips */}
+              <div className="space-y-2.5">
                 {cat.skills.map(({ name }, skillIdx) => {
                   const TechIcon = TechIcons[name];
                   return (
@@ -81,22 +73,15 @@ export default function SkillsSection() {
                       initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: catIdx * 0.1 + skillIdx * 0.05 }}
-                      className="flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 hover:scale-[1.02]"
-                      style={{
-                        background: 'var(--color-accent-soft)',
-                        border: '1px solid var(--color-border)',
-                      }}
+                      transition={{ delay: catIdx * 0.1 + skillIdx * 0.04 }}
+                      className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/5 border border-white/5 hover:border-emerald-500/30 hover:bg-white/10 transition-all"
                     >
                       {TechIcon ? (
-                        <TechIcon size={16} className="flex-shrink-0" style={{ color: 'var(--color-text-accent)' }} />
+                        <TechIcon size={16} className="text-emerald-400 flex-shrink-0" />
                       ) : (
-                        <div
-                          className="w-4 h-4 rounded-full flex-shrink-0"
-                          style={{ background: 'var(--color-accent-glow)', border: '2px solid var(--color-accent)' }}
-                        />
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
                       )}
-                      <span className="text-sm font-medium" style={{ color: 'var(--color-text-primary)' }}>
+                      <span className="text-sm font-medium text-slate-200">
                         {name}
                       </span>
                     </motion.div>

@@ -26,12 +26,12 @@ const achievements: Achievement[] = [
     description:
       "Led Team InnoSphere to develop 'JOMI-SHARE & NIRBASH', an AI Land Intelligence and Property Ecosystem for smart e-governance in Bangladesh, featuring automated land record cross-auditing and the proprietary Land DNA™ verification system.",
     projectLink: "https://github.com/Jinchuriki-7/jomi-share-landtech",
-    tag: "Hackathon Finalist & Participant",
+    tag: "Hackathon Finalist",
   },
   {
     id: "competitive-programming-contests",
     title: "Active Codeforces Contestant",
-    event: "Codeforces Rounds & Division Contests",
+    event: "Codeforces Division Contests",
     organizer: "Codeforces",
     role: "Competitive Programmer (Handle: Samii-7)",
     date: "Ongoing",
@@ -44,9 +44,9 @@ const achievements: Achievement[] = [
 
 export default function AchievementsSection() {
   return (
-    <SectionWrapper id="achievements" alternate>
+    <SectionWrapper id="achievements">
       <SectionHeader
-        title="Achievements & Competitions"
+        title="Achievements & Recognition"
         subtitle="Verified hackathon participation, team leadership, and competitive programming milestones."
       />
 
@@ -58,83 +58,51 @@ export default function AchievementsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.1, duration: 0.45 }}
-            className="card flex flex-col justify-between"
+            className="glass-card p-6 flex flex-col justify-between"
           >
             <div>
-              {/* Tag & Date */}
-              <div className="flex items-center justify-between mb-3">
-                <span
-                  className="text-xs font-semibold px-2.5 py-1 rounded-full"
-                  style={{
-                    background: 'var(--color-accent-soft)',
-                    color: 'var(--color-text-accent)',
-                    border: '1px solid rgba(59, 130, 246, 0.15)',
-                  }}
-                >
+              <div className="flex items-center justify-between mb-4">
+                <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                   {item.tag}
                 </span>
-                <span className="flex items-center gap-1 text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                  <Calendar size={12} />
+                <span className="flex items-center gap-1 text-xs text-slate-400">
+                  <Calendar size={12} className="text-emerald-400" />
                   {item.date}
                 </span>
               </div>
 
-              {/* Title & Icon */}
-              <div className="flex items-start gap-3">
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
-                  style={{
-                    background: 'rgba(245, 158, 11, 0.1)',
-                    color: '#f59e0b',
-                    border: '1px solid rgba(245, 158, 11, 0.2)',
-                  }}
-                >
-                  <Trophy size={18} />
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Trophy size={19} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base leading-snug" style={{ color: 'var(--color-text-primary)' }}>
+                  <h3 className="font-display font-bold text-base md:text-lg text-white leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-xs mt-1" style={{ color: 'var(--color-text-muted)' }}>
-                    {item.organizer}
-                  </p>
+                  <p className="text-xs text-slate-400 mt-1">{item.organizer}</p>
                 </div>
               </div>
 
-              {/* Role */}
-              <div
-                className="mt-3.5 flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg"
-                style={{
-                  background: 'var(--color-bg-card)',
-                  color: 'var(--color-text-accent)',
-                  border: '1px solid var(--color-border)',
-                }}
-              >
+              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 bg-white/5 px-3 py-1.5 rounded-lg border border-white/5 my-3">
                 <Users size={13} />
                 <span>{item.role}</span>
               </div>
 
-              {/* Description */}
-              <p
-                className="mt-3 text-sm leading-relaxed"
-                style={{ color: 'var(--color-text-secondary)' }}
-              >
+              <p className="text-xs md:text-sm text-slate-300 leading-relaxed">
                 {item.description}
               </p>
             </div>
 
-            {/* Link */}
             {item.projectLink && (
-              <div className="mt-5 pt-3" style={{ borderTop: '1px solid var(--color-border)' }}>
+              <div className="mt-5 pt-4 border-t border-white/5">
                 <a
                   href={item.projectLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-semibold transition-all duration-200 hover:gap-2"
-                  style={{ color: 'var(--color-text-accent)' }}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-cyan-400 transition-colors"
                 >
                   <span>View Project &amp; Proof</span>
-                  <ExternalLink size={12} />
+                  <ExternalLink size={13} />
                 </a>
               </div>
             )}

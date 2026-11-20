@@ -66,74 +66,60 @@ export default function ContactSection() {
     setStatus('error');
   };
 
-  const inputClass = 'w-full px-4 py-2.5 text-sm rounded-xl outline-none transition-all duration-200';
-
-  const inputStyle = (field: keyof FormState): React.CSSProperties => ({
-    background: 'var(--color-bg-card)',
-    color: 'var(--color-text-primary)',
-    border: errors[field]
-      ? '1.5px solid #ef4444'
-      : '1.5px solid var(--color-border)',
-  });
+  const inputClass = (field: keyof FormState) =>
+    `w-full px-4 py-3 text-sm rounded-xl outline-none transition-all duration-200 bg-white/5 text-slate-100 placeholder-slate-500 border ${
+      errors[field]
+        ? 'border-red-400 focus:border-red-400'
+        : 'border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20'
+    }`;
 
   return (
-    <SectionWrapper id="contact">
+    <SectionWrapper id="contact" alternate>
       <SectionHeader
-        title="Contact"
-        subtitle="Have a question or want to collaborate? Reach out!"
+        title="Get in Touch"
+        subtitle="Have a question, collaboration inquiry, or project opportunity? Feel free to reach out."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* Contact info */}
-        <div className="space-y-5">
-          <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
-            I&apos;m always open to interesting conversations, collaboration
-            opportunities, and new ideas. Whether you have a project in mind or
-            just want to connect — feel free to reach out through any of the
-            channels below.
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+        {/* Contact info cards */}
+        <div className="space-y-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-6">
+            I am always open to exploring new engineering opportunities, discussing software development, or connecting with fellow engineers. Reach out directly through any of the channels below.
           </p>
 
-          {/* Contact methods */}
-          <div className="space-y-3">
-            <ContactLink
-              icon={<Mail size={16} />}
-              label="Email"
-              value={personalInfo.email}
-              href={`mailto:${personalInfo.email}`}
-            />
-            <ContactLink
-              icon={<FaGithub size={16} />}
-              label="GitHub"
-              value={`@${personalInfo.githubUsername}`}
-              href={personalInfo.github}
-            />
-            <ContactLink
-              icon={<FaLinkedin size={16} />}
-              label="LinkedIn"
-              value="Connect on LinkedIn"
-              href={personalInfo.linkedin}
-            />
-          </div>
+          <ContactLink
+            icon={<Mail size={16} />}
+            label="Email Address"
+            value={personalInfo.email}
+            href={`mailto:${personalInfo.email}`}
+          />
+          <ContactLink
+            icon={<FaGithub size={16} />}
+            label="GitHub Profile"
+            value={`@${personalInfo.githubUsername}`}
+            href={personalInfo.github}
+          />
+          <ContactLink
+            icon={<FaLinkedin size={16} />}
+            label="LinkedIn"
+            value="Connect on LinkedIn"
+            href={personalInfo.linkedin}
+          />
         </div>
 
-        {/* Contact form */}
+        {/* Contact Form */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="card"
+          className="glass-card p-6 md:p-8"
         >
           <form onSubmit={handleSubmit} noValidate>
             <div className="space-y-4">
-              {/* Name */}
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-xs font-semibold mb-1.5"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  Full Name <span className="text-red-400">*</span>
+                <label htmlFor="name" className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  Full Name <span className="text-emerald-400">*</span>
                 </label>
                 <input
                   id="name"
@@ -143,21 +129,15 @@ export default function ContactSection() {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Your full name"
-                  className={inputClass}
-                  style={inputStyle('name')}
+                  className={inputClass('name')}
                   disabled={status === 'submitting'}
                 />
                 {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
               </div>
 
-              {/* Email */}
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-xs font-semibold mb-1.5"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  Email Address <span className="text-red-400">*</span>
+                <label htmlFor="email" className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  Email Address <span className="text-emerald-400">*</span>
                 </label>
                 <input
                   id="email"
@@ -167,21 +147,15 @@ export default function ContactSection() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="your@email.com"
-                  className={inputClass}
-                  style={inputStyle('email')}
+                  className={inputClass('email')}
                   disabled={status === 'submitting'}
                 />
                 {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
               </div>
 
-              {/* Subject */}
               <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-xs font-semibold mb-1.5"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  Subject <span className="text-red-400">*</span>
+                <label htmlFor="subject" className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  Subject <span className="text-emerald-400">*</span>
                 </label>
                 <input
                   id="subject"
@@ -190,21 +164,15 @@ export default function ContactSection() {
                   value={form.subject}
                   onChange={handleChange}
                   placeholder="What is this about?"
-                  className={inputClass}
-                  style={inputStyle('subject')}
+                  className={inputClass('subject')}
                   disabled={status === 'submitting'}
                 />
                 {errors.subject && <p className="mt-1 text-xs text-red-400">{errors.subject}</p>}
               </div>
 
-              {/* Message */}
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-xs font-semibold mb-1.5"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  Message <span className="text-red-400">*</span>
+                <label htmlFor="message" className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  Message <span className="text-emerald-400">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -213,78 +181,51 @@ export default function ContactSection() {
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Your message..."
-                  className={`${inputClass} resize-none`}
-                  style={inputStyle('message')}
+                  className={`${inputClass('message')} resize-none`}
                   disabled={status === 'submitting'}
                 />
                 {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-emerald-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
                 {status === 'submitting' ? (
                   <>
-                    <span className="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
-                    Sending…
+                    <span className="animate-spin inline-block w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full" />
+                    <span>Sending…</span>
                   </>
                 ) : (
                   <>
                     <Send size={15} />
-                    Send Message
+                    <span>Send Message</span>
                   </>
                 )}
               </button>
 
-              {/* Success feedback */}
               {status === 'success' && (
-                <div
-                  className="flex items-start gap-2 p-3 rounded-xl"
-                  style={{
-                    background: 'rgba(34, 197, 94, 0.1)',
-                    border: '1px solid rgba(34, 197, 94, 0.2)',
-                  }}
-                >
-                  <CheckCircle size={16} className="text-green-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-green-400">
-                    Message sent successfully! I&apos;ll get back to you soon.
-                  </p>
+                <div className="flex items-start gap-2 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm">
+                  <CheckCircle size={16} className="flex-shrink-0 mt-0.5" />
+                  <p>Message sent successfully! I will get back to you soon.</p>
                 </div>
               )}
 
-              {/* Error / mailto fallback */}
               {status === 'error' && (
-                <div
-                  className="flex flex-col gap-2 p-3.5 rounded-xl"
-                  style={{
-                    background: 'rgba(245, 158, 11, 0.1)',
-                    border: '1px solid rgba(245, 158, 11, 0.2)',
-                  }}
-                >
+                <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs space-y-2">
                   <div className="flex items-start gap-2">
                     <AlertCircle size={16} className="text-amber-400 flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-sm font-semibold text-amber-400">
-                        Direct delivery service not connected
-                      </p>
-                      <p className="text-xs text-amber-300/80 mt-0.5">
-                        To ensure your message reaches me immediately, click below to open your preferred email client.
-                      </p>
+                      <p className="font-bold text-amber-300">Direct delivery service not connected</p>
+                      <p className="text-slate-300 mt-0.5">Click below to open your email client directly with your message pre-filled:</p>
                     </div>
                   </div>
                   <a
                     href={`mailto:${personalInfo.email}?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(
                       `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
                     )}`}
-                    className="mt-1 self-start inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-200"
-                    style={{
-                      color: 'var(--color-text-accent)',
-                      background: 'var(--color-bg-card)',
-                      border: '1px solid rgba(245, 158, 11, 0.3)',
-                    }}
+                    className="inline-flex items-center gap-1.5 font-bold text-emerald-400 bg-white/5 border border-emerald-500/30 px-3 py-1.5 rounded-lg hover:bg-white/10 transition-colors"
                   >
                     <Mail size={13} />
                     <span>Send via Email Client</span>
@@ -299,47 +240,24 @@ export default function ContactSection() {
   );
 }
 
-// ─── Helper component ─────────────────────────────────────────────────────────
-
-interface ContactLinkProps {
-  icon: ReactNode;
-  label: string;
-  value: string;
-  href: string;
-}
-
-function ContactLink({ icon, label, value, href }: ContactLinkProps) {
+function ContactLink({ icon, label, value, href }: { icon: ReactNode; label: string; value: string; href: string }) {
   return (
     <a
       href={href}
       target={href.startsWith('mailto') ? '_self' : '_blank'}
       rel="noopener noreferrer"
-      className="flex items-center gap-3 p-3.5 rounded-xl transition-all duration-200 group"
-      style={{
-        background: 'var(--color-bg-card)',
-        border: '1px solid var(--color-border)',
-      }}
+      className="glass-card p-4 flex items-center gap-3 hover:border-emerald-500/30 transition-all group"
     >
-      <div
-        className="w-9 h-9 rounded-xl flex items-center justify-center transition-colors"
-        style={{
-          background: 'var(--color-accent-soft)',
-          color: 'var(--color-text-accent)',
-        }}
-      >
+      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500/20 transition-colors">
         {icon}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>{label}</p>
-        <p className="text-sm font-semibold truncate" style={{ color: 'var(--color-text-primary)' }}>
+        <p className="text-xs text-slate-400 font-medium">{label}</p>
+        <p className="text-sm font-bold text-white truncate group-hover:text-emerald-400 transition-colors">
           {value}
         </p>
       </div>
-      <ExternalLink
-        size={14}
-        className="flex-shrink-0 transition-colors"
-        style={{ color: 'var(--color-text-muted)' }}
-      />
+      <ExternalLink size={14} className="text-slate-500 group-hover:text-emerald-400 transition-colors" />
     </a>
   );
 }

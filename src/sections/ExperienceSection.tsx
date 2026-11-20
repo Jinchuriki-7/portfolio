@@ -6,163 +6,74 @@ import { experiences } from '../data/personalInfo';
 
 export default function ExperienceSection() {
   return (
-    <SectionWrapper id="experience">
+    <SectionWrapper id="experience" alternate>
       <SectionHeader
         title="Internship & Experience"
         subtitle="Practical industry experience, professional engagements, and technical internships."
       />
 
-      <div className="max-w-2xl">
-        <div className="space-y-8 relative">
-          {/* Vertical connecting line */}
-          <div
-            className="absolute left-[11px] top-6 bottom-6 w-[2px] hidden sm:block"
-            style={{
-              background: 'linear-gradient(to bottom, var(--color-accent), transparent)',
-            }}
-            aria-hidden="true"
-          />
+      <div className="max-w-3xl space-y-6">
+        {experiences.map((exp, idx) => {
+          const isCurrent = exp.status === 'current';
 
-          {experiences.map((exp, idx) => {
-            const isCurrent = exp.status === 'current';
-            const isIncoming = exp.status === 'incoming';
-            // Status colors: Green for Current, Orange for Incoming, Gray for Completed
-            const statusColor = isCurrent ? '#22c55e' : isIncoming ? '#f59e0b' : '#94a3b8';
-            const statusBg = isCurrent
-              ? 'rgba(34, 197, 94, 0.1)'
-              : isIncoming
-              ? 'rgba(245, 158, 11, 0.1)'
-              : 'rgba(148, 163, 184, 0.1)';
-            const statusBorder = isCurrent
-              ? 'rgba(34, 197, 94, 0.2)'
-              : isIncoming
-              ? 'rgba(245, 158, 11, 0.2)'
-              : 'rgba(148, 163, 184, 0.2)';
+          return (
+            <motion.div
+              key={exp.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.15, duration: 0.5 }}
+              className="glass-card p-6 md:p-8"
+            >
+              {/* Top Row: Status badge */}
+              <div className="flex items-center justify-between mb-4">
+                <span
+                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
+                    isCurrent
+                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                      : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                  }`}
+                >
+                  {isCurrent ? <CheckCircle2 size={12} /> : <Clock size={12} />}
+                  {exp.statusLabel}
+                </span>
 
-            return (
-              <motion.div
-                key={exp.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.15, duration: 0.5 }}
-                className="relative flex gap-5"
-              >
-                {/* Timeline dot */}
-                <div className="relative flex flex-col items-center">
-                  <div
-                    className="timeline-dot z-10"
-                    style={{
-                      backgroundColor: statusColor,
-                      boxShadow: `0 0 0 2px ${statusColor}, 0 0 12px ${statusColor}40`,
-                    }}
-                  />
+                <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+                  <Calendar size={13} className="text-emerald-400" />
+                  <span>{exp.startDate} → {exp.endDate}</span>
+                </div>
+              </div>
+
+              {/* Company Info with 56x56 logo container */}
+              <div className="flex items-start gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 border border-white/10 text-emerald-400 flex items-center justify-center font-display font-bold text-sm tracking-wider flex-shrink-0 shadow-md">
+                  {exp.id === 'biswas-it' ? 'BIT' : 'CA'}
                 </div>
 
-                {/* Card */}
-                <div className="card flex-1">
-                  {/* Status badge */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <span
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full"
-                      style={{
-                        background: statusBg,
-                        color: statusColor,
-                        border: `1px solid ${statusBorder}`,
-                      }}
-                    >
-                      {isCurrent ? <CheckCircle2 size={12} /> : <Clock size={12} />}
-                      {exp.statusLabel}
-                    </span>
-                  </div>
-
-                  {/* Position & organization with logo container (56x56px rounded-square) */}
-                  <div className="flex items-start gap-4">
-                    {/* Logo container: 56x56px, rounded-square, object-fit contain */}
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 font-bold text-sm tracking-wider shadow-sm transition-all duration-300 hover:scale-105"
-                      style={{
-                        background: 'linear-gradient(135deg, var(--color-bg-tertiary), var(--color-accent-soft))',
-                        color: 'var(--color-text-accent)',
-                        border: '1.5px solid var(--color-border)',
-                      }}
-                    >
-                      {exp.id === 'biswas-it' ? 'BIT' : 'CA'}
-                    </div>
-                    <div>
-                      <h3
-                        className="font-bold text-lg leading-snug"
-                        style={{ color: 'var(--color-text-primary)' }}
-                      >
-                        {exp.position}
-                      </h3>
-                      <a
-                        href={exp.organizationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-semibold text-sm mt-0.5 hover:underline"
-                        style={{ color: 'var(--color-text-accent)' }}
-                      >
-                        {exp.organization}
-                        <ArrowUpRight size={13} />
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Metadata */}
-                  <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div
-                      className="rounded-xl p-3"
-                      style={{
-                        background: 'var(--color-bg-card)',
-                        border: '1px solid var(--color-border)',
-                      }}
-                    >
-                      <p
-                        className="text-xs uppercase tracking-wide font-medium mb-1"
-                        style={{ color: 'var(--color-text-muted)' }}
-                      >
-                        Type
-                      </p>
-                      <p className="text-sm font-semibold" style={{ color: 'var(--color-text-primary)' }}>
-                        {exp.type}
-                      </p>
-                    </div>
-                    <div
-                      className="rounded-xl p-3"
-                      style={{
-                        background: 'var(--color-bg-card)',
-                        border: '1px solid var(--color-border)',
-                      }}
-                    >
-                      <p
-                        className="text-xs uppercase tracking-wide font-medium mb-1"
-                        style={{ color: 'var(--color-text-muted)' }}
-                      >
-                        Duration
-                      </p>
-                      <div
-                        className="flex items-center gap-1.5 text-sm font-semibold"
-                        style={{ color: 'var(--color-text-primary)' }}
-                      >
-                        <Calendar size={13} style={{ color: 'var(--color-text-muted)' }} />
-                        <span>{exp.startDate} → {exp.endDate}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p
-                    className="mt-4 text-sm leading-relaxed"
-                    style={{ color: 'var(--color-text-secondary)' }}
+                <div>
+                  <h3 className="font-display font-bold text-lg md:text-xl text-white">
+                    {exp.position}
+                  </h3>
+                  <a
+                    href={exp.organizationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-emerald-400 hover:text-cyan-400 transition-colors mt-0.5"
                   >
-                    {exp.description}
-                  </p>
+                    <span>{exp.organization}</span>
+                    <ArrowUpRight size={13} />
+                  </a>
+                  <p className="text-xs text-slate-400 mt-0.5">{exp.type}</p>
                 </div>
-              </motion.div>
-            );
-          })}
-        </div>
+              </div>
+
+              {/* Description */}
+              <p className="mt-4 text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-4">
+                {exp.description}
+              </p>
+            </motion.div>
+          );
+        })}
       </div>
     </SectionWrapper>
   );

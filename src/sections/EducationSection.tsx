@@ -9,66 +9,45 @@ export default function EducationSection() {
     <SectionWrapper id="education">
       <SectionHeader
         title="Education"
-        subtitle="My academic background and ongoing studies."
+        subtitle="My academic background, institution, and ongoing undergraduate studies."
       />
 
-      <div className="max-w-2xl">
+      <div className="max-w-3xl">
         {education.map((item, idx) => (
           <motion.div
             key={item.id}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.1, duration: 0.5 }}
-            className="relative flex gap-5 pb-8 last:pb-0"
+            className="glass-card p-6 md:p-8"
           >
-            {/* Timeline left column */}
-            <div className="relative flex flex-col items-center">
-              <div className="timeline-dot" />
-              {idx < education.length - 1 && <div className="timeline-line" />}
-            </div>
-
-            {/* Content */}
-            <div className="card flex-1 mt-0">
-              {/* Header row */}
-              <div className="flex items-start justify-between gap-3 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <GraduationCap size={18} style={{ color: 'var(--color-text-accent)' }} className="flex-shrink-0" />
-                  <h3 className="font-bold text-base" style={{ color: 'var(--color-text-primary)' }}>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                  <GraduationCap size={24} />
+                </div>
+                <div>
+                  <h3 className="font-display font-bold text-lg md:text-xl text-white">
                     {item.degree} in {item.field}
                   </h3>
+                  <div className="flex items-center gap-2 text-xs md:text-sm text-slate-400 mt-0.5">
+                    <BookOpen size={13} className="text-emerald-400" />
+                    <span>{item.institution}</span>
+                  </div>
                 </div>
-                <span
-                  className="text-xs font-semibold px-2.5 py-1 rounded-full"
-                  style={{
-                    background: item.status === 'ongoing' ? 'rgba(34, 197, 94, 0.1)' : 'var(--color-accent-soft)',
-                    color: item.status === 'ongoing' ? '#22c55e' : 'var(--color-text-accent)',
-                    border: `1px solid ${item.status === 'ongoing' ? 'rgba(34, 197, 94, 0.2)' : 'rgba(59, 130, 246, 0.15)'}`,
-                  }}
-                >
-                  {item.status === 'ongoing' ? 'In Progress' : 'Completed'}
-                </span>
               </div>
 
-              {/* Institution */}
-              <div
-                className="mt-2 flex items-center gap-1.5 text-sm"
-                style={{ color: 'var(--color-text-muted)' }}
-              >
-                <BookOpen size={14} />
-                <span>{item.institution}</span>
-              </div>
-
-              {/* Description */}
-              {item.description && (
-                <p
-                  className="mt-3 text-sm leading-relaxed"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  {item.description}
-                </p>
-              )}
+              <span className="self-start sm:self-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                {item.status === 'ongoing' ? 'In Progress' : 'Completed'}
+              </span>
             </div>
+
+            {item.description && (
+              <p className="text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-4 mt-2">
+                {item.description}
+              </p>
+            )}
           </motion.div>
         ))}
       </div>
