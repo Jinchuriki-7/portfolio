@@ -17,7 +17,7 @@ import ContactSection from './sections/ContactSection';
  */
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col relative bg-slate-950 text-slate-200">
+    <div className="min-h-screen flex flex-col relative bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
       {/* Dynamic WebGL Shader Background (AnoAI Aurora Waves) */}
       <AnimatedShaderBackground />
 

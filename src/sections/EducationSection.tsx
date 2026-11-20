@@ -28,23 +28,23 @@ export default function EducationSection() {
                   <GraduationCap size={24} />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-lg md:text-xl text-white">
+                  <h3 className="font-display font-bold text-lg md:text-xl text-[var(--text-primary)]">
                     {item.degree} in {item.field}
                   </h3>
-                  <div className="flex items-center gap-2 text-xs md:text-sm text-slate-400 mt-0.5">
-                    <BookOpen size={13} className="text-emerald-400" />
+                  <div className="flex items-center gap-2 text-xs md:text-sm text-[var(--text-muted)] mt-0.5">
+                    <BookOpen size={13} className="text-[var(--accent)]" />
                     <span>{item.institution}</span>
                   </div>
                 </div>
               </div>
 
-              <span className="self-start sm:self-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              <span className="self-start sm:self-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 [data-theme=light]:bg-blue-50 [data-theme=light]:text-blue-600 [data-theme=light]:border-blue-200">
                 {item.status === 'ongoing' ? 'In Progress' : 'Completed'}
               </span>
             </div>
 
             {item.description && (
-              <p className="text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-4 mt-2">
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed border-t border-[var(--border-subtle)] pt-4 mt-2">
                 {item.description}
               </p>
             )}

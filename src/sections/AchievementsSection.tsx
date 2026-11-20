@@ -62,11 +62,11 @@ export default function AchievementsSection() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 [data-theme=light]:bg-blue-50 [data-theme=light]:text-blue-600 [data-theme=light]:border-blue-200">
                   {item.tag}
                 </span>
-                <span className="flex items-center gap-1 text-xs text-slate-400">
-                  <Calendar size={12} className="text-emerald-400" />
+                <span className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
+                  <Calendar size={12} className="text-[var(--accent)]" />
                   {item.date}
                 </span>
               </div>
@@ -76,30 +76,30 @@ export default function AchievementsSection() {
                   <Trophy size={19} />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-base md:text-lg text-white leading-snug">
+                  <h3 className="font-display font-bold text-base md:text-lg text-[var(--text-primary)] leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-slate-400 mt-1">{item.organizer}</p>
+                  <p className="text-xs text-[var(--text-muted)] mt-1">{item.organizer}</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 bg-white/5 px-3 py-1.5 rounded-lg border border-white/5 my-3">
+              <div className="flex items-center gap-2 text-xs font-semibold text-[var(--accent)] bg-[var(--bg-pill)] px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] my-3">
                 <Users size={13} />
                 <span>{item.role}</span>
               </div>
 
-              <p className="text-xs md:text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs md:text-sm text-[var(--text-secondary)] leading-relaxed">
                 {item.description}
               </p>
             </div>
 
             {item.projectLink && (
-              <div className="mt-5 pt-4 border-t border-white/5">
+              <div className="mt-5 pt-4 border-t border-[var(--border-subtle)]">
                 <a
                   href={item.projectLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-cyan-400 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--accent)] hover:text-[var(--accent-secondary)] transition-colors"
                 >
                   <span>View Project &amp; Proof</span>
                   <ExternalLink size={13} />

@@ -17,8 +17,8 @@ export default function SectionWrapper({
   return (
     <section
       id={id}
-      className={`section-padding relative overflow-hidden ${
-        alternate ? 'bg-slate-950/40' : 'bg-transparent'
+      className={`section-padding relative overflow-hidden transition-colors duration-300 ${
+        alternate ? 'bg-[var(--bg-alternate)]' : 'bg-transparent'
       } ${className}`}
     >
       <motion.div

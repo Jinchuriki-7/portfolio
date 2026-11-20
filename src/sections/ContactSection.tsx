@@ -67,10 +67,10 @@ export default function ContactSection() {
   };
 
   const inputClass = (field: keyof FormState) =>
-    `w-full px-4 py-3 text-sm rounded-xl outline-none transition-all duration-200 bg-white/5 text-slate-100 placeholder-slate-500 border ${
+    `w-full px-4 py-3 text-sm rounded-xl outline-none transition-all duration-200 bg-[var(--input-bg)] text-[var(--input-text)] placeholder-[var(--input-placeholder)] border ${
       errors[field]
         ? 'border-red-400 focus:border-red-400'
-        : 'border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20'
+        : 'border-[var(--input-border)] focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]'
     }`;
 
   return (
@@ -83,7 +83,7 @@ export default function ContactSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
         {/* Contact info cards */}
         <div className="space-y-4">
-          <p className="text-sm text-slate-300 leading-relaxed mb-6">
+          <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
             I am always open to exploring new engineering opportunities, discussing software development, or connecting with fellow engineers. Reach out directly through any of the channels below.
           </p>
 
@@ -118,8 +118,8 @@ export default function ContactSection() {
           <form onSubmit={handleSubmit} noValidate>
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  Full Name <span className="text-emerald-400">*</span>
+                <label htmlFor="name" className="block text-xs font-semibold text-[var(--text-secondary)] mb-1.5">
+                  Full Name <span className="text-[var(--accent)]">*</span>
                 </label>
                 <input
                   id="name"
@@ -136,8 +136,8 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  Email Address <span className="text-emerald-400">*</span>
+                <label htmlFor="email" className="block text-xs font-semibold text-[var(--text-secondary)] mb-1.5">
+                  Email Address <span className="text-[var(--accent)]">*</span>
                 </label>
                 <input
                   id="email"
@@ -154,8 +154,8 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  Subject <span className="text-emerald-400">*</span>
+                <label htmlFor="subject" className="block text-xs font-semibold text-[var(--text-secondary)] mb-1.5">
+                  Subject <span className="text-[var(--accent)]">*</span>
                 </label>
                 <input
                   id="subject"
@@ -171,8 +171,8 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  Message <span className="text-emerald-400">*</span>
+                <label htmlFor="message" className="block text-xs font-semibold text-[var(--text-secondary)] mb-1.5">
+                  Message <span className="text-[var(--accent)]">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -190,7 +190,7 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-emerald-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 [data-theme=light]:from-blue-600 [data-theme=light]:to-blue-500 [data-theme=light]:text-white font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-emerald-500/25 [data-theme=light]:hover:shadow-blue-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
                 {status === 'submitting' ? (
                   <>
@@ -217,15 +217,15 @@ export default function ContactSection() {
                   <div className="flex items-start gap-2">
                     <AlertCircle size={16} className="text-amber-400 flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-bold text-amber-300">Direct delivery service not connected</p>
-                      <p className="text-slate-300 mt-0.5">Click below to open your email client directly with your message pre-filled:</p>
+                      <p className="font-bold text-amber-400">Direct delivery service not connected</p>
+                      <p className="text-[var(--text-secondary)] mt-0.5">Click below to open your email client directly with your message pre-filled:</p>
                     </div>
                   </div>
                   <a
                     href={`mailto:${personalInfo.email}?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(
                       `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
                     )}`}
-                    className="inline-flex items-center gap-1.5 font-bold text-emerald-400 bg-white/5 border border-emerald-500/30 px-3 py-1.5 rounded-lg hover:bg-white/10 transition-colors"
+                    className="inline-flex items-center gap-1.5 font-bold text-[var(--accent)] bg-[var(--bg-pill)] border border-[var(--border-subtle)] px-3 py-1.5 rounded-lg hover:bg-[var(--bg-pill-hover)] transition-colors"
                   >
                     <Mail size={13} />
                     <span>Send via Email Client</span>
@@ -246,18 +246,18 @@ function ContactLink({ icon, label, value, href }: { icon: ReactNode; label: str
       href={href}
       target={href.startsWith('mailto') ? '_self' : '_blank'}
       rel="noopener noreferrer"
-      className="glass-card p-4 flex items-center gap-3 hover:border-emerald-500/30 transition-all group"
+      className="glass-card p-4 flex items-center gap-3 hover:border-[var(--accent)] transition-all group"
     >
-      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500/20 transition-colors">
+      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 [data-theme=light]:bg-blue-50 [data-theme=light]:text-blue-600 [data-theme=light]:border-blue-200 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-all">
         {icon}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-xs text-slate-400 font-medium">{label}</p>
-        <p className="text-sm font-bold text-white truncate group-hover:text-emerald-400 transition-colors">
+        <p className="text-xs text-[var(--text-muted)] font-medium">{label}</p>
+        <p className="text-sm font-bold text-[var(--text-primary)] truncate group-hover:text-[var(--accent)] transition-colors">
           {value}
         </p>
       </div>
-      <ExternalLink size={14} className="text-slate-500 group-hover:text-emerald-400 transition-colors" />
+      <ExternalLink size={14} className="text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors" />
     </a>
   );
 }

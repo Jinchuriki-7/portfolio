@@ -50,6 +50,10 @@ export default function Navbar() {
     document.documentElement.classList.toggle('dark', theme === 'dark');
     document.documentElement.classList.toggle('light', theme === 'light');
     localStorage.setItem('theme', theme);
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+      metaTheme.setAttribute('content', theme === 'dark' ? '#020617' : '#F8FAFC');
+    }
   }, [theme]);
 
   const toggleTheme = () => {
@@ -271,7 +275,11 @@ export default function Navbar() {
       <a
         href="/cv.pdf"
         download="Farhanul_Haque_CV.pdf"
-        className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 flex items-center justify-center shadow-lg shadow-emerald-500/30 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+        className={`fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all cursor-pointer ${
+          theme === 'dark'
+            ? 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-emerald-500/30'
+            : 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-600/30'
+        }`}
         aria-label="Quick Download CV"
         title="Download CV"
       >

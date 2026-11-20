@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -11,6 +11,23 @@
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#020617" />
     
+    <!-- Inline Theme Initializer (prevents flash of wrong theme on initial load) -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var theme = (saved === 'light' || saved === 'dark') ? saved : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.classList.add(theme);
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            var metaTheme = document.querySelector('meta[name="theme-color"]');
+            if (metaTheme) metaTheme.setAttribute('content', '#F8FAFC');
+          }
+        } catch(e) {}
+      })();
+    </script>
+
     <!-- Google Fonts: Inter + Space Grotesk + Dancing Script -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +37,7 @@
     />
     <title>Farhanul Haque | Portfolio</title>
   </head>
-  <body class="bg-slate-950 text-slate-200">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

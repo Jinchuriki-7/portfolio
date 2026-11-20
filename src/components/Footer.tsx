@@ -22,14 +22,14 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-white/10 bg-slate-950/80 backdrop-blur-xl relative">
+    <footer className="border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)] backdrop-blur-xl relative transition-colors">
       <div className="section-container py-12">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <p className="font-display font-bold text-2xl tracking-tight text-white">
+            <p className="font-display font-bold text-2xl tracking-tight text-[var(--text-primary)]">
               Farhanul<span className="text-gradient">.</span>
             </p>
-            <p className="text-sm text-slate-400 mt-1">
+            <p className="text-sm text-[var(--text-muted)] mt-1">
               CSE Student • Software Developer • Problem Solver
             </p>
           </div>
@@ -39,7 +39,7 @@ export default function Footer() {
               <button
                 key={label}
                 onClick={() => handleNavClick(href)}
-                className="text-sm font-medium text-slate-400 hover:text-emerald-400 transition-colors"
+                className="text-sm font-medium text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors cursor-pointer"
               >
                 {label}
               </button>
@@ -51,7 +51,7 @@ export default function Footer() {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/30 transition-all hover:scale-105"
+              className="p-2.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all hover:scale-105"
               aria-label="GitHub"
             >
               <FaGithub size={18} />
@@ -60,7 +60,7 @@ export default function Footer() {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/30 transition-all hover:scale-105"
+              className="p-2.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--accent-secondary)] hover:border-[var(--accent-secondary)] transition-all hover:scale-105"
               aria-label="LinkedIn"
             >
               <FaLinkedin size={18} />
@@ -68,15 +68,15 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <div className="mt-8 pt-6 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[var(--text-muted)]">
           <p>&copy; {CURRENT_YEAR} Farhanul Haque. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <p className="flex items-center gap-1">
-              Crafted with <Heart size={12} className="text-emerald-400 fill-emerald-400" /> in React &amp; Tailwind CSS
+              Crafted with <Heart size={12} className="text-red-500 fill-red-500" /> in React &amp; Tailwind CSS
             </p>
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-all"
+              className="p-2 rounded-lg bg-[var(--bg-pill)] text-[var(--accent)] hover:bg-[var(--bg-pill-hover)] transition-all cursor-pointer"
               aria-label="Back to top"
             >
               <ArrowUp size={14} />

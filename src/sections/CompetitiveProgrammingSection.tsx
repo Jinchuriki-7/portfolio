@@ -62,45 +62,45 @@ export default function CompetitiveProgrammingSection() {
                 <SiCodeforces size={24} />
               </div>
               <div>
-                <h3 className="font-display font-bold text-lg text-white">Codeforces</h3>
-                <p className="text-xs text-slate-400">Competitive Programming</p>
+                <h3 className="font-display font-bold text-lg text-[var(--text-primary)]">Codeforces</h3>
+                <p className="text-xs text-[var(--text-muted)]">Competitive Programming</p>
               </div>
             </div>
 
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 [data-theme=light]:bg-blue-50 [data-theme=light]:text-blue-600 [data-theme=light]:border-blue-200">
               <Activity size={12} className={isLive ? 'animate-pulse' : ''} />
               {isLive ? 'Live API Verified' : 'Verified Profile'}
             </span>
           </div>
 
           {/* Handle */}
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 mb-5">
-            <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">
+          <div className="p-4 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] mb-5">
+            <p className="text-xs uppercase tracking-wider text-[var(--text-muted)] font-semibold mb-1">
               Handle
             </p>
-            <p className="font-display font-bold text-2xl text-emerald-400">
+            <p className="font-display font-bold text-2xl text-emerald-400 [data-theme=light]:text-blue-600">
               Samii-7
             </p>
           </div>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-3 mb-6">
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-              <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-1">
-                <Zap size={13} className="text-emerald-400" />
+            <div className="p-4 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)]">
+              <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] mb-1">
+                <Zap size={13} className="text-emerald-400 [data-theme=light]:text-blue-600" />
                 <span>Current Rating</span>
               </div>
-              <p className="text-2xl font-display font-bold text-white">
+              <p className="text-2xl font-display font-bold text-[var(--text-primary)]">
                 {stats.rating}
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-              <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-1">
-                <Award size={13} className="text-cyan-400" />
+            <div className="p-4 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)]">
+              <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] mb-1">
+                <Award size={13} className="text-cyan-400 [data-theme=light]:text-blue-500" />
                 <span>Rank</span>
               </div>
-              <p className="text-2xl font-display font-bold text-slate-300 capitalize">
+              <p className="text-2xl font-display font-bold text-[var(--text-secondary)] capitalize">
                 {stats.rank}
               </p>
             </div>
@@ -111,7 +111,7 @@ export default function CompetitiveProgrammingSection() {
             href="https://codeforces.com/profile/Samii-7"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-emerald-500/20 transition-all flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 [data-theme=light]:from-blue-600 [data-theme=light]:to-blue-500 [data-theme=light]:text-white font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-emerald-500/20 [data-theme=light]:hover:shadow-blue-500/20 transition-all flex items-center justify-center gap-2"
             aria-label="View Codeforces profile"
           >
             <ExternalLink size={15} />
@@ -127,7 +127,7 @@ export default function CompetitiveProgrammingSection() {
           transition={{ duration: 0.5 }}
           className="space-y-4"
         >
-          <h3 className="font-display font-bold text-lg text-white mb-2">
+          <h3 className="font-display font-bold text-lg text-[var(--text-primary)] mb-2">
             What I Practice
           </h3>
 
@@ -156,14 +156,14 @@ export default function CompetitiveProgrammingSection() {
               transition={{ delay: i * 0.1, duration: 0.4 }}
               className="glass-card p-5 flex gap-4 items-start"
             >
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 [data-theme=light]:bg-blue-50 [data-theme=light]:text-blue-600 [data-theme=light]:border-blue-200 border border-emerald-500/20 flex items-center justify-center flex-shrink-0">
                 <Icon size={18} />
               </div>
               <div>
-                <h4 className="font-display font-bold text-base text-white">
+                <h4 className="font-display font-bold text-base text-[var(--text-primary)]">
                   {title}
                 </h4>
-                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                <p className="text-xs text-[var(--text-muted)] mt-1 leading-relaxed">
                   {desc}
                 </p>
               </div>

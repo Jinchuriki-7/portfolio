@@ -127,7 +127,7 @@ export default function AnimatedShaderBackground() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-0 pointer-events-none opacity-60 overflow-hidden"
+      className="fixed inset-0 z-0 pointer-events-none shader-container overflow-hidden"
     />
   );
 }
