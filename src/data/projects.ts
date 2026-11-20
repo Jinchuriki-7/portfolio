@@ -1,6 +1,7 @@
 // ============================================================
 // Projects Data
 // Verified from GitHub profile & project repositories
+// All projects use real authentic screenshots and natural photos
 // ============================================================
 
 export interface Project {
@@ -26,7 +27,7 @@ export const projects: Project[] = [
     liveUrl: "https://jomi-share-portal.web.app",
     category: "Full-Stack & AI",
     featured: true,
-    image: "/projects/jomi-share.svg",
+    image: "/projects/jomi-share.jpg",
   },
   {
     id: "medcore",
@@ -49,7 +50,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Jinchuriki-7/FileX",
     category: "Software Development",
     featured: true,
-    image: "/projects/filex.svg",
+    image: "/projects/filex.jpg",
   },
   {
     id: "byebyte-ai",
@@ -60,7 +61,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Jinchuriki-7/ByeByte-AI",
     category: "Mobile & Desktop",
     featured: true,
-    image: "/projects/byebyte-ai.svg",
+    image: "/projects/byebyte-ai.jpg",
   },
   {
     id: "hospital-management",
@@ -71,7 +72,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Jinchuriki-7/Hospital-Management-System",
     category: "Software Development",
     featured: false,
-    image: "/projects/hospital-management.svg",
+    image: "/projects/hospital-management.jpg",
   },
   {
     id: "currency-converter",
@@ -82,7 +83,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Jinchuriki-7/Currency-Converter",
     category: "Software Development",
     featured: false,
-    image: "/projects/currency-converter.svg",
+    image: "/projects/currency-converter.jpg",
   },
   {
     id: "weather-app",
@@ -93,7 +94,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Jinchuriki-7/Real-Time-Weather-App",
     category: "Software Development",
     featured: false,
-    image: "/projects/weather-app.svg",
+    image: "/projects/weather-app.jpg",
   },
 ];
 
