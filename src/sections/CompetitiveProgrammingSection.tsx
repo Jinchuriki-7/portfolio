@@ -22,6 +22,7 @@ export default function CompetitiveProgrammingSection() {
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
+    // Dynamically fetch live Codeforces data
     fetch('https://codeforces.com/api/user.info?handles=Samii-7')
       .then((res) => res.json())
       .then((data) => {
@@ -36,11 +37,13 @@ export default function CompetitiveProgrammingSection() {
           setIsLive(true);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        // Fallback to verified baseline stats
+      });
   }, []);
 
   return (
-    <SectionWrapper id="competitive-programming">
+    <SectionWrapper id="competitive-programming" alternate>
       <SectionHeader
         title="Competitive Programming"
         subtitle="Sharpening problem-solving skills through algorithmic competitions and rated contests."
@@ -53,62 +56,90 @@ export default function CompetitiveProgrammingSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="card border-white/10 hover:border-emerald-500/30"
+          className="card"
         >
-          {/* Header */}
+          {/* Platform header */}
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-3">
               <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center bg-red-500/10 text-red-400 border border-red-500/20"
+                className="w-11 h-11 rounded-xl flex items-center justify-center"
+                style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444' }}
               >
                 <SiCodeforces size={24} />
               </div>
               <div>
-                <h3 className="font-display font-bold text-base text-white">
+                <h3 className="font-bold text-base" style={{ color: 'var(--color-text-primary)' }}>
                   Codeforces
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
                   Competitive Programming Platform
                 </p>
               </div>
             </div>
 
+            {/* Live indicator badge */}
             <span
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold"
+              style={{
+                background: isLive ? 'rgba(34, 197, 94, 0.1)' : 'var(--color-accent-soft)',
+                color: isLive ? '#22c55e' : 'var(--color-text-accent)',
+                border: `1px solid ${isLive ? 'rgba(34, 197, 94, 0.2)' : 'rgba(59, 130, 246, 0.15)'}`,
+              }}
             >
               <Activity size={12} className={isLive ? 'animate-pulse' : ''} />
-              {isLive ? 'Live API Verified' : 'Verified Handle'}
+              {isLive ? 'Live API Verified' : 'Verified Profile'}
             </span>
           </div>
 
           {/* Handle */}
-          <div className="rounded-xl p-4 mb-4 glass border border-white/10">
-            <p className="text-xs uppercase tracking-wide font-medium text-slate-500 mb-1">
-              Active Handle
+          <div
+            className="rounded-xl p-4 mb-4"
+            style={{
+              background: 'var(--color-bg-card)',
+              border: '1px solid var(--color-border)',
+            }}
+          >
+            <p
+              className="text-xs uppercase tracking-wide font-medium mb-1"
+              style={{ color: 'var(--color-text-muted)' }}
+            >
+              Handle
             </p>
-            <p className="font-display font-bold text-2xl font-mono text-emerald-400">
+            <p className="font-bold text-2xl font-mono" style={{ color: 'var(--color-text-accent)' }}>
               Samii-7
             </p>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            <div className="rounded-xl p-3.5 glass border border-white/10">
-              <div className="flex items-center gap-1.5 text-xs font-medium text-slate-400">
-                <Zap size={13} className="text-emerald-400" />
+          {/* Verified Stats Grid */}
+          <div className="grid grid-cols-2 gap-3 mb-5">
+            <div
+              className="rounded-xl p-3"
+              style={{
+                background: 'var(--color-bg-card)',
+                border: '1px solid var(--color-border)',
+              }}
+            >
+              <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>
+                <Zap size={13} style={{ color: 'var(--color-text-accent)' }} />
                 <span>Current Rating</span>
               </div>
-              <p className="text-2xl font-display font-bold font-mono mt-1 text-white">
+              <p className="text-xl font-bold font-mono mt-1" style={{ color: 'var(--color-text-primary)' }}>
                 {stats.rating}
               </p>
             </div>
 
-            <div className="rounded-xl p-3.5 glass border border-white/10">
-              <div className="flex items-center gap-1.5 text-xs font-medium text-slate-400">
-                <Award size={13} className="text-amber-400" />
+            <div
+              className="rounded-xl p-3"
+              style={{
+                background: 'var(--color-bg-card)',
+                border: '1px solid var(--color-border)',
+              }}
+            >
+              <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>
+                <Award size={13} className="text-amber-500" />
                 <span>Rank</span>
               </div>
-              <p className="text-2xl font-display font-bold capitalize mt-1 text-slate-300">
+              <p className="text-xl font-bold capitalize mt-1 text-slate-400">
                 {stats.rank}
               </p>
             </div>
@@ -127,7 +158,7 @@ export default function CompetitiveProgrammingSection() {
           </a>
         </motion.div>
 
-        {/* What I practice */}
+        {/* What I do in CP */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -135,25 +166,25 @@ export default function CompetitiveProgrammingSection() {
           transition={{ duration: 0.5 }}
           className="space-y-4"
         >
-          <h3 className="font-display font-bold text-lg text-white">
-            Algorithmic Focus &amp; Practice
+          <h3 className="font-bold text-base" style={{ color: 'var(--color-text-primary)' }}>
+            What I Practice
           </h3>
 
           {[
             {
               icon: Code2,
               title: 'Algorithmic Problem Solving',
-              desc: 'Working through problems in graph theory, dynamic programming, greedy algorithms, and number theory in optimized C++.',
+              desc: 'Working through problems in graph theory, dynamic programming, greedy algorithms, and number theory.',
             },
             {
               icon: Award,
-              title: 'Rated Contest Participation',
-              desc: 'Competing in rated Codeforces Division rounds under strict time constraints to test problem-solving speed and accuracy.',
+              title: 'Contest Participation',
+              desc: 'Participating in Codeforces Div. rounds to test problem-solving speed and accuracy under real-time constraints.',
             },
             {
               icon: Code2,
-              title: 'Efficient Data Structures',
-              desc: 'Mastering performance-critical data structures including segment trees, binary indexed trees, heaps, and hash tables.',
+              title: 'Data Structures',
+              desc: 'Mastering efficient data structures including trees, heaps, segment trees, and hash maps for optimized solutions.',
             },
           ].map(({ icon: Icon, title, desc }, i) => (
             <motion.div
@@ -162,18 +193,22 @@ export default function CompetitiveProgrammingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="card flex gap-4 items-start border-white/10 hover:border-emerald-500/30"
+              className="card flex gap-4 items-start"
             >
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{
+                  background: 'var(--color-accent-soft)',
+                  color: 'var(--color-text-accent)',
+                }}
               >
                 <Icon size={18} />
               </div>
               <div>
-                <h4 className="font-display font-bold text-base text-white">
+                <h4 className="font-semibold text-sm" style={{ color: 'var(--color-text-primary)' }}>
                   {title}
                 </h4>
-                <p className="text-xs mt-1 text-slate-400 leading-relaxed">
+                <p className="text-xs mt-1 leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                   {desc}
                 </p>
               </div>

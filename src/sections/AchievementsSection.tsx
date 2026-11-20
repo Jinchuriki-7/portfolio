@@ -58,15 +58,22 @@ export default function AchievementsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.1, duration: 0.45 }}
-            className="card flex flex-col justify-between border-white/10 hover:border-emerald-500/30"
+            className="card flex flex-col justify-between"
           >
             <div>
               {/* Tag & Date */}
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span
+                  className="text-xs font-semibold px-2.5 py-1 rounded-full"
+                  style={{
+                    background: 'var(--color-accent-soft)',
+                    color: 'var(--color-text-accent)',
+                    border: '1px solid rgba(59, 130, 246, 0.15)',
+                  }}
+                >
                   {item.tag}
                 </span>
-                <span className="flex items-center gap-1 text-xs text-slate-500">
+                <span className="flex items-center gap-1 text-xs" style={{ color: 'var(--color-text-muted)' }}>
                   <Calendar size={12} />
                   {item.date}
                 </span>
@@ -74,37 +81,57 @@ export default function AchievementsSection() {
 
               {/* Title & Icon */}
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
+                  style={{
+                    background: 'rgba(245, 158, 11, 0.1)',
+                    color: '#f59e0b',
+                    border: '1px solid rgba(245, 158, 11, 0.2)',
+                  }}
+                >
                   <Trophy size={18} />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-base text-white leading-snug">
+                  <h3 className="font-bold text-base leading-snug" style={{ color: 'var(--color-text-primary)' }}>
                     {item.title}
                   </h3>
-                  <p className="text-xs text-slate-400 mt-1">{item.organizer}</p>
+                  <p className="text-xs mt-1" style={{ color: 'var(--color-text-muted)' }}>
+                    {item.organizer}
+                  </p>
                 </div>
               </div>
 
               {/* Role */}
-              <div className="mt-3.5 flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg glass border border-white/10 text-emerald-300">
-                <Users size={13} className="text-emerald-400" />
+              <div
+                className="mt-3.5 flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg"
+                style={{
+                  background: 'var(--color-bg-card)',
+                  color: 'var(--color-text-accent)',
+                  border: '1px solid var(--color-border)',
+                }}
+              >
+                <Users size={13} />
                 <span>{item.role}</span>
               </div>
 
               {/* Description */}
-              <p className="mt-3 text-sm leading-relaxed text-slate-400">
+              <p
+                className="mt-3 text-sm leading-relaxed"
+                style={{ color: 'var(--color-text-secondary)' }}
+              >
                 {item.description}
               </p>
             </div>
 
             {/* Link */}
             {item.projectLink && (
-              <div className="mt-5 pt-3 border-t border-white/10">
+              <div className="mt-5 pt-3" style={{ borderTop: '1px solid var(--color-border)' }}>
                 <a
                   href={item.projectLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+                  className="inline-flex items-center gap-1 text-xs font-semibold transition-all duration-200 hover:gap-2"
+                  style={{ color: 'var(--color-text-accent)' }}
                 >
                   <span>View Project &amp; Proof</span>
                   <ExternalLink size={12} />
