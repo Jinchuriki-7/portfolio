@@ -29,11 +29,22 @@ function ProjectCard({ project }: { project: Project }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3 }}
-      className="card flex flex-col h-full group"
+      className="card flex flex-col h-full group overflow-hidden"
       style={{
-        borderColor: project.featured ? 'rgba(59, 130, 246, 0.2)' : undefined,
+        borderColor: project.featured ? 'rgba(59, 130, 246, 0.25)' : undefined,
       }}
     >
+      {/* Project Image Preview Banner */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-950 mb-4 border border-slate-800/80 group-hover:border-blue-500/40 transition-all duration-300">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1c]/70 via-transparent to-transparent pointer-events-none" />
+      </div>
+
       {/* Category tag + featured badge */}
       <div className="flex items-center justify-between mb-3">
         <span
@@ -65,7 +76,7 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="flex items-start gap-2 mb-2">
         <FolderOpen size={18} className="flex-shrink-0 mt-1" style={{ color: 'var(--color-text-accent)' }} />
         <h3
-          className="font-bold text-base leading-snug transition-colors"
+          className="font-bold text-base leading-snug transition-colors group-hover:text-blue-400"
           style={{ color: 'var(--color-text-primary)' }}
         >
           {project.title}
@@ -132,7 +143,7 @@ function ProjectCard({ project }: { project: Project }) {
 export default function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState<string>('All');
 
-  const categories = ['All', 'Full-Stack & AI', 'Software Development', 'Mobile & Desktop', 'Competitive Programming'];
+  const categories = ['All', 'Full-Stack & AI', 'Software Development', 'Mobile & Desktop'];
 
   const filteredProjects = activeCategory === 'All'
     ? projects

@@ -12,6 +12,7 @@ export interface Project {
   liveUrl?: string;
   category: string;
   featured: boolean;
+  image: string;
 }
 
 export const projects: Project[] = [
@@ -25,6 +26,7 @@ export const projects: Project[] = [
     liveUrl: "https://jomi-share-portal.web.app",
     category: "Full-Stack & AI",
     featured: true,
+    image: "/projects/jomi-share.svg",
   },
   {
     id: "medcore",
@@ -36,6 +38,7 @@ export const projects: Project[] = [
     liveUrl: "https://medcore-main-2026.vercel.app/",
     category: "Full-Stack & AI",
     featured: true,
+    image: "/projects/medcore.jpg",
   },
   {
     id: "filex",
@@ -46,6 +49,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Jinchuriki-7/FileX",
     category: "Software Development",
     featured: true,
+    image: "/projects/filex.svg",
   },
   {
     id: "byebyte-ai",
@@ -56,6 +60,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Jinchuriki-7/ByeByte-AI",
     category: "Mobile & Desktop",
     featured: true,
+    image: "/projects/byebyte-ai.svg",
   },
   {
     id: "hospital-management",
@@ -66,6 +71,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Jinchuriki-7/Hospital-Management-System",
     category: "Software Development",
     featured: false,
+    image: "/projects/hospital-management.svg",
   },
   {
     id: "currency-converter",
@@ -76,6 +82,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Jinchuriki-7/Currency-Converter",
     category: "Software Development",
     featured: false,
+    image: "/projects/currency-converter.svg",
   },
   {
     id: "weather-app",
@@ -86,16 +93,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Jinchuriki-7/Real-Time-Weather-App",
     category: "Software Development",
     featured: false,
-  },
-  {
-    id: "codeforces-solutions",
-    title: "Codeforces Problem Solutions Archive",
-    description:
-      "A curated collection of algorithmic solutions for competitive programming challenges on Codeforces. Covers dynamic programming, graph theory, greedy techniques, and number theory in optimized C++.",
-    technologies: ["C++", "Algorithms", "Data Structures", "Competitive Programming"],
-    githubUrl: "https://github.com/Jinchuriki-7/Codeforces-Problem-Solution",
-    category: "Competitive Programming",
-    featured: false,
+    image: "/projects/weather-app.svg",
   },
 ];
 
