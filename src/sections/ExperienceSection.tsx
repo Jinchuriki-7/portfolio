@@ -6,12 +6,12 @@ import { experiences } from '../data/personalInfo';
 
 const COMPANY_LOGOS: Record<string, { src: string; alt: string; padding?: string }> = {
   'biswas-it': {
-    src: '/biswas-it.png',
+    src: '/biswas-it-firm.png?v=2',
     alt: 'Biswas IT Firm',
-    padding: 'p-1.5',
+    padding: 'p-1',
   },
   'codealpha': {
-    src: '/codealpha.png',
+    src: '/codealpha.png?v=2',
     alt: 'CodeAlpha',
     padding: 'p-2',
   },
