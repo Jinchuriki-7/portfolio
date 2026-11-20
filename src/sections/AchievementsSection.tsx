@@ -1,114 +1,231 @@
-import { motion } from 'framer-motion';
-import { Trophy, ExternalLink, Users, Calendar } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, Building2, Eye, X, ExternalLink, Award } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import SectionHeader from '../components/SectionHeader';
 
 interface Achievement {
   id: string;
   title: string;
-  event: string;
-  organizer: string;
-  role: string;
+  organization: string;
   date: string;
+  category: string;
   description: string;
-  projectLink?: string;
-  tag: string;
+  certificateImage: string;
 }
 
 const achievements: Achievement[] = [
   {
-    id: "landtech-2026",
-    title: "LandTech Innovation Hackathon 2026 — Track: Digital Land Records & Digitization",
-    event: "LandTech Innovation Hackathon 2026",
-    organizer: "Department of CSE & CSE-TECH, Daffodil International University (DIU)",
-    role: "Team Leader, Full-Stack & GIS Architect (Team InnoSphere)",
-    date: "2026",
+    id: 'ai-innovation-hackathon-2026',
+    title: 'AI Innovation Hackathon 2026 – Finalist',
+    organization: 'Daffodil International University',
+    date: '25 July 2026',
+    category: 'Hackathon / AI Innovation',
     description:
-      "Led Team InnoSphere to develop 'JOMI-SHARE & NIRBASH', an AI Land Intelligence and Property Ecosystem for smart e-governance in Bangladesh, featuring automated land record cross-auditing and the proprietary Land DNA™ verification system.",
-    projectLink: "https://github.com/Jinchuriki-7/jomi-share-landtech",
-    tag: "Hackathon Finalist",
+      'Successfully qualified for the final round of the AI Innovation Hackathon 2026: From Learning to Impact as part of Team TRIMATRIX, recognized for innovation, creativity, and dedication.',
+    certificateImage: '/certificates/ai-innovation-hackathon-2026.jpg',
   },
   {
-    id: "competitive-programming-contests",
-    title: "Active Codeforces Contestant",
-    event: "Codeforces Division Contests",
-    organizer: "Codeforces",
-    role: "Competitive Programmer (Handle: Samii-7)",
-    date: "Ongoing",
+    id: 'unlock-the-algorithm-2026',
+    title: 'Unlock the Algorithm – Summer 2026',
+    organization: 'DIU Computer & Programming Club',
+    date: 'Summer 2026',
+    category: 'Competitive Programming',
     description:
-      "Regularly competing in rated algorithmic rounds on Codeforces, solving data structures, dynamic programming, and greedy optimization problems under real-time contest pressure.",
-    projectLink: "https://codeforces.com/profile/Samii-7",
-    tag: "Competitive Programming",
+      'Successfully participated in the Unlock the Algorithm Programming Contest, awarded Certificate of Appreciation by the Department of CSE and CPC.',
+    certificateImage: '/certificates/unlock-the-algorithm-2026.jpg',
+  },
+  {
+    id: 'diu-math-olympiad-2025',
+    title: 'DIU Mathematics Olympiad – Summer 2025',
+    organization: 'DIU Mathematical Society (DIUMS)',
+    date: '26 July 2025',
+    category: 'Mathematics Competition',
+    description:
+      'Participated in the Preliminary Round of the DIU Mathematics Olympiad – Summer 2025, organized by the Faculty of Science & Information Technology in association with DIUMS.',
+    certificateImage: '/certificates/diu-math-olympiad-2025.jpg',
+  },
+  {
+    id: 'shapla-cub-award-2018',
+    title: 'Shapla Cub Award',
+    organization: 'Bangladesh Scouts',
+    date: '25 July 2018',
+    category: 'National Recognition',
+    description:
+      'Decorated with the Shapla Cub Award, the highest national recognition in Cub Scouting, in recognition of outstanding performance, leadership, and dedicated contribution.',
+    certificateImage: '/certificates/shapla-cub-award-2018.jpg',
   },
 ];
 
 export default function AchievementsSection() {
+  const [selectedCert, setSelectedCert] = useState<Achievement | null>(null);
+
+  // Close modal on Escape key and lock background scroll
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedCert(null);
+    };
+    if (selectedCert) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedCert]);
+
   return (
-    <SectionWrapper id="achievements">
+    <SectionWrapper id="achievements" alternate>
       <SectionHeader
         title="Achievements & Recognition"
-        subtitle="Verified hackathon participation, team leadership, and competitive programming milestones."
+        subtitle="Verified competition certificates, academic recognitions, and national honors."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
         {achievements.map((item, idx) => (
           <motion.div
             key={item.id}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: idx * 0.1, duration: 0.45 }}
-            className="glass-card p-6 flex flex-col justify-between"
+            transition={{ delay: idx * 0.12, duration: 0.45 }}
+            className="glass-card p-5 sm:p-6 flex flex-col justify-between group hover:border-[var(--accent)] transition-all duration-300"
           >
             <div>
-              <div className="flex items-center justify-between mb-4">
+              {/* Certificate Image Thumbnail Preview */}
+              <div
+                onClick={() => setSelectedCert(item)}
+                className="relative aspect-[16/10] w-full rounded-xl overflow-hidden mb-5 bg-black/10 border border-[var(--border-subtle)] group/thumb cursor-pointer shadow-sm"
+              >
+                <img
+                  src={item.certificateImage}
+                  alt={item.title}
+                  className="w-full h-full object-cover object-center group-hover/thumb:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-semibold text-xs backdrop-blur-[2px]">
+                  <Eye size={16} />
+                  <span>Click to Expand Certificate</span>
+                </div>
+              </div>
+
+              {/* Top Row: Category Badge + Date */}
+              <div className="flex items-center justify-between gap-2 mb-3">
                 <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-[#75A2B5]/15 text-[#75A2B5] border border-[#75A2B5]/30 [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5]">
-                  {item.tag}
+                  {item.category}
                 </span>
-                <span className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
+                <span className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] font-medium">
                   <Calendar size={12} className="text-[var(--accent)]" />
                   {item.date}
                 </span>
               </div>
 
-              <div className="flex items-start gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Trophy size={19} />
-                </div>
-                <div>
-                  <h3 className="font-display font-bold text-base md:text-lg text-[var(--text-primary)] leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-[var(--text-muted)] mt-1">{item.organizer}</p>
-                </div>
+              {/* Title */}
+              <h3 className="font-display font-bold text-lg md:text-xl text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors leading-snug">
+                {item.title}
+              </h3>
+
+              {/* Organization */}
+              <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] mt-1.5 font-medium">
+                <Building2 size={13} className="text-[var(--accent)] flex-shrink-0" />
+                <span>{item.organization}</span>
               </div>
 
-              <div className="flex items-center gap-2 text-xs font-semibold text-[var(--accent)] bg-[var(--bg-pill)] px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] my-3">
-                <Users size={13} />
-                <span>{item.role}</span>
-              </div>
-
-              <p className="text-xs md:text-sm text-[var(--text-secondary)] leading-relaxed">
+              {/* Description */}
+              <p className="mt-3 text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
                 {item.description}
               </p>
             </div>
 
-            {item.projectLink && (
-              <div className="mt-5 pt-4 border-t border-[var(--border-subtle)]">
-                <a
-                  href={item.projectLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--accent)] hover:text-[var(--accent-secondary)] transition-colors"
-                >
-                  <span>View Project &amp; Proof</span>
-                  <ExternalLink size={13} />
-                </a>
-              </div>
-            )}
+            {/* Bottom Row: View Certificate Button */}
+            <div className="mt-5 pt-4 border-t border-[var(--border-subtle)] flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => setSelectedCert(item)}
+                className="inline-flex items-center gap-2 text-xs font-bold text-white bg-gradient-to-r from-[#75A2B5] to-[#527F93] hover:from-[#527F93] hover:to-[#75A2B5] px-4 py-2.5 rounded-xl transition-all shadow-md shadow-[#75A2B5]/20 hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <Eye size={14} />
+                <span>View Certificate</span>
+              </button>
+
+              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[var(--text-muted)]">
+                <Award size={13} className="text-[var(--accent)]" />
+                <span>Verified</span>
+              </span>
+            </div>
           </motion.div>
         ))}
       </div>
+
+      {/* Full-Screen Certificate Modal Viewer */}
+      <AnimatePresence>
+        {selectedCert && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedCert(null)}
+              className="absolute inset-0 bg-black/85 backdrop-blur-md cursor-pointer"
+            />
+
+            {/* Modal Dialog */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="relative w-full max-w-4xl bg-[var(--bg-card)] rounded-2xl border border-[var(--border-subtle)] shadow-2xl overflow-hidden z-10 flex flex-col max-h-[92vh]"
+            >
+              {/* Modal Header */}
+              <div className="p-4 sm:p-5 border-b border-[var(--border-subtle)] flex items-center justify-between gap-4">
+                <div>
+                  <h4 className="font-display font-bold text-base sm:text-lg text-[var(--text-primary)]">
+                    {selectedCert.title}
+                  </h4>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">
+                    {selectedCert.organization} • {selectedCert.date}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setSelectedCert(null)}
+                  className="w-9 h-9 rounded-full bg-[var(--bg-pill)] hover:bg-[var(--bg-pill-hover)] border border-[var(--border-subtle)] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all cursor-pointer flex-shrink-0"
+                  aria-label="Close modal"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Modal Certificate Image Viewer */}
+              <div className="p-3 sm:p-5 flex-1 overflow-auto flex items-center justify-center bg-black/20">
+                <img
+                  src={selectedCert.certificateImage}
+                  alt={selectedCert.title}
+                  className="max-h-[68vh] w-auto max-w-full object-contain rounded-lg shadow-lg border border-[var(--border-subtle)]"
+                />
+              </div>
+
+              {/* Modal Footer */}
+              <div className="p-4 border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)] flex items-center justify-between text-xs text-[var(--text-muted)]">
+                <span>Original Verified Document</span>
+                <a
+                  href={selectedCert.certificateImage}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-bold text-[var(--accent)] hover:underline"
+                >
+                  <span>Open in Full Tab</span>
+                  <ExternalLink size={13} />
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </SectionWrapper>
   );
 }
