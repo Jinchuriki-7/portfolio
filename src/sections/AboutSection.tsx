@@ -9,25 +9,25 @@ const highlights = [
     icon: Code2,
     title: 'Software Development',
     description:
-      'Building clean, efficient software solutions with a focus on code quality and maintainability.',
+      'Building clean, efficient software solutions with a focus on code quality, architecture, and maintainability.',
   },
   {
     icon: Globe,
     title: 'Web Development',
     description:
-      'Crafting responsive, user-friendly web experiences using modern frontend technologies.',
+      'Crafting responsive, high-performance web applications using modern frontend frameworks and ecosystems.',
   },
   {
     icon: Brain,
     title: 'Artificial Intelligence',
     description:
-      'Exploring machine learning concepts and AI applications to solve real-world problems.',
+      'Exploring machine learning concepts and practical AI integrations to solve real-world engineering challenges.',
   },
   {
     icon: Trophy,
     title: 'Competitive Programming',
     description:
-      'Sharpening algorithmic thinking through problem-solving on Codeforces and similar platforms.',
+      'Sharpening algorithmic thinking, data structures, and speed through problem-solving on Codeforces.',
   },
 ];
 
@@ -36,7 +36,7 @@ export default function AboutSection() {
     <SectionWrapper id="about" alternate>
       <SectionHeader
         title="About Me"
-        subtitle="A brief introduction to who I am and what drives me."
+        subtitle="A brief introduction to my background, technical focus, and engineering passion."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
@@ -45,8 +45,7 @@ export default function AboutSection() {
           {personalInfo.about.trim().split('\n\n').map((para, i) => (
             <p
               key={i}
-              className={`leading-relaxed text-base ${i > 0 ? 'mt-4' : ''}`}
-              style={{ color: 'var(--color-text-secondary)' }}
+              className={`leading-relaxed text-base text-slate-300 ${i > 0 ? 'mt-4' : ''}`}
             >
               {para.trim()}
             </p>
@@ -62,19 +61,12 @@ export default function AboutSection() {
             ].map(({ label, value }) => (
               <div
                 key={label}
-                className="rounded-xl p-3"
-                style={{
-                  background: 'var(--color-bg-card)',
-                  border: '1px solid var(--color-border)',
-                }}
+                className="rounded-xl p-3.5 glass border border-white/10"
               >
-                <p
-                  className="text-xs font-medium uppercase tracking-wide"
-                  style={{ color: 'var(--color-text-muted)' }}
-                >
+                <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                   {label}
                 </p>
-                <p className="mt-1 font-semibold text-sm" style={{ color: 'var(--color-text-accent)' }}>
+                <p className="mt-1 font-display font-bold text-sm text-emerald-400">
                   {value}
                 </p>
               </div>
@@ -91,21 +83,17 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.4 }}
-              className="card group"
+              className="card group hover:border-emerald-500/30"
             >
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-all duration-300"
-                style={{
-                  background: 'var(--color-accent-soft)',
-                  color: 'var(--color-text-accent)',
-                }}
+                className="w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-all duration-300 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 group-hover:scale-105"
               >
                 <Icon size={20} />
               </div>
-              <h3 className="font-semibold text-sm" style={{ color: 'var(--color-text-primary)' }}>
+              <h3 className="font-display font-bold text-base text-white">
                 {title}
               </h3>
-              <p className="mt-1.5 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="mt-2 text-xs leading-relaxed text-slate-400">
                 {description}
               </p>
             </motion.div>
