@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import AnimatedShaderBackground from './components/ui/animated-shader-background';
 import HeroSection from './sections/HeroSection';
 import AboutSection from './sections/AboutSection';
 import EducationSection from './sections/EducationSection';
@@ -11,19 +12,20 @@ import AchievementsSection from './sections/AchievementsSection';
 import ContactSection from './sections/ContactSection';
 
 /**
- * App — Root component with sleek dark mode UI inspired by rahat300809.
+ * App — Root component with dynamic Three.js WebGL aurora shader background
+ * and dark mode UI system matching rahat300809's portfolio.
  */
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col relative bg-slate-950 text-slate-200">
-      {/* Background ambient radial mesh */}
-      <div className="animate-mesh" aria-hidden="true" />
+      {/* Dynamic WebGL Shader Background (AnoAI Aurora Waves) */}
+      <AnimatedShaderBackground />
 
-      {/* Fixed navigation bar */}
+      {/* Floating Capsule Navigation Bar & Quick Action Button */}
       <Navbar />
 
       {/* Main content */}
-      <main className="flex-1">
+      <main className="flex-1 relative z-10">
         <HeroSection />
         <AboutSection />
         <EducationSection />
