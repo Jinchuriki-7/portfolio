@@ -123,20 +123,38 @@ export default function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Right: Large Portrait Photo (Just like in the screenshot) */}
+          {/* Right: Circular Profile Picture with CSE Student badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
             className="lg:col-span-5 flex justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-[380px] sm:max-w-[420px]">
-              {/* Photo Frame with rounded-[2.5rem] just like rahat's portfolio */}
-              <div className="relative aspect-[4/5] w-full rounded-[2.5rem] overflow-hidden glass border border-white/10 shadow-2xl shadow-emerald-500/10 group">
+            <div className="relative">
+              {/* Outer Dashed Concentric Circles */}
+              <motion.div
+                aria-hidden="true"
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
+                className="absolute -inset-6 sm:-inset-8 rounded-full border border-dashed border-blue-500/25 pointer-events-none"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute -inset-3 sm:-inset-4 rounded-full border border-dashed border-blue-500/40 pointer-events-none"
+              />
+
+              {/* Ambient Blue Glow */}
+              <div
+                aria-hidden="true"
+                className="absolute -inset-2 rounded-full bg-blue-500/20 blur-2xl pointer-events-none"
+              />
+
+              {/* Circular Photo Container */}
+              <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-[3.5px] border-blue-500 shadow-2xl shadow-blue-500/20 group">
                 <img
                   src="/profile.jpg"
                   alt="Farhanul Haque - Computer Science & Engineering Student"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   onError={(e) => {
                     const target = e.currentTarget;
                     target.style.display = 'none';
@@ -146,10 +164,20 @@ export default function HeroSection() {
                   }}
                 />
                 <div className="hidden flex-col items-center justify-center w-full h-full text-slate-500 bg-slate-900">
-                  <User size={64} strokeWidth={1} />
-                  <span className="text-sm font-medium mt-3">Farhanul Haque</span>
+                  <User size={56} strokeWidth={1} />
+                  <span className="text-xs font-medium mt-2">Farhanul Haque</span>
                 </div>
               </div>
+
+              {/* CSE Student Badge (Bottom Right) */}
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
+                className="absolute -bottom-2 -right-1 sm:bottom-0 sm:right-0 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-[#2563eb] text-white shadow-xl shadow-blue-600/30 border-2 border-slate-950"
+              >
+                CSE Student
+              </motion.div>
             </div>
           </motion.div>
 
