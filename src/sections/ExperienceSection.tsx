@@ -4,6 +4,19 @@ import SectionWrapper from '../components/SectionWrapper';
 import SectionHeader from '../components/SectionHeader';
 import { experiences } from '../data/personalInfo';
 
+const COMPANY_LOGOS: Record<string, { src: string; alt: string; padding?: string }> = {
+  'biswas-it': {
+    src: '/biswas-it.png',
+    alt: 'Biswas IT Firm',
+    padding: 'p-1.5',
+  },
+  'codealpha': {
+    src: '/codealpha.png',
+    alt: 'CodeAlpha',
+    padding: 'p-2',
+  },
+};
+
 export default function ExperienceSection() {
   return (
     <SectionWrapper id="experience" alternate>
@@ -46,9 +59,25 @@ export default function ExperienceSection() {
 
               {/* Company Info with 56x56 logo container */}
               <div className="flex items-start gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 to-[var(--accent-secondary)]/10 border border-[var(--border-subtle)] text-[var(--accent)] flex items-center justify-center font-display font-bold text-sm tracking-wider flex-shrink-0 shadow-md">
-                  {exp.id === 'biswas-it' ? 'BIT' : 'CA'}
-                </div>
+                {(() => {
+                  const logo = COMPANY_LOGOS[exp.id];
+                  return (
+                    <div className="w-14 h-14 rounded-2xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden hover:scale-105 transition-transform duration-200">
+                      {logo ? (
+                        <img
+                          src={logo.src}
+                          alt={logo.alt}
+                          className={`w-full h-full object-contain ${logo.padding || 'p-2'}`}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="font-display font-bold text-sm text-[var(--accent)]">
+                          {exp.organization.slice(0, 2).toUpperCase()}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })()}
 
                 <div>
                   <h3 className="font-display font-bold text-lg md:text-xl text-[var(--text-primary)]">

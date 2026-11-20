@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Code2, Award, Zap, Activity } from 'lucide-react';
-import { SiCodeforces } from 'react-icons/si';
 import SectionWrapper from '../components/SectionWrapper';
 import SectionHeader from '../components/SectionHeader';
 
@@ -57,9 +56,14 @@ export default function CompetitiveProgrammingSection() {
         >
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center">
-                <SiCodeforces size={24} />
+            <div className="flex items-center gap-3.5">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] shadow-sm flex items-center justify-center p-2.5 flex-shrink-0 hover:scale-105 transition-transform duration-200">
+                <img
+                  src="/codeforces.svg"
+                  alt="Codeforces"
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
               </div>
               <div>
                 <h3 className="font-display font-bold text-lg text-[var(--text-primary)]">Codeforces</h3>
