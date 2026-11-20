@@ -190,11 +190,11 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 [data-theme=light]:from-blue-600 [data-theme=light]:to-blue-500 [data-theme=light]:text-white font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-emerald-500/25 [data-theme=light]:hover:shadow-blue-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                className="w-full bg-gradient-to-r from-[#00D6A3] to-[#39E6B0] text-[#101613] [data-theme=light]:from-blue-600 [data-theme=light]:to-blue-500 [data-theme=light]:text-white font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-[#00D6A3]/25 [data-theme=light]:hover:shadow-blue-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
                 {status === 'submitting' ? (
                   <>
-                    <span className="animate-spin inline-block w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full" />
+                    <span className="animate-spin inline-block w-4 h-4 border-2 border-[#101613] [data-theme=light]:border-white border-t-transparent rounded-full" />
                     <span>Sending…</span>
                   </>
                 ) : (

@@ -46,7 +46,7 @@ export default function ExperienceSection() {
 
               {/* Company Info with 56x56 logo container */}
               <div className="flex items-start gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 border border-[var(--border-subtle)] text-[var(--accent)] flex items-center justify-center font-display font-bold text-sm tracking-wider flex-shrink-0 shadow-md">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 to-[var(--accent-secondary)]/10 border border-[var(--border-subtle)] text-[var(--accent)] flex items-center justify-center font-display font-bold text-sm tracking-wider flex-shrink-0 shadow-md">
                   {exp.id === 'biswas-it' ? 'BIT' : 'CA'}
                 </div>
 

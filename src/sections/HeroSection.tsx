@@ -136,21 +136,21 @@ export default function HeroSection() {
                 aria-hidden="true"
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
-                className="absolute -inset-6 sm:-inset-8 rounded-full border border-dashed border-blue-500/25 pointer-events-none"
+                className="absolute -inset-6 sm:-inset-8 rounded-full border border-dashed border-[var(--profile-ring)] pointer-events-none"
               />
               <div
                 aria-hidden="true"
-                className="absolute -inset-3 sm:-inset-4 rounded-full border border-dashed border-blue-500/40 pointer-events-none"
+                className="absolute -inset-3 sm:-inset-4 rounded-full border border-dashed border-[var(--profile-ring-inner)] pointer-events-none"
               />
 
-              {/* Ambient Blue Glow */}
+              {/* Ambient Glow */}
               <div
                 aria-hidden="true"
-                className="absolute -inset-2 rounded-full bg-blue-500/20 blur-2xl pointer-events-none"
+                className="absolute -inset-2 rounded-full bg-[var(--profile-glow)] blur-2xl pointer-events-none"
               />
 
               {/* Circular Photo Container */}
-              <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-[3.5px] border-blue-500 shadow-2xl shadow-blue-500/20 group">
+              <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-[3.5px] border-[var(--profile-border)] shadow-2xl shadow-[var(--profile-glow)] group">
                 <img
                   src="/profile.jpg"
                   alt="Farhanul Haque - Computer Science & Engineering Student"
@@ -163,7 +163,7 @@ export default function HeroSection() {
                     }
                   }}
                 />
-                <div className="hidden flex-col items-center justify-center w-full h-full text-slate-500 bg-slate-900">
+                <div className="hidden flex-col items-center justify-center w-full h-full text-[var(--text-muted)] bg-[var(--bg-secondary)]">
                   <User size={56} strokeWidth={1} />
                   <span className="text-xs font-medium mt-2">Farhanul Haque</span>
                 </div>
@@ -174,7 +174,7 @@ export default function HeroSection() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
-                className="absolute -bottom-2 -right-1 sm:bottom-0 sm:right-0 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-[#2563eb] text-white shadow-xl shadow-blue-600/30 border-2 border-[var(--badge-blue-border)] transition-colors"
+                className="absolute -bottom-2 -right-1 sm:bottom-0 sm:right-0 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-[var(--badge-profile-bg)] text-[var(--badge-profile-text)] shadow-xl shadow-[var(--profile-glow)] border-2 border-[var(--badge-profile-border)] transition-colors"
               >
                 CSE Student
               </motion.div>

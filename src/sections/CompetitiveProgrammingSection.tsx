@@ -78,7 +78,7 @@ export default function CompetitiveProgrammingSection() {
             <p className="text-xs uppercase tracking-wider text-[var(--text-muted)] font-semibold mb-1">
               Handle
             </p>
-            <p className="font-display font-bold text-2xl text-emerald-400 [data-theme=light]:text-blue-600">
+            <p className="font-display font-bold text-2xl text-[#00D6A3] [data-theme=light]:text-blue-600">
               Samii-7
             </p>
           </div>
@@ -87,7 +87,7 @@ export default function CompetitiveProgrammingSection() {
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div className="p-4 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)]">
               <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] mb-1">
-                <Zap size={13} className="text-emerald-400 [data-theme=light]:text-blue-600" />
+                <Zap size={13} className="text-[#00D6A3] [data-theme=light]:text-blue-600" />
                 <span>Current Rating</span>
               </div>
               <p className="text-2xl font-display font-bold text-[var(--text-primary)]">
@@ -97,7 +97,7 @@ export default function CompetitiveProgrammingSection() {
 
             <div className="p-4 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)]">
               <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] mb-1">
-                <Award size={13} className="text-cyan-400 [data-theme=light]:text-blue-500" />
+                <Award size={13} className="text-[#39E6B0] [data-theme=light]:text-blue-500" />
                 <span>Rank</span>
               </div>
               <p className="text-2xl font-display font-bold text-[var(--text-secondary)] capitalize">
@@ -111,7 +111,7 @@ export default function CompetitiveProgrammingSection() {
             href="https://codeforces.com/profile/Samii-7"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 [data-theme=light]:from-blue-600 [data-theme=light]:to-blue-500 [data-theme=light]:text-white font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-emerald-500/20 [data-theme=light]:hover:shadow-blue-500/20 transition-all flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-[#00D6A3] to-[#39E6B0] text-[#101613] [data-theme=light]:from-blue-600 [data-theme=light]:to-blue-500 [data-theme=light]:text-white font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-[#00D6A3]/25 [data-theme=light]:hover:shadow-blue-500/20 transition-all flex items-center justify-center gap-2"
             aria-label="View Codeforces profile"
           >
             <ExternalLink size={15} />

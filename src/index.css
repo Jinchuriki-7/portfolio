@@ -20,40 +20,46 @@
    CENTRALIZED THEME VARIABLE ARCHITECTURE
    ========================================================================== */
 
-/* Dark Mode Theme Variables (Default) */
+/* Dark Mode: Premium Dark Forest Green + Charcoal + Emerald Theme */
 :root,
 [data-theme="dark"],
 .dark {
-  --bg-primary: #020617;
-  --bg-secondary: #0b1120;
-  --bg-alternate: rgba(2, 6, 23, 0.55);
-  --bg-card: rgba(15, 23, 42, 0.65);
-  --bg-card-hover: rgba(30, 41, 59, 0.85);
-  --bg-pill: rgba(255, 255, 255, 0.05);
-  --bg-pill-hover: rgba(255, 255, 255, 0.1);
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --accent: #10b981;
-  --accent-secondary: #06b6d4;
-  --accent-rgb: 16, 185, 129;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-  --navbar-bg: rgba(2, 6, 23, 0.82);
-  --navbar-border: rgba(255, 255, 255, 0.1);
-  --input-bg: rgba(255, 255, 255, 0.05);
-  --input-text: #f8fafc;
-  --input-placeholder: #64748b;
-  --input-border: rgba(255, 255, 255, 0.1);
-  --shader-opacity: 0.60;
-  --badge-blue-border: #020617;
-  --scrollbar-track: #020617;
-  --scrollbar-thumb: rgba(255, 255, 255, 0.12);
-  --scrollbar-thumb-hover: rgba(16, 185, 129, 0.4);
+  --bg-primary: #101613;
+  --bg-secondary: #17201D;
+  --bg-alternate: rgba(23, 32, 29, 0.70);
+  --bg-card: #1C2722;
+  --bg-card-hover: #222F28;
+  --bg-pill: rgba(255, 255, 255, 0.04);
+  --bg-pill-hover: rgba(0, 214, 163, 0.10);
+  --text-primary: #F1F5F2;
+  --text-secondary: #A8B8AE;
+  --text-muted: #82958A;
+  --accent: #00D6A3;
+  --accent-secondary: #39E6B0;
+  --accent-rgb: 0, 214, 163;
+  --border-subtle: #2B3932;
+  --border-strong: #3D5046;
+  --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+  --navbar-bg: rgba(16, 22, 19, 0.88);
+  --navbar-border: #2B3932;
+  --input-bg: #17201D;
+  --input-text: #F1F5F2;
+  --input-placeholder: #82958A;
+  --input-border: #2B3932;
+  --shader-opacity: 0.50;
+  --badge-profile-bg: #00D6A3;
+  --badge-profile-text: #101613;
+  --badge-profile-border: #101613;
+  --profile-ring: rgba(0, 214, 163, 0.25);
+  --profile-ring-inner: rgba(0, 214, 163, 0.45);
+  --profile-glow: rgba(0, 214, 163, 0.20);
+  --profile-border: #00D6A3;
+  --scrollbar-track: #101613;
+  --scrollbar-thumb: rgba(43, 57, 50, 0.85);
+  --scrollbar-thumb-hover: #00D6A3;
 }
 
-/* Light Mode Theme Variables */
+/* Light Mode Theme Variables (Preserved Exactly) */
 [data-theme="light"],
 .light {
   --bg-primary: #f8fafc;
@@ -79,7 +85,13 @@
   --input-placeholder: #94a3b8;
   --input-border: #e2e8f0;
   --shader-opacity: 0.12;
-  --badge-blue-border: #f8fafc;
+  --badge-profile-bg: #2563eb;
+  --badge-profile-text: #ffffff;
+  --badge-profile-border: #f8fafc;
+  --profile-ring: rgba(37, 99, 235, 0.25);
+  --profile-ring-inner: rgba(37, 99, 235, 0.40);
+  --profile-glow: rgba(37, 99, 235, 0.18);
+  --profile-border: #2563eb;
   --scrollbar-track: #f8fafc;
   --scrollbar-thumb: rgba(15, 23, 42, 0.15);
   --scrollbar-thumb-hover: rgba(37, 99, 235, 0.4);
@@ -140,8 +152,8 @@
 
 [data-theme="dark"] .glass-card:hover {
   background-color: var(--bg-card-hover);
-  border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.15);
+  border-color: rgba(0, 214, 163, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(0, 214, 163, 0.18);
 }
 
 [data-theme="light"] .glass-card:hover {
@@ -171,6 +183,11 @@
   transform: translateY(-1px);
 }
 
+[data-theme="dark"] .glass-button:hover {
+  border-color: rgba(0, 214, 163, 0.5);
+  color: #00D6A3;
+}
+
 .glass-button:active {
   transform: scale(0.98);
 }
@@ -195,7 +212,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  background-image: linear-gradient(135deg, #10b981, #06b6d4, #3b82f6);
+  background-image: linear-gradient(135deg, #00D6A3, #39E6B0, #10b981);
 }
 
 [data-theme="light"] .text-gradient {

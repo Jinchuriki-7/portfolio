@@ -52,7 +52,7 @@ export default function Navbar() {
     localStorage.setItem('theme', theme);
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
-      metaTheme.setAttribute('content', theme === 'dark' ? '#020617' : '#F8FAFC');
+      metaTheme.setAttribute('content', theme === 'dark' ? '#101613' : '#F8FAFC');
     }
   }, [theme]);
 
@@ -69,16 +69,14 @@ export default function Navbar() {
     <>
       {/* Floating Capsule Navbar (Center) */}
       <nav
-        className={`fixed left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-auto max-w-fit transition-all duration-300 ${
-          scrolled ? 'top-3 md:top-4' : 'top-5 md:top-6'
-        }`}
+        className={`fixed left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-auto max-w-fit transition-all duration-300 ${scrolled ? 'top-3 md:top-4' : 'top-5 md:top-6'
+          }`}
       >
         <div
-          className={`glass rounded-full px-4 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between lg:justify-start gap-3 lg:gap-6 shadow-2xl backdrop-blur-2xl transition-all duration-300 ${
-            theme === 'dark'
-              ? 'bg-slate-950/80 border border-white/10 shadow-emerald-500/5 text-white'
-              : 'bg-white/90 border border-slate-200 shadow-slate-300/50 text-slate-900'
-          }`}
+          className={`glass rounded-full px-4 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between lg:justify-start gap-3 lg:gap-6 shadow-2xl backdrop-blur-2xl transition-all duration-300 ${theme === 'dark'
+            ? 'bg-[#101613]/88 border border-[#2B3932] shadow-[rgba(0,214,163,0.06)] text-[#F1F5F2]'
+            : 'bg-white/90 border border-slate-200 shadow-slate-300/50 text-slate-900'
+            }`}
         >
           {/* Logo / Avatar Pill */}
           <button
@@ -86,15 +84,18 @@ export default function Navbar() {
             className="flex items-center gap-2 group cursor-pointer shrink-0"
             aria-label="Go to top"
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-400 flex items-center justify-center text-slate-950 font-display font-bold text-xs tracking-wider shadow-md group-hover:rotate-12 transition-transform">
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center font-display font-bold text-xs tracking-wider shadow-md group-hover:rotate-12 transition-transform ${
+              theme === 'dark'
+                ? 'bg-gradient-to-br from-[#00D6A3] to-[#39E6B0] text-[#101613]'
+                : 'bg-gradient-to-br from-emerald-400 to-cyan-400 text-slate-950'
+            }`}>
               FH
             </div>
             <span
-              className={`font-display font-bold text-base transition-colors ${
-                theme === 'dark'
-                  ? 'text-white group-hover:text-emerald-400'
-                  : 'text-slate-900 group-hover:text-emerald-600'
-              }`}
+              className={`font-display font-bold text-base transition-colors ${theme === 'dark'
+                ? 'text-[#F1F5F2] group-hover:text-[#00D6A3]'
+                : 'text-slate-900 group-hover:text-emerald-600'
+                }`}
             >
               Farhanul
             </span>
@@ -109,15 +110,14 @@ export default function Navbar() {
                 <button
                   key={item.label}
                   onClick={() => handleNavClick(item.href)}
-                  className={`px-3 py-1.5 rounded-full text-[13px] font-medium tracking-normal transition-all cursor-pointer ${
-                    isActive
-                      ? theme === 'dark'
-                        ? 'text-emerald-400 bg-white/10 shadow-sm font-semibold'
-                        : 'text-emerald-600 bg-emerald-500/15 shadow-sm font-semibold'
-                      : theme === 'dark'
-                      ? 'text-slate-400 hover:text-white hover:bg-white/5'
+                  className={`px-3 py-1.5 rounded-full text-[13px] font-medium tracking-normal transition-all cursor-pointer ${isActive
+                    ? theme === 'dark'
+                      ? 'text-[#00D6A3] bg-white/[0.06] shadow-sm font-semibold'
+                      : 'text-emerald-600 bg-emerald-500/15 shadow-sm font-semibold'
+                    : theme === 'dark'
+                      ? 'text-[#A8B8AE] hover:text-[#F1F5F2] hover:bg-white/5'
                       : 'text-slate-600 hover:text-slate-950 hover:bg-black/5'
-                  }`}
+                    }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
                   {item.label}
@@ -127,19 +127,17 @@ export default function Navbar() {
 
             {/* Subtle Divider */}
             <div
-              className={`w-px h-4 mx-2 ${
-                theme === 'dark' ? 'bg-white/15' : 'bg-slate-300'
-              }`}
+              className={`w-px h-4 mx-2 ${theme === 'dark' ? 'bg-[#2B3932]' : 'bg-slate-300'
+                }`}
             />
 
             {/* DAY / NIGHT Toggle Button (Desktop) */}
             <button
               onClick={toggleTheme}
-              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-bold font-mono tracking-wider transition-all cursor-pointer select-none active:scale-95 ${
-                theme === 'dark'
-                  ? 'border-white/20 bg-white/5 hover:bg-white/10 hover:border-emerald-400/50 text-slate-200'
-                  : 'border-slate-300 bg-black/5 hover:bg-black/10 hover:border-emerald-500 text-slate-800'
-              }`}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-bold font-mono tracking-wider transition-all cursor-pointer select-none active:scale-95 ${theme === 'dark'
+                ? 'border-[#2B3932] bg-[#17201D] hover:bg-[#222F28] hover:border-[#00D6A3]/60 text-[#F1F5F2]'
+                : 'border-slate-300 bg-black/5 hover:bg-black/10 hover:border-emerald-500 text-slate-800'
+                }`}
               aria-label={`Switch to ${theme === 'dark' ? 'Day' : 'Night'} mode`}
               title={`Switch to ${theme === 'dark' ? 'Day' : 'Night'} mode`}
             >
@@ -161,11 +159,10 @@ export default function Navbar() {
           <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={toggleTheme}
-              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-bold font-mono tracking-wider transition-all cursor-pointer select-none active:scale-95 ${
-                theme === 'dark'
-                  ? 'border-white/20 bg-white/5 hover:bg-white/10 hover:border-emerald-400/50 text-slate-200'
-                  : 'border-slate-300 bg-black/5 hover:bg-black/10 hover:border-emerald-500 text-slate-800'
-              }`}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-bold font-mono tracking-wider transition-all cursor-pointer select-none active:scale-95 ${theme === 'dark'
+                ? 'border-[#2B3932] bg-[#17201D] hover:bg-[#222F28] hover:border-[#00D6A3]/60 text-[#F1F5F2]'
+                : 'border-slate-300 bg-black/5 hover:bg-black/10 hover:border-emerald-500 text-slate-800'
+                }`}
               aria-label={`Switch to ${theme === 'dark' ? 'Day' : 'Night'} mode`}
             >
               {theme === 'dark' ? (
@@ -183,9 +180,8 @@ export default function Navbar() {
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`p-1.5 transition-colors cursor-pointer ${
-                theme === 'dark' ? 'text-slate-300 hover:text-white' : 'text-slate-700 hover:text-slate-950'
-              }`}
+              className={`p-1.5 transition-colors cursor-pointer ${theme === 'dark' ? 'text-[#A8B8AE] hover:text-[#F1F5F2]' : 'text-slate-700 hover:text-slate-950'
+                }`}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             >
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -203,11 +199,10 @@ export default function Navbar() {
               className="mt-3 lg:hidden w-full max-w-sm mx-auto"
             >
               <div
-                className={`glass rounded-3xl p-4 flex flex-col gap-1.5 border shadow-2xl backdrop-blur-2xl ${
-                  theme === 'dark'
-                    ? 'bg-slate-950/95 border-white/10'
-                    : 'bg-white/95 border-slate-200 shadow-slate-300/50'
-                }`}
+                className={`glass rounded-3xl p-4 flex flex-col gap-1.5 border shadow-2xl backdrop-blur-2xl ${theme === 'dark'
+                  ? 'bg-[#101613]/95 border-[#2B3932]'
+                  : 'bg-white/95 border-slate-200 shadow-slate-300/50'
+                  }`}
               >
                 {NAV_ITEMS.map((item) => {
                   const sectionId = item.href.replace('#', '');
@@ -216,15 +211,14 @@ export default function Navbar() {
                     <button
                       key={item.label}
                       onClick={() => handleNavClick(item.href)}
-                      className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
-                        isActive
-                          ? theme === 'dark'
-                            ? 'text-emerald-400 bg-white/10 font-bold'
-                            : 'text-emerald-600 bg-emerald-500/15 font-bold'
-                          : theme === 'dark'
-                          ? 'text-slate-300 hover:text-white hover:bg-white/5'
+                      className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${isActive
+                        ? theme === 'dark'
+                          ? 'text-[#00D6A3] bg-white/[0.06] font-bold'
+                          : 'text-emerald-600 bg-emerald-500/15 font-bold'
+                        : theme === 'dark'
+                          ? 'text-[#A8B8AE] hover:text-[#F1F5F2] hover:bg-white/5'
                           : 'text-slate-700 hover:text-slate-950 hover:bg-black/5'
-                      }`}
+                        }`}
                     >
                       {item.label}
                     </button>
@@ -238,17 +232,16 @@ export default function Navbar() {
 
       {/* Top-Right Social Icons Pill (Desktop) */}
       <div
-        className={`fixed top-5 md:top-6 right-6 z-50 hidden xl:flex items-center gap-3 glass px-4 py-2.5 rounded-full border shadow-xl backdrop-blur-xl ${
-          theme === 'dark'
-            ? 'bg-slate-950/70 border-white/10 text-slate-400'
-            : 'bg-white/90 border-slate-200 text-slate-600 shadow-slate-300/40'
-        }`}
+        className={`fixed top-5 md:top-6 right-6 z-50 hidden xl:flex items-center gap-3 glass px-4 py-2.5 rounded-full border shadow-xl backdrop-blur-xl ${theme === 'dark'
+          ? 'bg-[#101613]/88 border-[#2B3932] text-[#A8B8AE]'
+          : 'bg-white/90 border-slate-200 text-slate-600 shadow-slate-300/40'
+          }`}
       >
         <a
           href={personalInfo.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-slate-400 hover:text-emerald-400 transition-colors"
+          className="hover:text-[#00D6A3] transition-colors"
           aria-label="GitHub"
         >
           <FaGithub size={16} />
@@ -257,14 +250,14 @@ export default function Navbar() {
           href={personalInfo.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-slate-400 hover:text-cyan-400 transition-colors"
+          className="hover:text-[#00D6A3] transition-colors"
           aria-label="LinkedIn"
         >
           <FaLinkedin size={16} />
         </a>
         <a
           href={`mailto:${personalInfo.email}`}
-          className="text-slate-400 hover:text-emerald-400 transition-colors"
+          className="hover:text-[#00D6A3] transition-colors"
           aria-label="Email"
         >
           <MdEmail size={17} />
@@ -277,7 +270,7 @@ export default function Navbar() {
         download="Farhanul_Haque_CV.pdf"
         className={`fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all cursor-pointer ${
           theme === 'dark'
-            ? 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-emerald-500/30'
+            ? 'bg-[#00D6A3] hover:bg-[#39E6B0] text-[#101613] shadow-[#00D6A3]/25 font-bold'
             : 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-600/30'
         }`}
         aria-label="Quick Download CV"
