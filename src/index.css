@@ -212,7 +212,7 @@
 }
 
 [data-theme="light"] .shader-container {
-  filter: saturate(0.85) brightness(1.05);
+  opacity: 0.45;
 }
 
 /* Typography Helpers */

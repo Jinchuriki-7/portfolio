@@ -3,9 +3,8 @@ import * as THREE from 'three';
 
 /**
  * AnimatedShaderBackground
- * High-performance, slender WebGL dynamic aurora shader background.
- * Strictly bounded filaments that maintain an elegant, compact scale
- * and never expand into massive or obstructive shapes over time.
+ * High-performance, slender WebGL dynamic aurora light streaks.
+ * Razor-thin luminous filaments with zero background grey halos or capsule bodies.
  */
 export default function AnimatedShaderBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -36,79 +35,61 @@ export default function AnimatedShaderBackground() {
         uniform float iTime;
         uniform vec2 iResolution;
 
-        #define NUM_OCTAVES 2
-
-        float rand(vec2 n) {
-          return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
-        }
-
-        float noise(vec2 p) {
-          vec2 ip = floor(p);
-          vec2 u = fract(p);
-          u = u * u * (3.0 - 2.0 * u);
-
-          float res = mix(
-            mix(rand(ip), rand(ip + vec2(1.0, 0.0)), u.x),
-            mix(rand(ip + vec2(0.0, 1.0)), rand(ip + vec2(1.0, 1.0)), u.x), u.y);
-          return res * res;
-        }
-
-        float fbm(vec2 x) {
-          float v = 0.0;
-          float a = 0.35;
-          vec2 shift = vec2(50.0);
-          mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
-          for (int i = 0; i < NUM_OCTAVES; ++i) {
-            v += a * noise(x);
-            x = rot * x * 2.0 + shift;
-            a *= 0.5;
-          }
-          return v;
-        }
-
         void main() {
           // Normalized, aspect-corrected coordinates centered on screen
           vec2 uv = (gl_FragCoord.xy - iResolution.xy * 0.5) / iResolution.y;
 
-          // Diagonal tilt matching the elegant aurora streak
-          mat2 rot = mat2(0.866, -0.5, 0.5, 0.866);
-          vec2 p = rot * uv * 3.5;
+          // Diagonal tilt (-32 degrees)
+          float angle = -0.55;
+          mat2 rot = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+          vec2 p = rot * uv * 2.8;
 
-          vec3 col = vec3(0.0);
+          vec3 finalColor = vec3(0.0);
+          float finalAlpha = 0.0;
 
-          // Slender, controlled filaments with bounded wave amplitude (keeps them thin and compact)
-          for (float i = 0.0; i < 10.0; i++) {
-            float t = iTime * 0.5 + i * 0.42;
+          // Render 4 slender, delicate, glowing light filaments - NO grey capsule body
+          for (float i = 0.0; i < 4.0; i++) {
+            float t = iTime * 0.45 + i * 1.57;
 
-            // Strictly bounded gentle sinusoidal wave (amplitude <= 0.35)
-            float wave = sin(p.x * 1.4 + t) * 0.20 + cos(p.x * 2.6 - t * 0.7) * 0.10;
-            wave += fbm(vec2(p.x * 0.7 + t * 0.25, i * 1.5)) * 0.15;
+            // Gentle sinusoidal undulation with small, strictly bounded amplitude
+            float wave = sin(p.x * 1.8 + t) * 0.12 + cos(p.x * 3.2 - t * 0.7) * 0.06;
 
-            // Distance to filament center line (controlled separation)
-            float dist = abs(p.y - wave - (i - 5.0) * 0.14);
+            // Controlled separation between filaments
+            float yPos = wave + (i - 1.5) * 0.38;
 
-            // Quadratic dropoff keeps beam thin and tightly localized (no bloat or blob expansion)
-            float beam = 0.010 / (dist * dist * 42.0 + 0.016);
-            beam *= smoothstep(2.4, 0.4, abs(p.x)); // Softly taper at screen edges
+            // Distance to filament center line
+            float dist = abs(p.y - yPos);
 
-            // Palette matching Dusty Blue (#75A2B5), Steel Blue (#527F93), Cyan & Mint
-            vec3 auroraColor = mix(
-              vec3(0.32, 0.55, 0.68), // Dusty Blue / Steel Blue
-              vec3(0.24, 0.78, 0.72), // Cyan / Mint
-              0.5 + 0.5 * sin(i * 0.55 + t * 0.4)
-            );
+            // Razor-thin core with steep quadratic dropoff - completely transparent beyond 3-4px
+            float core = 0.0035 / (dist * dist * 450.0 + 0.0035);
 
-            col += auroraColor * beam * 0.40;
+            // Soft longitudinal fade at screen edges
+            float endFade = smoothstep(2.6, 0.8, abs(p.x));
+            core *= endFade;
+
+            // Distinct vibrant neon colors matching Farhanul's signature palette
+            vec3 streakColor;
+            if (i < 1.0) {
+              streakColor = vec3(0.22, 0.75, 0.85); // Bright Cyan / Steel Blue
+            } else if (i < 2.0) {
+              streakColor = vec3(0.30, 0.85, 0.65); // Neon Mint / Emerald
+            } else if (i < 3.0) {
+              streakColor = vec3(0.46, 0.64, 0.95); // Dusty Blue
+            } else {
+              streakColor = vec3(0.65, 0.55, 0.95); // Subtle Lavender / Violet
+            }
+
+            finalColor += streakColor * core;
+            finalAlpha += core * 0.85;
           }
 
-          // Tone curve to compress peak values
-          col = col / (1.0 + col);
+          // Strict clamping - alpha is 0.0 everywhere except directly on the thin beams
+          finalAlpha = clamp(finalAlpha, 0.0, 0.95);
 
-          // Alpha strictly derived from luminosity with a clean cutoff so no dark/grey smudges appear
-          float brightness = max(col.r, max(col.g, col.b));
-          float alpha = smoothstep(0.012, 0.60, brightness) * 0.70;
+          // Tone map color to prevent over-saturation
+          finalColor = finalColor / (1.0 + finalColor);
 
-          gl_FragColor = vec4(col, alpha);
+          gl_FragColor = vec4(finalColor, finalAlpha);
         }
       `,
     });
