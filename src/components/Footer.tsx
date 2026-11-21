@@ -29,7 +29,7 @@ export default function Footer() {
               Farhanul<span className="text-gradient">.</span>
             </p>
             <p className="text-sm text-[var(--text-muted)] mt-1">
-              CSE Student • Software Developer • Problem Solver
+              Software Developer • Competitive Programmer • Problem Solver
             </p>
           </div>
 

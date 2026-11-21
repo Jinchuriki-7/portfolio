@@ -61,7 +61,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.4 }}
                 className="text-lg sm:text-xl font-medium text-[var(--text-secondary)]"
               >
-                {ROTATING_TITLES[titleIdx]} • CSE Student
+                {ROTATING_TITLES[titleIdx]}
               </motion.p>
             </div>
 
@@ -181,16 +181,6 @@ export default function HeroSection() {
                   <span className="text-xs font-medium mt-2">Farhanul Haque</span>
                 </div>
               </div>
-
-              {/* CSE Student Badge (Bottom Right) */}
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
-                className="absolute -bottom-2 -right-1 sm:bottom-0 sm:right-0 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-[var(--badge-profile-bg)] text-[var(--badge-profile-text)] shadow-xl shadow-[var(--profile-glow)] border-2 border-[var(--badge-profile-border)] transition-colors"
-              >
-                CSE Student
-              </motion.div>
             </div>
           </motion.div>
 
