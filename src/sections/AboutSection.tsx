@@ -1,30 +1,29 @@
 import { motion } from 'framer-motion';
-import { Code2, Globe, Brain, Trophy } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import SectionHeader from '../components/SectionHeader';
 import { personalInfo } from '../data/personalInfo';
 
 const highlights = [
   {
-    icon: Code2,
+    image: '/tech/vscode.svg',
     title: 'Software Development',
     description:
       'Building clean, scalable, maintainable software architectures with high code standards.',
   },
   {
-    icon: Globe,
+    image: '/tech/react.svg',
     title: 'Web Technologies',
     description:
       'Crafting high-performance responsive web applications using modern full-stack tools.',
   },
   {
-    icon: Brain,
+    image: '/tech/ai.svg',
     title: 'Artificial Intelligence',
     description:
       'Exploring machine learning pipelines and integrating practical AI models into products.',
   },
   {
-    icon: Trophy,
+    image: '/codeforces.svg',
     title: 'Competitive Programming',
     description:
       'Sharpening analytical thinking through algorithms and rated problem-solving contests.',
@@ -70,7 +69,7 @@ export default function AboutSection() {
 
         {/* Highlight cards */}
         <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {highlights.map(({ icon: Icon, title, description }, idx) => (
+          {highlights.map(({ image, title, description }, idx) => (
             <motion.div
               key={title}
               initial={{ opacity: 0, y: 20 }}
@@ -79,8 +78,13 @@ export default function AboutSection() {
               transition={{ delay: idx * 0.1, duration: 0.4 }}
               className="glass-card p-5 group"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#75A2B5]/15 text-[#75A2B5] [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5] border border-[#75A2B5]/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
-                <Icon size={19} />
+              <div className="w-11 h-11 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] [data-theme=light]:shadow-sm flex items-center justify-center mb-3.5 group-hover:scale-110 transition-transform duration-200 p-2">
+                <img
+                  src={image}
+                  alt={title}
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
               </div>
               <h3 className="font-display font-bold text-base text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
                 {title}
