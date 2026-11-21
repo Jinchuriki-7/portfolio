@@ -25,10 +25,10 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme');
-      if (saved === 'light' || saved === 'dark') return saved;
+      const saved = localStorage.getItem('user_theme_pref');
+      if (saved === 'dark' || saved === 'light') return saved;
     }
-    return 'dark';
+    return 'light';
   });
   const activeSection = useScrollSpy(SECTION_IDS, 100);
 
@@ -49,6 +49,7 @@ export default function Navbar() {
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.classList.toggle('dark', theme === 'dark');
     document.documentElement.classList.toggle('light', theme === 'light');
+    localStorage.setItem('user_theme_pref', theme);
     localStorage.setItem('theme', theme);
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {

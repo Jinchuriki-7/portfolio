@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light" class="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -9,23 +9,23 @@
     <meta property="og:title" content="Farhanul Haque | Software Developer Portfolio" />
     <meta property="og:description" content="CSE Student | Software Developer | Competitive Programmer | AI Enthusiast" />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#101613" />
+    <meta name="theme-color" content="#F4F1E9" />
     
-    <!-- Inline Theme Initializer (prevents flash of wrong theme on initial load) -->
+    <!-- Inline Theme Initializer (Defaults to 'light' / Day Mode on visit) -->
     <script>
       (function() {
         try {
-          var saved = localStorage.getItem('theme');
-          var theme = (saved === 'light' || saved === 'dark') ? saved : 'dark';
+          var saved = localStorage.getItem('user_theme_pref');
+          var theme = saved === 'dark' ? 'dark' : 'light';
           document.documentElement.setAttribute('data-theme', theme);
           document.documentElement.classList.add(theme);
           var metaTheme = document.querySelector('meta[name="theme-color"]');
-          if (theme === 'light') {
-            document.documentElement.classList.remove('dark');
-            if (metaTheme) metaTheme.setAttribute('content', '#F4F1E9');
-          } else {
+          if (theme === 'dark') {
             document.documentElement.classList.remove('light');
             if (metaTheme) metaTheme.setAttribute('content', '#101613');
+          } else {
+            document.documentElement.classList.remove('dark');
+            if (metaTheme) metaTheme.setAttribute('content', '#F4F1E9');
           }
         } catch(e) {}
       })();
