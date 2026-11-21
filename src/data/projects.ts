@@ -39,7 +39,7 @@ export const projects: Project[] = [
     liveUrl: "https://medcore-main-2026.vercel.app/",
     category: "Full-Stack & AI",
     featured: true,
-    image: "/projects/medcore.jpg",
+    image: "/projects/medcore.jpg?v=2",
   },
   {
     id: "filex",
