@@ -10,7 +10,7 @@ export const personalInfo = {
   email: "farhan9t1l@gmail.com",
   github: "https://github.com/Jinchuriki-7",
   githubUsername: "Jinchuriki-7",
-  linkedin: "https://www.linkedin.com/in/your-profile", // Replace with actual LinkedIn
+  linkedin: "https://www.linkedin.com/in/farhanul-haque-sami-a1a455399/",
   codeforces: "https://codeforces.com/profile/Samii-7",
   codeforcesUsername: "Samii-7",
   location: "Bangladesh",
