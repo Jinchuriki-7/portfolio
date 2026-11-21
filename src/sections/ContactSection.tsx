@@ -260,7 +260,7 @@ function ContactLink({
       rel="noopener noreferrer"
       className="glass-card p-4 flex items-center gap-3.5 hover:border-[var(--accent)] transition-all group"
     >
-      <div className="w-11 h-11 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] shadow-xs flex items-center justify-center p-2.5 flex-shrink-0 group-hover:scale-105 transition-all">
+      <div className="w-11 h-11 rounded-xl bg-[var(--bg-icon-card)] border border-[var(--border-subtle)] shadow-xs flex items-center justify-center p-2.5 flex-shrink-0 group-hover:scale-105 transition-all">
         <img
           src={logo}
           alt={label}

@@ -62,7 +62,7 @@ export default function ExperienceSection() {
                 {(() => {
                   const logo = COMPANY_LOGOS[exp.id];
                   return (
-                    <div className="w-14 h-14 rounded-2xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden hover:scale-105 transition-transform duration-200">
+                    <div className="w-14 h-14 rounded-2xl bg-[var(--bg-icon-card)] border border-[var(--border-subtle)] flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden hover:scale-105 transition-transform duration-200">
                       {logo ? (
                         <img
                           src={logo.src}

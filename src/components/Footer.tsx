@@ -50,7 +50,7 @@ export default function Footer() {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:scale-110 transition-all flex items-center justify-center p-2.5 shadow-xs group"
+              className="w-10 h-10 rounded-xl bg-[var(--bg-icon-card)] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:scale-110 transition-all flex items-center justify-center p-2.5 shadow-xs group"
               aria-label="GitHub"
             >
               <img
@@ -64,7 +64,7 @@ export default function Footer() {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:scale-110 transition-all flex items-center justify-center p-2.5 shadow-xs group"
+              className="w-10 h-10 rounded-xl bg-[var(--bg-icon-card)] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:scale-110 transition-all flex items-center justify-center p-2.5 shadow-xs group"
               aria-label="LinkedIn"
             >
               <img

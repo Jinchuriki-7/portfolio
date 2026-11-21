@@ -76,7 +76,7 @@ export default function AboutSection() {
               transition={{ delay: idx * 0.1, duration: 0.4 }}
               className="glass-card p-5 group"
             >
-              <div className="w-11 h-11 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] [data-theme=light]:shadow-sm flex items-center justify-center mb-3.5 group-hover:scale-110 transition-transform duration-200 p-2">
+              <div className="w-11 h-11 rounded-xl bg-[var(--bg-icon-card)] border border-[var(--border-subtle)] [data-theme=light]:shadow-sm flex items-center justify-center mb-3.5 group-hover:scale-110 transition-transform duration-200 p-2">
                 <img
                   src={image}
                   alt={title}

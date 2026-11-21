@@ -24,7 +24,7 @@ export default function EducationSection() {
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
               <div className="flex items-center gap-3.5 min-w-0">
-                <div className="w-14 h-14 rounded-2xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] [data-theme=light]:shadow-sm flex items-center justify-center flex-shrink-0 p-2 overflow-hidden hover:scale-105 transition-transform duration-200">
+                <div className="w-14 h-14 rounded-2xl bg-[var(--bg-icon-card)] border border-[var(--border-subtle)] [data-theme=light]:shadow-sm flex items-center justify-center flex-shrink-0 p-2 overflow-hidden hover:scale-105 transition-transform duration-200">
                   <img
                     src={item.logo || '/diu.svg'}
                     alt={item.institution}

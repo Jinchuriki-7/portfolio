@@ -57,6 +57,7 @@
   --profile-ring-inner: rgba(117, 162, 181, 0.55);
   --profile-glow: rgba(117, 162, 181, 0.20);
   --profile-border: #75A2B5;
+  --bg-icon-card: #FFFFFF;
   --scrollbar-track: #F4F1E9;
   --scrollbar-thumb: rgba(133, 135, 127, 0.35);
   --scrollbar-thumb-hover: #527F93;
@@ -95,6 +96,7 @@
   --profile-ring-inner: rgba(117, 162, 181, 0.50);
   --profile-glow: rgba(117, 162, 181, 0.22);
   --profile-border: #75A2B5;
+  --bg-icon-card: #17201D;
   --scrollbar-track: #101613;
   --scrollbar-thumb: rgba(43, 57, 50, 0.85);
   --scrollbar-thumb-hover: #75A2B5;
@@ -308,6 +310,11 @@ section {
 [data-theme="dark"] .github-icon {
   filter: invert(1) brightness(1.25) !important;
   transition: filter 0.3s ease;
+}
+
+/* Ensure all brand icon / logo containers seamlessly transition to dark surface in Night mode */
+[data-theme="dark"] .bg-white {
+  background-color: #17201D !important;
 }
 
 .section-container {

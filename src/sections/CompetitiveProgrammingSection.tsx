@@ -59,7 +59,7 @@ export default function CompetitiveProgrammingSection() {
             {/* Header */}
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 md:w-13 md:h-13 rounded-2xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] shadow-sm flex items-center justify-center p-2.5 flex-shrink-0 hover:scale-105 transition-transform duration-200">
+                <div className="w-12 h-12 md:w-13 md:h-13 rounded-2xl bg-[var(--bg-icon-card)] border border-[var(--border-subtle)] shadow-sm flex items-center justify-center p-2.5 flex-shrink-0 hover:scale-105 transition-transform duration-200">
                   <img
                     src="/codeforces.svg"
                     alt="Codeforces"
@@ -146,7 +146,7 @@ export default function CompetitiveProgrammingSection() {
             {/* Header */}
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 md:w-13 md:h-13 rounded-2xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] shadow-sm flex items-center justify-center p-2 flex-shrink-0 hover:scale-105 transition-transform duration-200">
+                <div className="w-12 h-12 md:w-13 md:h-13 rounded-2xl bg-[var(--bg-icon-card)] border border-[var(--border-subtle)] shadow-sm flex items-center justify-center p-2 flex-shrink-0 hover:scale-105 transition-transform duration-200">
                   <img
                     src="/beecrowd.png"
                     alt="Beecrowd"
@@ -250,7 +250,7 @@ export default function CompetitiveProgrammingSection() {
               transition={{ delay: i * 0.1, duration: 0.4 }}
               className="glass-card p-5 flex gap-4 items-start group"
             >
-              <div className="w-11 h-11 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] [data-theme=light]:shadow-sm flex items-center justify-center flex-shrink-0 p-2 group-hover:scale-105 transition-transform duration-200">
+              <div className="w-11 h-11 rounded-xl bg-[var(--bg-icon-card)] border border-[var(--border-subtle)] [data-theme=light]:shadow-sm flex items-center justify-center flex-shrink-0 p-2 group-hover:scale-105 transition-transform duration-200">
                 <img
                   src={image}
                   alt={title}
