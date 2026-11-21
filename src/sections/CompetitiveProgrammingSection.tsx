@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Code2, Award, Zap, Activity, Trophy, Flame, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Zap, Activity, Trophy, Flame, CheckCircle2 } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import SectionHeader from '../components/SectionHeader';
 
@@ -227,34 +227,39 @@ export default function CompetitiveProgrammingSection() {
 
           {[
             {
-              icon: Code2,
+              image: '/tech/cplusplus.svg',
               title: 'Algorithmic Problem Solving',
-              desc: 'Working through problems in dynamic programming, graph algorithms, greedy optimization, and number theory.',
+              desc: 'Working through problems in dynamic programming, graph algorithms, greedy optimization, and number theory with high-performance C++.',
             },
             {
-              icon: Award,
+              image: '/codeforces.svg',
               title: 'Contest Participation',
               desc: 'Actively participating in Codeforces Div. rated contests to enhance speed, precision, and accuracy under real-time constraints.',
             },
             {
-              icon: Code2,
+              image: '/tech/python.svg',
               title: 'Data Structures',
               desc: 'Mastering trees, segment trees, heaps, union-find sets, and hash maps for high-performance solutions.',
             },
-          ].map(({ icon: Icon, title, desc }, i) => (
+          ].map(({ image, title, desc }, i) => (
             <motion.div
               key={title}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="glass-card p-5 flex gap-4 items-start"
+              className="glass-card p-5 flex gap-4 items-start group"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#75A2B5]/15 text-[#75A2B5] [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5] border border-[#75A2B5]/30 flex items-center justify-center flex-shrink-0">
-                <Icon size={18} />
+              <div className="w-11 h-11 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] [data-theme=light]:shadow-sm flex items-center justify-center flex-shrink-0 p-2 group-hover:scale-105 transition-transform duration-200">
+                <img
+                  src={image}
+                  alt={title}
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
               </div>
               <div>
-                <h4 className="font-display font-bold text-base text-[var(--text-primary)]">
+                <h4 className="font-display font-bold text-base text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
                   {title}
                 </h4>
                 <p className="text-xs text-[var(--text-muted)] mt-1 leading-relaxed">
