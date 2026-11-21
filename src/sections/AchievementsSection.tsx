@@ -31,12 +31,13 @@ const achievements: Achievement[] = [
   },
   {
     id: 'unlock-the-algorithm-2026',
-    title: 'Unlock the Algorithm – Summer 2026',
+    title: 'Unlock the Algorithm – Summer 2026 – Finalist',
     organization: 'DIU Computer & Programming Club',
     date: 'Summer 2026',
     category: 'Competitive Programming',
+    isFinalist: true,
     description:
-      'Successfully participated in the Unlock the Algorithm Programming Contest, awarded Certificate of Appreciation by the Department of CSE and CPC.',
+      'Selected as a finalist and successfully participated in the Unlock the Algorithm Programming Contest, awarded Certificate of Appreciation by the Department of CSE and CPC.',
     certificateImage: '/certificates/unlock-the-algorithm-2026.jpg',
   },
   {
