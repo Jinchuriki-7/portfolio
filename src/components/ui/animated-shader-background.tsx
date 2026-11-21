@@ -1,304 +1,193 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * AnimatedShaderBackground
- * High-performance, native WebGL dynamic aurora shader background.
- * Renders elegant, flowing, slender aurora filaments with soft translucent
- * ribbons, subtle luminous highlights, and minimal floating light particles.
- * 
- * Strict mathematically bounded wave functions ensure filaments remain
- * permanently slender and compact without blob expansion.
+ * World-class interactive algorithmic constellation & neural network canvas.
+ * High-performance, clean, elegant, and perfectly balanced for both
+ * Warm Ivory (Day) and Obsidian (Night) themes.
  */
 export default function AnimatedShaderBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [webglSupported, setWebglSupported] = useState(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
 
-    // Initialize WebGL context
-    const gl = (
-      canvas.getContext('webgl', {
-        alpha: true,
-        antialias: true,
-        powerPreference: 'low-power',
-        preserveDrawingBuffer: false,
-      }) ||
-      canvas.getContext('experimental-webgl')
-    ) as WebGLRenderingContext | null;
+    let animId: number;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
 
-    if (!gl) {
-      setWebglSupported(false);
-      return;
+    // Track mouse position with smooth idle decay
+    const mouse = { x: -1000, y: -1000, active: false };
+
+    // Get current theme helper
+    const isDark = () => {
+      return document.documentElement.getAttribute('data-theme') === 'dark';
+    };
+
+    // Responsive node count (lightweight, zero CPU strain)
+    const nodeCount = Math.min(Math.floor((width * height) / 22000), 55);
+
+    interface Node {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      isAccent: boolean;
+      pulse: number;
+      pulseSpeed: number;
     }
 
-    // Vertex Shader: Fullscreen triangle/quad
-    const vertexSource = `
-      attribute vec2 a_position;
-      void main() {
-        gl_Position = vec4(a_position, 0.0, 1.0);
-      }
-    `;
+    const nodes: Node[] = [];
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        radius: Math.random() * 1.5 + 1.2,
+        isAccent: Math.random() > 0.65,
+        pulse: Math.random() * Math.PI,
+        pulseSpeed: Math.random() * 0.02 + 0.01,
+      });
+    }
 
-    // Fragment Shader: Slender, flowing aurora ribbons matching reference design
-    const fragmentSource = `
-      precision highp float;
-      uniform vec2 u_resolution;
-      uniform float u_time;
-      uniform float u_dark;
+    const handleResize = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
 
-      float hash(vec2 p) {
-        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-      }
+    const handleMouseMove = (e: MouseEvent) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    };
 
-      float noise(vec2 p) {
-        vec2 i = floor(p);
-        vec2 f = fract(p);
-        vec2 u = f * f * (3.0 - 2.0 * f);
-        return mix(
-          mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
-          mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
-          u.y
+    const handleMouseLeave = () => {
+      mouse.active = false;
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    const maxDist = 125;
+    const mouseRadius = 150;
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      const dark = isDark();
+
+      // Palette definitions matching Farhanul's design system
+      const baseNodeColor = dark ? 'rgba(117, 162, 181,' : 'rgba(82, 127, 147,';
+      const accentNodeColor = dark ? 'rgba(110, 231, 183,' : 'rgba(117, 162, 181,';
+      const lineColor = dark ? 'rgba(117, 162, 181,' : 'rgba(82, 127, 147,';
+
+      // 1. Draw subtle interactive mouse glow
+      if (mouse.active && mouse.x > 0 && mouse.y > 0) {
+        const glowGrad = ctx.createRadialGradient(
+          mouse.x,
+          mouse.y,
+          0,
+          mouse.x,
+          mouse.y,
+          mouseRadius * 1.5
         );
+        glowGrad.addColorStop(0, dark ? 'rgba(117, 162, 181, 0.07)' : 'rgba(82, 127, 147, 0.04)');
+        glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = glowGrad;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, mouseRadius * 1.5, 0, Math.PI * 2);
+        ctx.fill();
       }
 
-      void main() {
-        // Aspect-corrected UV space centered on screen
-        vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / u_resolution.y;
+      // 2. Update and draw nodes + connections
+      for (let i = 0; i < nodes.length; i++) {
+        const n1 = nodes[i];
 
-        // Slow, serene time scale
-        float t = u_time * 0.16;
+        // Move node smoothly
+        n1.x += n1.vx;
+        n1.y += n1.vy;
+        n1.pulse += n1.pulseSpeed;
 
-        vec3 accumColor = vec3(0.0);
-        float accumAlpha = 0.0;
+        // Wrap around borders seamlessly
+        if (n1.x < -10) n1.x = width + 10;
+        if (n1.x > width + 10) n1.x = -10;
+        if (n1.y < -10) n1.y = height + 10;
+        if (n1.y > height + 10) n1.y = -10;
 
-        // Portfolio color palette
-        vec3 c_primary = vec3(0.459, 0.635, 0.710);    // #75A2B5
-        vec3 c_darkAccent = vec3(0.322, 0.498, 0.576); // #527F93
-        vec3 c_softCyan = vec3(0.725, 0.867, 0.898);   // #B9DDE5
-        vec3 c_lightBlue = vec3(0.863, 0.918, 0.941);  // #DCEAF0
-        vec3 c_white = vec3(1.0, 1.0, 1.0);
+        // Draw connections between nearby nodes
+        for (let j = i + 1; j < nodes.length; j++) {
+          const n2 = nodes[j];
+          const dx = n1.x - n2.x;
+          const dy = n1.y - n2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
-        // 4 layered, flowing slender aurora filaments
-        for (float i = 0.0; i < 4.0; i++) {
-          float layerTime = t * (0.85 + i * 0.18) + i * 1.57;
-
-          // Mid-hero baseline vertical offset
-          float baseY = (i - 1.5) * 0.08 - 0.02;
-
-          // Mathematically bounded gentle wave equation (amplitude strictly <= 0.15)
-          float wave = sin(uv.x * 2.2 + layerTime * 1.1) * 0.085
-                     + cos(uv.x * 3.8 - layerTime * 0.7) * 0.045
-                     + sin(uv.x * 5.4 + layerTime * 1.8) * 0.020;
-
-          // Gentle organic undulation via lightweight noise
-          float n = noise(vec2(uv.x * 2.5 + layerTime * 0.5, i * 3.2)) * 0.035;
-
-          float waveY = baseY + wave + n;
-
-          // Vertical distance to wave center line
-          float dist = uv.y - waveY;
-
-          // 1. Slender luminous crest highlight line
-          float crest = exp(-abs(dist) * 95.0);
-
-          // 2. Translucent flowing ribbon veil (strictly localized)
-          float bodySpread = mix(35.0, 55.0, mod(i, 2.0));
-          float body = exp(-dist * dist * bodySpread) * smoothstep(0.22, -0.05, dist);
-
-          // Soft edge taper across horizontal bounds
-          float xFade = smoothstep(1.4 * (u_resolution.x / u_resolution.y), 0.25, abs(uv.x));
-
-          // Harmonious gradient across the filament
-          float colorShift = 0.5 + 0.5 * sin(uv.x * 1.8 + layerTime + i * 1.2);
-          vec3 ribbonBody = mix(c_darkAccent, c_primary, colorShift);
-          vec3 ribbonCrest = mix(c_softCyan, c_white, 0.5 + 0.5 * cos(uv.x * 2.5 - layerTime));
-
-          vec3 layerColor = mix(ribbonBody, ribbonCrest, crest * 0.82);
-          float layerIntensity = (crest * 0.85 + body * 0.38) * xFade;
-
-          accumColor += layerColor * layerIntensity;
-          accumAlpha += layerIntensity;
+          if (dist < maxDist) {
+            const alpha = (1 - dist / maxDist) * (dark ? 0.22 : 0.16);
+            ctx.beginPath();
+            ctx.moveTo(n1.x, n1.y);
+            ctx.lineTo(n2.y ? n2.x : n1.x, n2.y);
+            ctx.strokeStyle = `${lineColor} ${alpha})`;
+            ctx.lineWidth = 0.85;
+            ctx.stroke();
+          }
         }
 
-        // Minimal floating starlight particles (8 subtle glowing specks)
-        for (float p = 0.0; p < 8.0; p++) {
-          float pSpeed = 0.035 + fract(sin(p * 45.1) * 43758.5) * 0.03;
-          vec2 pPos = vec2(
-            (fract(sin(p * 12.3) * 43758.5) - 0.5) * 2.2 * (u_resolution.x / u_resolution.y),
-            fract(sin(p * 67.8) * 43758.5 - t * pSpeed) * 1.6 - 0.8
-          );
+        // Connect node to mouse cursor if nearby
+        if (mouse.active) {
+          const mdx = n1.x - mouse.x;
+          const mdy = n1.y - mouse.y;
+          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
 
-          float pDist = length(uv - pPos);
-          float pGlow = exp(-pDist * 140.0) * (0.5 + 0.5 * sin(t * 3.0 + p * 2.5));
+          if (mdist < mouseRadius) {
+            const malpha = (1 - mdist / mouseRadius) * (dark ? 0.35 : 0.25);
+            ctx.beginPath();
+            ctx.moveTo(n1.x, n1.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `${lineColor} ${malpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
 
-          accumColor += mix(c_lightBlue, c_white, 0.6) * pGlow * 0.45;
-          accumAlpha += pGlow * 0.35;
+            // Very gentle, natural attraction toward cursor
+            n1.x -= mdx * 0.006;
+            n1.y -= mdy * 0.006;
+          }
         }
 
-        // Soft tone curve
-        accumColor = accumColor / (1.0 + accumColor * 0.35);
+        // Draw the node circle
+        const dynamicAlpha = 0.45 + Math.sin(n1.pulse) * 0.25;
+        const colorPrefix = n1.isAccent ? accentNodeColor : baseNodeColor;
 
-        // Day Mode (Warm Ivory) vs Night Mode (Dark Charcoal) balance:
-        // Day mode preserves ivory background with delicate translucency
-        // Night mode provides rich, cinematic aurora luminosity
-        float targetAlpha = mix(0.40, 0.70, u_dark);
-        float finalAlpha = clamp(accumAlpha * targetAlpha, 0.0, targetAlpha);
-
-        gl_FragColor = vec4(accumColor, finalAlpha);
-      }
-    `;
-
-    // Shader compilation utility
-    function compileShader(type: number, source: string): WebGLShader | null {
-      if (!gl) return null;
-      const shader = gl.createShader(type);
-      if (!shader) return null;
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
-      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error('Shader compilation error:', gl.getShaderInfoLog(shader));
-        gl.deleteShader(shader);
-        return null;
-      }
-      return shader;
-    }
-
-    const vertexShader = compileShader(gl.VERTEX_SHADER, vertexSource);
-    const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentSource);
-
-    if (!vertexShader || !fragmentShader) {
-      setWebglSupported(false);
-      return;
-    }
-
-    const program = gl.createProgram();
-    if (!program) {
-      setWebglSupported(false);
-      return;
-    }
-
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
-
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error('Program link error:', gl.getProgramInfoLog(program));
-      setWebglSupported(false);
-      return;
-    }
-
-    gl.useProgram(program);
-
-    // Full-screen quad geometry
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    const positions = new Float32Array([
-      -1.0, -1.0,
-       1.0, -1.0,
-      -1.0,  1.0,
-      -1.0,  1.0,
-       1.0, -1.0,
-       1.0,  1.0,
-    ]);
-    gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
-
-    const positionLocation = gl.getAttribLocation(program, 'a_position');
-    gl.enableVertexAttribArray(positionLocation);
-    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
-    // Uniform locations
-    const uResolution = gl.getUniformLocation(program, 'u_resolution');
-    const uTime = gl.getUniformLocation(program, 'u_time');
-    const uDark = gl.getUniformLocation(program, 'u_dark');
-
-    // Viewport & DPR Sizing
-    const resize = () => {
-      if (!canvas || !gl) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      if (uResolution) {
-        gl.uniform2f(uResolution, canvas.width, canvas.height);
-      }
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Track Theme changes (Day Mode vs Night Mode)
-    let isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const updateThemeUniform = () => {
-      isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if (uDark && gl) {
-        gl.uniform1f(uDark, isDark ? 1.0 : 0.0);
-      }
-    };
-    updateThemeUniform();
-
-    const themeObserver = new MutationObserver(() => {
-      updateThemeUniform();
-    });
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    });
-
-    // Animation Render Loop
-    let animationFrameId: number;
-    let startTime = performance.now();
-
-    const render = (now: number) => {
-      if (!gl || !program) return;
-
-      const elapsed = prefersReducedMotion ? 10.0 : (now - startTime) * 0.001;
-
-      // Bound time smoothly using modulo to prevent precision artifacts
-      const boundedTime = elapsed % 628.3185;
-
-      if (uTime) {
-        gl.uniform1f(uTime, boundedTime);
+        ctx.beginPath();
+        ctx.arc(n1.x, n1.y, n1.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `${colorPrefix} ${dynamicAlpha * (dark ? 0.75 : 0.6)})`;
+        ctx.fill();
       }
 
-      gl.clearColor(0.0, 0.0, 0.0, 0.0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
-
-      if (!prefersReducedMotion) {
-        animationFrameId = requestAnimationFrame(render);
-      }
+      animId = requestAnimationFrame(render);
     };
 
-    animationFrameId = requestAnimationFrame(render);
+    render();
 
-    // Cleanup resources on unmount
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', resize);
-      themeObserver.disconnect();
-
-      if (gl) {
-        gl.deleteProgram(program);
-        gl.deleteShader(vertexShader);
-        gl.deleteShader(fragmentShader);
-        gl.deleteBuffer(positionBuffer);
-      }
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
-      {/* 1. Subtle Developer Technical Grid Pattern (Faded Vignette) */}
+      {/* 1. Subtle, Minimal Architectural Grid Overlay */}
       <div
         className="absolute inset-0 opacity-[0.20] [data-theme=dark]:opacity-[0.14] transition-opacity duration-500"
         style={{
@@ -306,22 +195,17 @@ export default function AnimatedShaderBackground() {
             linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
             linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px)
           `,
-          backgroundSize: '48px 48px',
+          backgroundSize: '56px 56px',
           maskImage: 'radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 85%)',
           WebkitMaskImage: 'radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 85%)',
         }}
       />
 
-      {/* 2. WebGL Dynamic Aurora Filaments Canvas */}
-      {webglSupported ? (
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 w-full h-full pointer-events-none"
-        />
-      ) : (
-        /* Graceful CSS Fallback when WebGL is unavailable */
-        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_80%_50%_at_50%_20%,rgba(117,162,181,0.22),transparent)]" />
-      )}
+      {/* 2. Interactive Algorithmic Constellation & Neural Graph Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full block"
+      />
     </div>
   );
 }
