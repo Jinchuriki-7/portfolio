@@ -2,8 +2,10 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 /**
- * AnimatedShaderBackground (AnoAI)
- * High-performance WebGL dynamic aurora shader background.
+ * AnimatedShaderBackground
+ * High-performance, slender WebGL dynamic aurora shader background.
+ * Strictly bounded filaments that maintain an elegant, compact scale
+ * and never expand into massive or obstructive shapes over time.
  */
 export default function AnimatedShaderBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,9 +16,9 @@ export default function AnimatedShaderBackground() {
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     container.appendChild(renderer.domElement);
 
     const material = new THREE.ShaderMaterial({
@@ -34,7 +36,7 @@ export default function AnimatedShaderBackground() {
         uniform float iTime;
         uniform vec2 iResolution;
 
-        #define NUM_OCTAVES 3
+        #define NUM_OCTAVES 2
 
         float rand(vec2 n) {
           return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
@@ -53,42 +55,60 @@ export default function AnimatedShaderBackground() {
 
         float fbm(vec2 x) {
           float v = 0.0;
-          float a = 0.3;
-          vec2 shift = vec2(100.0);
+          float a = 0.35;
+          vec2 shift = vec2(50.0);
           mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
           for (int i = 0; i < NUM_OCTAVES; ++i) {
             v += a * noise(x);
             x = rot * x * 2.0 + shift;
-            a *= 0.4;
+            a *= 0.5;
           }
           return v;
         }
 
         void main() {
-          vec2 shake = vec2(sin(iTime * 1.2) * 0.005, cos(iTime * 2.1) * 0.005);
-          vec2 p = ((gl_FragCoord.xy + shake * iResolution.xy) - iResolution.xy * 0.5) / iResolution.y * mat2(6.0, -4.0, 4.0, 6.0);
-          vec2 v;
-          vec4 o = vec4(0.0);
+          // Normalized, aspect-corrected coordinates centered on screen
+          vec2 uv = (gl_FragCoord.xy - iResolution.xy * 0.5) / iResolution.y;
 
-          float f = 2.0 + fbm(p + vec2(iTime * 5.0, 0.0)) * 0.5;
+          // Diagonal tilt matching the elegant aurora streak
+          mat2 rot = mat2(0.866, -0.5, 0.5, 0.866);
+          vec2 p = rot * uv * 3.5;
 
-          for (float i = 0.0; i < 35.0; i++) {
-            v = p + cos(i * i + (iTime + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 + vec2(sin(iTime * 3.0 + i) * 0.003, cos(iTime * 3.5 - i) * 0.003);
-            float tailNoise = fbm(v + vec2(iTime * 0.5, i)) * 0.3 * (1.0 - (i / 35.0));
-            vec4 auroraColors = vec4(
-              0.15 + 0.25 * sin(i * 0.2 + iTime * 0.4),
-              0.35 + 0.45 * cos(i * 0.3 + iTime * 0.5),
-              0.65 + 0.35 * sin(i * 0.4 + iTime * 0.3),
-              1.0
+          vec3 col = vec3(0.0);
+
+          // Slender, controlled filaments with bounded wave amplitude (keeps them thin and compact)
+          for (float i = 0.0; i < 10.0; i++) {
+            float t = iTime * 0.5 + i * 0.42;
+
+            // Strictly bounded gentle sinusoidal wave (amplitude <= 0.35)
+            float wave = sin(p.x * 1.4 + t) * 0.20 + cos(p.x * 2.6 - t * 0.7) * 0.10;
+            wave += fbm(vec2(p.x * 0.7 + t * 0.25, i * 1.5)) * 0.15;
+
+            // Distance to filament center line (controlled separation)
+            float dist = abs(p.y - wave - (i - 5.0) * 0.14);
+
+            // Quadratic dropoff keeps beam thin and tightly localized (no bloat or blob expansion)
+            float beam = 0.010 / (dist * dist * 42.0 + 0.016);
+            beam *= smoothstep(2.4, 0.4, abs(p.x)); // Softly taper at screen edges
+
+            // Palette matching Dusty Blue (#75A2B5), Steel Blue (#527F93), Cyan & Mint
+            vec3 auroraColor = mix(
+              vec3(0.32, 0.55, 0.68), // Dusty Blue / Steel Blue
+              vec3(0.24, 0.78, 0.72), // Cyan / Mint
+              0.5 + 0.5 * sin(i * 0.55 + t * 0.4)
             );
-            vec4 currentContribution = auroraColors * exp(sin(i * i + iTime * 0.8)) / length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));
-            float thinnessFactor = smoothstep(0.0, 1.0, i / 35.0) * 0.6;
-            o += currentContribution * (1.0 + tailNoise * 0.8) * thinnessFactor;
+
+            col += auroraColor * beam * 0.40;
           }
 
-          o = tanh(pow(o / 100.0, vec4(1.6)));
-          gl_FragColor = o * 0.95;
-          gl_FragColor.a = min(1.0, (o.r + o.g + o.b) / 1.1);
+          // Tone curve to compress peak values
+          col = col / (1.0 + col);
+
+          // Alpha strictly derived from luminosity with a clean cutoff so no dark/grey smudges appear
+          float brightness = max(col.r, max(col.g, col.b));
+          float alpha = smoothstep(0.012, 0.60, brightness) * 0.70;
+
+          gl_FragColor = vec4(col, alpha);
         }
       `,
     });
@@ -99,7 +119,8 @@ export default function AnimatedShaderBackground() {
 
     let frameId: number;
     const animate = () => {
-      material.uniforms.iTime.value += 0.014;
+      // Bounded periodic time to eliminate any floating-point precision loss over long durations
+      material.uniforms.iTime.value = (performance.now() * 0.001) % 628.3185;
       renderer.render(scene, camera);
       frameId = requestAnimationFrame(animate);
     };
@@ -107,7 +128,7 @@ export default function AnimatedShaderBackground() {
 
     const handleResize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       material.uniforms.iResolution.value.set(window.innerWidth, window.innerHeight);
     };
     window.addEventListener('resize', handleResize);
