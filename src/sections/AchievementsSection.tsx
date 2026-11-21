@@ -106,11 +106,13 @@ export default function AchievementsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.1, duration: 0.45 }}
-            className="glass-card p-5 sm:p-6 flex flex-col justify-between group hover:border-[var(--accent)] transition-all duration-300"
+            className={`glass-card p-5 sm:p-6 flex flex-col justify-between group hover:border-[var(--accent)] transition-all duration-300 ${
+              !item.certificateImage ? 'self-start' : ''
+            }`}
           >
             <div>
-              {/* Top Visual Slot: Certificate Thumbnail or Team/Project Graphic */}
-              {item.certificateImage ? (
+              {/* Certificate Image Thumbnail Preview (only for items with certificate) */}
+              {item.certificateImage && (
                 <div
                   onClick={() => setSelectedCert(item)}
                   className="relative aspect-[16/10] w-full rounded-xl overflow-hidden mb-5 bg-black/10 border border-[var(--border-subtle)] group/thumb cursor-pointer shadow-sm"
@@ -125,18 +127,6 @@ export default function AchievementsSection() {
                     <Eye size={16} />
                     <span>Click to Expand Certificate</span>
                   </div>
-                </div>
-              ) : (
-                <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden mb-5 bg-gradient-to-br from-[#75A2B5]/10 via-[#527F93]/5 to-[var(--bg-pill)] border border-[var(--border-subtle)] flex flex-col items-center justify-center p-4 text-center">
-                  <div className="w-10 h-10 rounded-xl bg-[#75A2B5]/15 border border-[#75A2B5]/30 flex items-center justify-center text-[#527F93] [data-theme=dark]:text-[#75A2B5] mb-2 shadow-sm">
-                    <Trophy size={18} className="text-amber-500" />
-                  </div>
-                  <span className="font-display font-bold text-sm text-[var(--text-primary)]">
-                    {item.projectName}
-                  </span>
-                  <span className="text-[11px] text-[var(--text-muted)] font-medium mt-0.5">
-                    Team {item.teamName} • Daffodil International University
-                  </span>
                 </div>
               )}
 
