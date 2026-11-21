@@ -1,143 +1,64 @@
-import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import { useEffect, useState } from 'react';
 
 /**
  * AnimatedShaderBackground
- * High-performance WebGL shooting star / filament light trails.
- * Strictly bounded in length and width so they stay elegant, discrete,
- * and never expand or blob over time.
+ * High-performance, modern software engineer ambient background.
+ * Combines subtle technical grid, elegant dot matrix, breathing
+ * aurora blooms, and interactive cursor spotlight.
  */
 export default function AnimatedShaderBackground() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    container.appendChild(renderer.domElement);
-
-    const material = new THREE.ShaderMaterial({
-      transparent: true,
-      uniforms: {
-        iTime: { value: 0 },
-        iResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-      },
-      vertexShader: `
-        void main() {
-          gl_Position = vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform float iTime;
-        uniform vec2 iResolution;
-
-        void main() {
-          // Normalized, aspect-corrected coordinates centered on screen
-          vec2 uv = (gl_FragCoord.xy - iResolution.xy * 0.5) / iResolution.y;
-
-          // 38-degree diagonal tilt matching the shooting light streaks angle
-          float ang = 0.66;
-          mat2 rot = mat2(cos(ang), -sin(ang), sin(ang), cos(ang));
-          vec2 p = rot * uv;
-
-          vec3 col = vec3(0.0);
-          float alpha = 0.0;
-
-          // 16 discrete, slender shooting star filaments that stay strictly small and thin
-          for (float i = 0.0; i < 16.0; i++) {
-            // Pseudo-random fixed lane, speed, and length per streak
-            float lane = (fract(sin(i * 12.9898 + 1.5) * 43758.5453) - 0.5) * 2.4;
-            float speed = 0.28 + fract(sin(i * 78.233 + 3.7) * 43758.5453) * 0.32;
-            float len = 0.16 + fract(sin(i * 45.164 + 7.1) * 43758.5453) * 0.20; // Strictly 80px - 150px length
-
-            // Periodic progress along diagonal (glides smoothly across screen)
-            float phase = fract(sin(i * 91.345 + 5.2) * 43758.5453);
-            float progress = fract(iTime * speed * 0.22 + phase) * 4.0 - 2.0;
-
-            float dx = p.x - progress;
-            float dy = p.y - lane;
-
-            // Only render within the short bounds of the streak (strictly small!)
-            if (dx > 0.0 && dx < len) {
-              // Softly tapering tail from bright head to fading tail
-              float headGlow = exp(-dx * 60.0) * 0.4;
-              float tailFade = pow(1.0 - (dx / len), 2.0);
-
-              // Razor-thin width (2 - 3 pixels wide)
-              float core = exp(-abs(dy) * 400.0);
-              float halo = exp(-abs(dy) * 80.0) * 0.30;
-
-              float intensity = (core + halo) * (tailFade + headGlow);
-
-              // Authentic colors matching screenshot: Cyan, Mint Green, Lavender Purple, Dusty Blue
-              vec3 streakColor;
-              float colIdx = mod(i, 4.0);
-              if (colIdx < 1.0) {
-                streakColor = vec3(0.25, 0.88, 0.95); // Cyan
-              } else if (colIdx < 2.0) {
-                streakColor = vec3(0.38, 0.92, 0.65); // Mint Green
-              } else if (colIdx < 3.0) {
-                streakColor = vec3(0.70, 0.55, 0.98); // Lavender / Violet
-              } else {
-                streakColor = vec3(0.46, 0.68, 0.88); // Dusty / Steel Blue
-              }
-
-              col += streakColor * intensity;
-              alpha += intensity * 0.90;
-            }
-          }
-
-          // Ambient subtle background light filament
-          float ambient = exp(-abs(p.y - 0.25) * 12.0) * 0.05;
-          col += vec3(0.35, 0.55, 0.68) * ambient;
-          alpha += ambient * 0.4;
-
-          alpha = clamp(alpha, 0.0, 0.85);
-          gl_FragColor = vec4(col, alpha);
-        }
-      `,
-    });
-
-    const geometry = new THREE.PlaneGeometry(2, 2);
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-
-    let frameId: number;
-    const animate = () => {
-      material.uniforms.iTime.value = (performance.now() * 0.001) % 628.3185;
-      renderer.render(scene, camera);
-      frameId = requestAnimationFrame(animate);
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
     };
-    animate();
-
-    const handleResize = () => {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-      material.uniforms.iResolution.value.set(window.innerWidth, window.innerHeight);
-    };
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener('resize', handleResize);
-      if (container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
-      }
-      geometry.dispose();
-      material.dispose();
-      renderer.dispose();
-    };
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="fixed inset-0 z-0 pointer-events-none shader-container overflow-hidden"
-    />
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
+      {/* 1. Subtle Developer Technical Grid Pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.45] [data-theme=dark]:opacity-[0.25] transition-opacity duration-500"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px)
+          `,
+          backgroundSize: '48px 48px',
+          maskImage: 'radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 85%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 85%)',
+        }}
+      />
+
+      {/* 2. Delicate Dot Matrix Nodes at Grid Intersections */}
+      <div
+        className="absolute inset-0 opacity-[0.35] [data-theme=dark]:opacity-[0.20] transition-opacity duration-500"
+        style={{
+          backgroundImage: 'radial-gradient(var(--accent) 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
+          maskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black 25%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black 25%, transparent 80%)',
+        }}
+      />
+
+      {/* 3. Floating Ambient Aurora Glow Blooms (Hardware-Accelerated Smooth CSS) */}
+      <div className="absolute top-[-8%] left-[-5%] w-[55vw] h-[55vw] max-w-[650px] max-h-[650px] rounded-full bg-[#75A2B5]/25 [data-theme=dark]:bg-[#75A2B5]/18 blur-[110px] animate-ambient-drift-1" />
+      <div className="absolute top-[18%] right-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-[#527F93]/22 [data-theme=dark]:bg-[#527F93]/20 blur-[120px] animate-ambient-drift-2" />
+      <div className="absolute top-[52%] left-[8%] w-[45vw] h-[45vw] max-w-[550px] max-h-[550px] rounded-full bg-[#38BDF8]/18 [data-theme=dark]:bg-[#38BDF8]/12 blur-[105px] animate-ambient-drift-3" />
+
+      {/* 4. Interactive Spotlight Cursor Follow (Subtle) */}
+      <div
+        className="absolute w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-opacity duration-500 blur-[90px]"
+        style={{
+          left: `${mousePos.x}px`,
+          top: `${mousePos.y}px`,
+          background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
+          opacity: mousePos.x > 0 ? 0.12 : 0,
+        }}
+      />
+    </div>
   );
 }
