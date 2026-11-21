@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, FileText, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
 import { useScrollSpy } from '../hooks/useScrollSpy';
 import { personalInfo } from '../data/personalInfo';
 
@@ -233,35 +231,50 @@ export default function Navbar() {
 
       {/* Top-Right Social Icons Pill (Desktop) */}
       <div
-        className={`fixed top-5 md:top-6 right-6 z-50 hidden xl:flex items-center gap-3 glass px-4 py-2.5 rounded-full border shadow-xl backdrop-blur-xl ${theme === 'dark'
-          ? 'bg-[#101613]/88 border-[#2B3932] text-[#A8B8AE]'
-          : 'bg-[#F4F1E9]/92 border-[#E6E2D8] text-[#62675F] shadow-sm'
+        className={`fixed top-5 md:top-6 right-6 z-50 hidden xl:flex items-center gap-2.5 glass px-3.5 py-2 rounded-full border shadow-xl backdrop-blur-xl ${theme === 'dark'
+          ? 'bg-[#101613]/88 border-[#2B3932]'
+          : 'bg-[#F4F1E9]/92 border-[#E6E2D8] shadow-sm'
           }`}
       >
         <a
           href={personalInfo.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-[var(--accent)] transition-colors"
+          className="w-7 h-7 rounded-lg flex items-center justify-center p-1 hover:scale-115 transition-transform"
           aria-label="GitHub"
         >
-          <FaGithub size={16} />
+          <img
+            src="/tech/github.svg"
+            alt="GitHub"
+            className="w-full h-full object-contain [data-theme=dark]:invert [data-theme=dark]:brightness-125"
+            loading="lazy"
+          />
         </a>
         <a
           href={personalInfo.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-[var(--accent)] transition-colors"
+          className="w-7 h-7 rounded-lg flex items-center justify-center p-1 hover:scale-115 transition-transform"
           aria-label="LinkedIn"
         >
-          <FaLinkedin size={16} />
+          <img
+            src="/tech/linkedin.svg"
+            alt="LinkedIn"
+            className="w-full h-full object-contain"
+            loading="lazy"
+          />
         </a>
         <a
           href={`mailto:${personalInfo.email}`}
-          className="hover:text-[var(--accent)] transition-colors"
+          className="w-7 h-7 rounded-lg flex items-center justify-center p-1 hover:scale-115 transition-transform"
           aria-label="Email"
         >
-          <MdEmail size={17} />
+          <img
+            src="/tech/gmail.svg"
+            alt="Gmail"
+            className="w-full h-full object-contain"
+            loading="lazy"
+          />
         </a>
       </div>
 
