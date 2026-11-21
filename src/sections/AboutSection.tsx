@@ -48,11 +48,9 @@ export default function AboutSection() {
           ))}
 
           {/* Quick stats grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+          <div className="grid grid-cols-2 gap-3 pt-4">
             {[
               { label: 'Field', value: 'CSE' },
-              { label: 'GitHub', value: `@${personalInfo.githubUsername}` },
-              { label: 'Codeforces', value: personalInfo.codeforcesUsername },
               { label: 'Focus', value: 'Software & AI' },
             ].map(({ label, value }) => (
               <div key={label} className="p-3 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] text-center transition-colors">
