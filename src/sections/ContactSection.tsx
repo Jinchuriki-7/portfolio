@@ -1,7 +1,6 @@
-import { useState, type FormEvent, type ChangeEvent, type ReactNode } from 'react';
+import { useState, type FormEvent, type ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Send, CheckCircle, AlertCircle, ExternalLink } from 'lucide-react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import SectionWrapper from '../components/SectionWrapper';
 import SectionHeader from '../components/SectionHeader';
 import { personalInfo } from '../data/personalInfo';
@@ -88,19 +87,20 @@ export default function ContactSection() {
           </p>
 
           <ContactLink
-            icon={<Mail size={16} />}
+            logo="/tech/gmail.svg"
             label="Email Address"
             value={personalInfo.email}
             href={`mailto:${personalInfo.email}`}
           />
           <ContactLink
-            icon={<FaGithub size={16} />}
+            logo="/tech/github.svg"
+            logoClassName="[data-theme=dark]:invert [data-theme=dark]:brightness-125"
             label="GitHub Profile"
             value={`@${personalInfo.githubUsername}`}
             href={personalInfo.github}
           />
           <ContactLink
-            icon={<FaLinkedin size={16} />}
+            logo="/tech/linkedin.svg"
             label="LinkedIn"
             value="Connect on LinkedIn"
             href={personalInfo.linkedin}
@@ -240,16 +240,33 @@ export default function ContactSection() {
   );
 }
 
-function ContactLink({ icon, label, value, href }: { icon: ReactNode; label: string; value: string; href: string }) {
+function ContactLink({
+  logo,
+  logoClassName,
+  label,
+  value,
+  href,
+}: {
+  logo: string;
+  logoClassName?: string;
+  label: string;
+  value: string;
+  href: string;
+}) {
   return (
     <a
       href={href}
       target={href.startsWith('mailto') ? '_self' : '_blank'}
       rel="noopener noreferrer"
-      className="glass-card p-4 flex items-center gap-3 hover:border-[var(--accent)] transition-all group"
+      className="glass-card p-4 flex items-center gap-3.5 hover:border-[var(--accent)] transition-all group"
     >
-      <div className="w-10 h-10 rounded-xl bg-[#75A2B5]/15 border border-[#75A2B5]/30 text-[#75A2B5] [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5] flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-all">
-        {icon}
+      <div className="w-11 h-11 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] shadow-xs flex items-center justify-center p-2.5 flex-shrink-0 group-hover:scale-105 transition-all">
+        <img
+          src={logo}
+          alt={label}
+          className={`w-full h-full object-contain ${logoClassName || ''}`}
+          loading="lazy"
+        />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-xs text-[var(--text-muted)] font-medium">{label}</p>
