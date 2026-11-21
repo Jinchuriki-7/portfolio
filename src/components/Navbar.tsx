@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, FileText, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollSpy } from '../hooks/useScrollSpy';
 import { personalInfo } from '../data/personalInfo';
@@ -277,21 +277,6 @@ export default function Navbar() {
           />
         </a>
       </div>
-
-      {/* Floating Action Button (Bottom Right) */}
-      <a
-        href="/cv.pdf"
-        download="Farhanul_Haque_CV.pdf"
-        className={`fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all cursor-pointer ${
-          theme === 'dark'
-            ? 'bg-[#75A2B5] hover:bg-[#527F93] text-[#101613] shadow-[#75A2B5]/25 font-bold'
-            : 'bg-[#527F93] hover:bg-[#75A2B5] text-[#FCFBF7] shadow-[#527F93]/25 font-bold'
-        }`}
-        aria-label="Quick Download CV"
-        title="Download CV"
-      >
-        <FileText size={20} strokeWidth={2.5} />
-      </a>
     </>
   );
 }
