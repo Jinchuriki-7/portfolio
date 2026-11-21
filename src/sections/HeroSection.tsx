@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Download, ArrowRight, User } from 'lucide-react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
 import { personalInfo } from '../data/personalInfo';
 
 const ROTATING_TITLES = [
@@ -94,31 +92,46 @@ export default function HeroSection() {
             </div>
 
             {/* Social icons row */}
-            <div className="mt-8 flex items-center gap-4 justify-center lg:justify-start text-[var(--text-muted)]">
+            <div className="mt-8 flex items-center gap-3.5 justify-center lg:justify-start">
               <a
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
+                className="w-10 h-10 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:scale-110 transition-all flex items-center justify-center p-2.5 shadow-xs group"
                 aria-label="GitHub profile"
               >
-                <FaGithub size={18} />
+                <img
+                  src="/tech/github.svg"
+                  alt="GitHub"
+                  className="w-full h-full object-contain [data-theme=dark]:invert [data-theme=dark]:brightness-125 transition-transform"
+                  loading="lazy"
+                />
               </a>
               <a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
+                className="w-10 h-10 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:scale-110 transition-all flex items-center justify-center p-2.5 shadow-xs group"
                 aria-label="LinkedIn profile"
               >
-                <FaLinkedin size={18} />
+                <img
+                  src="/tech/linkedin.svg"
+                  alt="LinkedIn"
+                  className="w-full h-full object-contain transition-transform"
+                  loading="lazy"
+                />
               </a>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="p-2.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
+                className="w-10 h-10 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:scale-110 transition-all flex items-center justify-center p-2.5 shadow-xs group"
                 aria-label="Email"
               >
-                <MdEmail size={18} />
+                <img
+                  src="/tech/gmail.svg"
+                  alt="Gmail"
+                  className="w-full h-full object-contain transition-transform"
+                  loading="lazy"
+                />
               </a>
             </div>
           </motion.div>

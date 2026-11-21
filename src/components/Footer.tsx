@@ -1,5 +1,4 @@
 import { ArrowUp, Heart } from 'lucide-react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { personalInfo } from '../data/personalInfo';
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -51,19 +50,29 @@ export default function Footer() {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all hover:scale-105"
+              className="w-10 h-10 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:scale-110 transition-all flex items-center justify-center p-2.5 shadow-xs group"
               aria-label="GitHub"
             >
-              <FaGithub size={18} />
+              <img
+                src="/tech/github.svg"
+                alt="GitHub"
+                className="w-full h-full object-contain [data-theme=dark]:invert [data-theme=dark]:brightness-125 transition-transform"
+                loading="lazy"
+              />
             </a>
             <a
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--accent-secondary)] hover:border-[var(--accent-secondary)] transition-all hover:scale-105"
+              className="w-10 h-10 rounded-xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] hover:border-[var(--accent)] hover:scale-110 transition-all flex items-center justify-center p-2.5 shadow-xs group"
               aria-label="LinkedIn"
             >
-              <FaLinkedin size={18} />
+              <img
+                src="/tech/linkedin.svg"
+                alt="LinkedIn"
+                className="w-full h-full object-contain transition-transform"
+                loading="lazy"
+              />
             </a>
           </div>
         </div>
