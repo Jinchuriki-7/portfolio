@@ -72,34 +72,11 @@ export default function Navbar() {
           }`}
       >
         <div
-          className={`glass rounded-full px-4 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between lg:justify-start gap-3 lg:gap-6 shadow-2xl backdrop-blur-2xl transition-all duration-300 ${theme === 'dark'
+          className={`glass rounded-full px-3 py-1.5 sm:px-4 sm:py-2 flex items-center justify-center gap-1.5 shadow-2xl backdrop-blur-2xl transition-all duration-300 ${theme === 'dark'
             ? 'bg-[#101613]/88 border border-[#2B3932] shadow-[rgba(0,214,163,0.06)] text-[#F1F5F2]'
             : 'bg-[#F4F1E9]/92 border border-[#E6E2D8] shadow-sm text-[#252923]'
             }`}
         >
-          {/* Logo / Avatar Pill */}
-          <button
-            onClick={() => handleNavClick('#home')}
-            className="flex items-center gap-2 group cursor-pointer shrink-0"
-            aria-label="Go to top"
-          >
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center font-display font-bold text-xs tracking-wider shadow-md group-hover:rotate-12 transition-transform ${
-              theme === 'dark'
-                ? 'bg-gradient-to-br from-[#75A2B5] to-[#527F93] text-[#101613]'
-                : 'bg-gradient-to-br from-[#527F93] to-[#75A2B5] text-[#FCFBF7]'
-            }`}>
-              FH
-            </div>
-            <span
-              className={`font-display font-bold text-base transition-colors ${theme === 'dark'
-                ? 'text-[#F1F5F2] group-hover:text-[#75A2B5]'
-                : 'text-[#252923] group-hover:text-[#527F93]'
-                }`}
-            >
-              Farhanul
-            </span>
-          </button>
-
           {/* Desktop Navigation Links + Divider + DAY/NIGHT Toggle */}
           <div className="hidden lg:flex items-center gap-0.5">
             {NAV_ITEMS.map((item) => {
