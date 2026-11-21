@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, BookOpen } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import SectionHeader from '../components/SectionHeader';
 import { education } from '../data/education';
@@ -23,9 +23,14 @@ export default function EducationSection() {
             className="glass-card p-6 md:p-8"
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-[#75A2B5]/15 border border-[#75A2B5]/30 text-[#75A2B5] [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5] flex items-center justify-center flex-shrink-0">
-                  <GraduationCap size={24} />
+              <div className="flex items-center gap-3.5">
+                <div className="w-14 h-14 rounded-2xl bg-white [data-theme=dark]:bg-[#17201D] border border-[var(--border-subtle)] [data-theme=light]:shadow-sm flex items-center justify-center flex-shrink-0 p-2 overflow-hidden hover:scale-105 transition-transform duration-200">
+                  <img
+                    src={item.logo || '/diu.svg'}
+                    alt={item.institution}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
                 <div>
                   <h3 className="font-display font-bold text-lg md:text-xl text-[var(--text-primary)]">

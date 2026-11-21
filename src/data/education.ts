@@ -9,6 +9,7 @@ export interface EducationItem {
   institution: string;
   status: "ongoing" | "completed";
   description?: string;
+  logo?: string;
 }
 
 export const education: EducationItem[] = [
@@ -18,6 +19,7 @@ export const education: EducationItem[] = [
     field: "Computer Science & Engineering",
     institution: "Daffodil International University (DIU)",
     status: "ongoing",
+    logo: "/diu.svg",
     description:
       "Pursuing undergraduate studies with strong emphasis on software engineering, data structures, algorithms, artificial intelligence, and database management systems. Actively competing in programming hackathons and university contests.",
   },
