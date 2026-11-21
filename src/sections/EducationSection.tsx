@@ -44,7 +44,7 @@ export default function EducationSection() {
               </div>
 
               <span className="self-start sm:self-center px-3 py-1 rounded-full text-xs font-bold bg-[#75A2B5]/20 text-[#75A2B5] border border-[#75A2B5]/35 [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5]">
-                {item.status === 'ongoing' ? 'In Progress' : 'Completed'}
+                {item.period || (item.status === 'ongoing' ? '2025 – 2029 (Expected)' : 'Completed')}
               </span>
             </div>
 
