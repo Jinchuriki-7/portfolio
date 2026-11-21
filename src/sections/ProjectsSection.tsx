@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Sparkles } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import SectionWrapper from '../components/SectionWrapper';
 import SectionHeader from '../components/SectionHeader';
@@ -25,16 +25,6 @@ function ProjectCard({ project }: { project: Project }) {
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#101613] via-[#101613]/20 to-transparent [data-theme=light]:from-[#252923]/30 [data-theme=light]:via-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-
-        {/* Featured Badge */}
-        {project.featured && (
-          <div className="absolute top-3 right-3">
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-[#75A2B5]/25 text-[#75A2B5] border border-[#75A2B5]/40 backdrop-blur-md [data-theme=light]:bg-[#527F93] [data-theme=light]:text-white [data-theme=light]:border-[#527F93]">
-              <Sparkles size={11} />
-              Featured
-            </span>
-          </div>
-        )}
       </div>
 
       {/* Card Content */}
