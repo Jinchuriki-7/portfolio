@@ -223,7 +223,7 @@ export default function Navbar() {
           <img
             src="/tech/github.svg"
             alt="GitHub"
-            className="w-full h-full object-contain [data-theme=dark]:invert [data-theme=dark]:brightness-125"
+            className="w-full h-full object-contain github-icon"
             loading="lazy"
           />
         </a>

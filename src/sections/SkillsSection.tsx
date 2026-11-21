@@ -41,7 +41,7 @@ const TECH_CONFIG: Record<string, TechItemConfig> = {
   'GitHub': {
     type: 'image',
     src: '/tech/github.svg',
-    className: '[data-theme=dark]:invert [data-theme=dark]:brightness-125'
+    className: 'github-icon'
   },
   'VS Code': { type: 'image', src: '/tech/vscode.svg' },
   'Firebase': { type: 'image', src: '/tech/firebase.svg' },

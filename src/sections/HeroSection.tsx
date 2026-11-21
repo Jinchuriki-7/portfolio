@@ -103,7 +103,7 @@ export default function HeroSection() {
                 <img
                   src="/tech/github.svg"
                   alt="GitHub"
-                  className="w-full h-full object-contain [data-theme=dark]:invert [data-theme=dark]:brightness-125 transition-transform"
+                  className="w-full h-full object-contain github-icon transition-transform"
                   loading="lazy"
                 />
               </a>

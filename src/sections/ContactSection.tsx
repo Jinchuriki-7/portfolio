@@ -94,7 +94,7 @@ export default function ContactSection() {
           />
           <ContactLink
             logo="/tech/github.svg"
-            logoClassName="[data-theme=dark]:invert [data-theme=dark]:brightness-125"
+            logoClassName="github-icon"
             label="GitHub Profile"
             value={`@${personalInfo.githubUsername}`}
             href={personalInfo.github}
