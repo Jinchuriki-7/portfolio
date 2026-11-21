@@ -31,23 +31,23 @@ const achievements: Achievement[] = [
   },
   {
     id: 'unlock-the-algorithm-2026',
-    title: 'Unlock the Algorithm – Summer 2026 – Finalist',
+    title: 'Unlock the Algorithm',
     organization: 'DIU Computer & Programming Club',
     date: 'Summer 2026',
     category: 'Competitive Programming',
-    isFinalist: true,
     description:
-      'Selected as a finalist and successfully participated in the Unlock the Algorithm Programming Contest, awarded Certificate of Appreciation by the Department of CSE and CPC.',
+      'Successfully participated in the Unlock the Algorithm Programming Contest, awarded Certificate of Appreciation by the Department of CSE and CPC.',
     certificateImage: '/certificates/unlock-the-algorithm-2026.jpg',
   },
   {
     id: 'diu-math-olympiad-2025',
-    title: 'DIU Mathematics Olympiad – Summer 2025',
+    title: 'DIU Mathematics Olympiad – Summer 2025 – Finalist',
     organization: 'DIU Mathematical Society (DIUMS)',
     date: '26 July 2025',
     category: 'Mathematics Competition',
+    isFinalist: true,
     description:
-      'Participated in the Preliminary Round of the DIU Mathematics Olympiad – Summer 2025, organized by the Faculty of Science & Information Technology in association with DIUMS.',
+      'Selected as a finalist and participated in the Preliminary Round of the DIU Mathematics Olympiad – Summer 2025, organized by the Faculty of Science & Information Technology in association with DIUMS.',
     certificateImage: '/certificates/diu-math-olympiad-2025.jpg',
   },
   {
