@@ -6,7 +6,7 @@
   <style>
     @page {
       size: A4;
-      margin: 9mm 12mm 8mm 12mm;
+      margin: 14mm 16mm 14mm 16mm;
     }
     * {
       box-sizing: border-box;
@@ -15,14 +15,16 @@
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      color: #252923;
+      color: #1f2937;
       background-color: #ffffff;
-      line-height: 1.28;
-      font-size: 8.7pt;
+      line-height: 1.45;
+      font-size: 9.6pt;
+      -webkit-font-smoothing: antialiased;
     }
     a {
       color: #527F93;
       text-decoration: none;
+      font-weight: 500;
     }
     a:hover {
       text-decoration: underline;
@@ -30,71 +32,86 @@
     
     /* Header */
     .header {
-      border-bottom: 2px solid #527F93;
-      padding-bottom: 5px;
-      margin-bottom: 6px;
+      border-bottom: 2.5px solid #527F93;
+      padding-bottom: 9px;
+      margin-bottom: 12px;
     }
     .name-title {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px;
     }
     .name {
-      font-size: 20pt;
+      font-size: 24pt;
       font-weight: 800;
       letter-spacing: -0.5px;
-      color: #17201D;
+      color: #0f172a;
     }
     .title {
-      font-size: 9.8pt;
+      font-size: 11pt;
       font-weight: 600;
       color: #527F93;
+      letter-spacing: 0.2px;
     }
     .contact-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
-      font-size: 8.5pt;
-      color: #555e58;
+      gap: 12px;
+      margin-top: 7px;
+      font-size: 9.2pt;
+      color: #4b5563;
     }
     .contact-item {
       display: flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
     }
     .contact-item span.sep {
       color: #C8DCE5;
-      margin-left: 6px;
+      margin-left: 8px;
     }
     
     /* Section Headers */
     .section-title {
-      font-size: 9.6pt;
+      font-size: 10.8pt;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      color: #17201D;
-      border-bottom: 1px solid #C8DCE5;
-      padding-bottom: 2px;
-      margin-top: 6px;
-      margin-bottom: 4px;
+      color: #0f172a;
+      border-bottom: 1.5px solid #C8DCE5;
+      padding-bottom: 3px;
+      margin-top: 13px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
+      break-after: avoid;
+      page-break-after: avoid;
     }
     .section-title::before {
       content: "";
       display: inline-block;
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       background-color: #527F93;
-      border-radius: 1px;
+      border-radius: 1.5px;
+    }
+
+    /* Summary text */
+    .summary-text {
+      font-size: 9.4pt;
+      color: #374151;
+      text-align: justify;
+      line-height: 1.45;
     }
 
     /* Items */
     .item {
-      margin-bottom: 4px;
+      margin-bottom: 9px;
+      break-inside: avoid;
+      page-break-inside: avoid;
     }
     .item-header {
       display: flex;
@@ -103,89 +120,96 @@
     }
     .item-title {
       font-weight: 700;
-      font-size: 9.2pt;
-      color: #1a221f;
+      font-size: 9.9pt;
+      color: #0f172a;
     }
     .item-subtitle {
       font-weight: 600;
-      font-size: 8.6pt;
+      font-size: 9.3pt;
       color: #527F93;
     }
     .item-date {
-      font-size: 8.2pt;
-      color: #62675F;
+      font-size: 9pt;
+      color: #6b7280;
       font-weight: 500;
     }
     .item-desc {
-      font-size: 8.4pt;
-      color: #434944;
-      margin-top: 1px;
+      font-size: 9.3pt;
+      color: #374151;
+      margin-top: 2px;
     }
     ul.bullet-list {
-      margin-left: 14px;
-      margin-top: 1.5px;
+      margin-left: 17px;
+      margin-top: 3px;
     }
     ul.bullet-list li {
-      font-size: 8.4pt;
-      color: #434944;
-      margin-bottom: 1.5px;
+      font-size: 9.2pt;
+      color: #374151;
+      margin-bottom: 2.5px;
+      line-height: 1.4;
     }
     
     /* Skills Grid */
     .skills-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 8.4pt;
+      font-size: 9.2pt;
+      break-inside: avoid;
+      page-break-inside: avoid;
     }
     .skills-table td {
-      padding: 1.5px 0;
+      padding: 3px 0;
       vertical-align: top;
     }
     .skill-category {
       font-weight: 700;
-      color: #1a221f;
-      width: 24%;
+      color: #0f172a;
+      width: 25%;
     }
     .skill-items {
-      color: #434944;
-      width: 76%;
+      color: #374151;
+      width: 75%;
     }
 
     /* Grid for Stats & Highlights */
     .stats-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 12px;
+      margin-top: 4px;
       margin-bottom: 4px;
+      break-inside: avoid;
+      page-break-inside: avoid;
     }
     .stat-card {
-      background: #F8F9FA;
-      border: 1px solid #E6E2D8;
-      border-left: 3px solid #527F93;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: 3.5px solid #527F93;
       border-radius: 4px;
-      padding: 3.5px 7px;
+      padding: 7px 10px;
     }
     .stat-card-title {
       font-weight: 700;
-      font-size: 8.7pt;
-      color: #1a221f;
+      font-size: 9.5pt;
+      color: #0f172a;
     }
     .stat-card-desc {
-      font-size: 8.2pt;
-      color: #555e58;
+      font-size: 9pt;
+      color: #475569;
+      margin-top: 2px;
     }
 
     /* Badges */
     .badge {
       display: inline-block;
-      font-size: 7pt;
+      font-size: 7.8pt;
       font-weight: 700;
-      padding: 0px 4px;
-      border-radius: 2px;
+      padding: 1px 6px;
+      border-radius: 3px;
       background: #EAF2F5;
       color: #527F93;
       border: 1px solid #C8DCE5;
-      margin-left: 3px;
+      margin-left: 5px;
       vertical-align: baseline;
     }
   </style>
@@ -196,7 +220,7 @@
   <div class="header">
     <div class="name-title">
       <div class="name">FARHANUL HAQUE</div>
-      <div class="title">Software Developer & CSE Undergraduate</div>
+      <div class="title">Software Developer | CSE Undergraduate</div>
     </div>
     <div class="contact-row">
       <div class="contact-item">
@@ -217,19 +241,25 @@
     </div>
   </div>
 
+  <!-- Professional Summary -->
+  <div class="section-title">Professional Summary</div>
+  <p class="summary-text">
+    Motivated Computer Science & Engineering undergraduate at Daffodil International University with a strong interest in software development, problem-solving, and modern technologies. Hands-on experience developing responsive frontend web applications and practical AI/ML solutions across diverse programming languages including Python, C, C++, Java, and JavaScript. Active competitive programmer with 380+ algorithmic challenges solved on Codeforces and Beecrowd, demonstrating sharp computational thinking and analytical rigor. Passionate about engineering practical, scalable, and innovative software solutions that address real-world challenges with clean architecture.
+  </p>
+
   <!-- Education -->
   <div class="section-title">Education</div>
   <div class="item">
     <div class="item-header">
       <span class="item-title">Daffodil International University (DIU)</span>
-      <span class="item-date">2024 – Present (Ongoing)</span>
+      <span class="item-date">2025 – Present (Ongoing)</span>
     </div>
     <div class="item-header">
       <span class="item-subtitle">Bachelor of Science in Computer Science & Engineering</span>
       <span class="item-date">Dhaka, Bangladesh</span>
     </div>
     <div class="item-desc">
-      Relevant Coursework: Data Structures & Algorithms, Object-Oriented Programming (OOP), Database Management Systems, Software Engineering, Discrete Mathematics.
+      <strong>Relevant Coursework:</strong> Data Structures & Algorithms, Object-Oriented Programming (OOP), Database Management Systems, Software Engineering, Discrete Mathematics.
     </div>
   </div>
 
@@ -250,7 +280,7 @@
     </tr>
     <tr>
       <td class="skill-category">Core Competencies:</td>
-      <td class="skill-items">Algorithmic Problem Solving, Object-Oriented Design (OOP), System Architecture, Team Collaboration</td>
+      <td class="skill-items">Algorithmic Problem Solving, Object-Oriented Design, System Architecture, Team Collaboration</td>
     </tr>
   </table>
 
@@ -259,7 +289,7 @@
   <div class="item">
     <div class="item-header">
       <span class="item-title">Biswas IT Firm</span>
-      <span class="item-date">Nov 2026 – Jan 2027</span>
+      <span class="item-date">Current Position</span>
     </div>
     <div class="item-header">
       <span class="item-subtitle">Web Developer Intern <span class="badge">Current Position</span></span>
@@ -274,14 +304,15 @@
   <div class="item">
     <div class="item-header">
       <span class="item-title">CodeAlpha</span>
-      <span class="item-date">Nov 2026 – Dec 2026</span>
+      <span class="item-date">November 2026 – December 2026</span>
     </div>
     <div class="item-header">
-      <span class="item-subtitle">Artificial Intelligence Intern <span class="badge">Current Position</span></span>
-      <span class="item-date">Virtual</span>
+      <span class="item-subtitle">Artificial Intelligence Intern</span>
+      <span class="item-date">Remote</span>
     </div>
     <ul class="bullet-list">
-      <li>Engaging in machine learning and applied AI projects, focusing on data processing and practical algorithm implementation.</li>
+      <li>Engaging in machine learning and applied AI projects, focusing on practical algorithm implementation.</li>
+      <li>Focusing on data processing, exploratory analysis, and building functional machine learning workflows.</li>
     </ul>
   </div>
 
@@ -292,10 +323,11 @@
       <span class="item-title">JOMI-SHARE & NIRBASH — AI Land Tech & Property Ecosystem</span>
       <span class="item-date"><a href="https://github.com/Jinchuriki-7/jomi-share-landtech">GitHub</a> | <a href="https://jomi-share-portal.web.app">Live Demo</a></span>
     </div>
-    <div class="item-subtitle">React, TypeScript, Tailwind CSS, AI/GIS, Firebase <span class="badge">Hackathon Finalist</span></div>
+    <div class="item-subtitle">React, TypeScript, Tailwind CSS, AI/GIS, Firebase <span class="badge">LandTech Hackathon Finalist</span></div>
     <ul class="bullet-list">
-      <li>Built an integrated dual-platform land intelligence solution for title records verification and property dispute mitigation.</li>
-      <li>Developed the Land DNA™ index verification system and digital surveyor consultation booking workflows.</li>
+      <li>Built an integrated dual-platform land intelligence solution for title record verification and property dispute mitigation.</li>
+      <li>Developed the Land DNA™ index verification system.</li>
+      <li>Designed digital surveyor consultation booking workflows.</li>
     </ul>
   </div>
 
@@ -306,7 +338,7 @@
     </div>
     <div class="item-subtitle">PHP, JavaScript, MySQL, Tailwind CSS, Vercel</div>
     <ul class="bullet-list">
-      <li>Architected an enterprise Electronic Health Record (EHR) ecosystem connecting patients, physicians, and diagnostic laboratories.</li>
+      <li>Architected an Electronic Health Record (EHR) ecosystem connecting patients, physicians, and diagnostic laboratories.</li>
       <li>Implemented tokenized patient verification, doctor live queue chambers, and synchronized diagnostic report access.</li>
     </ul>
   </div>
@@ -318,7 +350,9 @@
     </div>
     <div class="item-subtitle">Python, PySide6, Qt Framework, Desktop Software</div>
     <ul class="bullet-list">
-      <li>Engineered an always-on-top floating desktop tool enabling instant drag-and-drop batch conversions across documents, PDFs, images, and audio/video formats with multithreaded background processing.</li>
+      <li>Engineered an always-on-top floating desktop application.</li>
+      <li>Implemented instant drag-and-drop batch conversion across documents, PDFs, images, and audio/video formats.</li>
+      <li>Integrated multithreaded background processing.</li>
     </ul>
   </div>
 
@@ -329,7 +363,8 @@
     </div>
     <div class="item-subtitle">Flutter, Dart, MVVM Architecture, Android & Windows</div>
     <ul class="bullet-list">
-      <li>Developed a system telemetry and junk cleaner utility for Windows and Android with sandboxed file recovery protection.</li>
+      <li>Developed a system telemetry and junk cleaner utility for Windows and Android.</li>
+      <li>Implemented sandboxed file recovery protection.</li>
     </ul>
   </div>
 
@@ -338,22 +373,22 @@
   <div class="stats-row">
     <div class="stat-card">
       <div class="stat-card-title">Codeforces — Handle: <a href="https://codeforces.com/profile/Samii-7">Samii-7</a></div>
-      <div class="stat-card-desc">Current Rating: <strong>921</strong> | Problems Solved: <strong>309</strong> | Max Streak: <strong>204 Days</strong></div>
+      <div class="stat-card-desc">Current Rating: <strong>921</strong> | Problems Solved: <strong>309</strong> | Maximum Streak: <strong>204 Days</strong></div>
     </div>
     <div class="stat-card">
-      <div class="stat-card-title">Beecrowd — ID: <a href="https://judge.beecrowd.com/en/profile/25215184">252-15-184</a></div>
-      <div class="stat-card-desc">Ranking: <strong>Top 7% Worldwide</strong> | Problems Solved: <strong>79</strong></div>
+      <div class="stat-card-title">Beecrowd — User ID: <a href="https://judge.beecrowd.com/en/profile/25215184">252-15-184</a></div>
+      <div class="stat-card-desc">Global Ranking: <strong>Top 7%</strong> | Problems Solved: <strong>79</strong></div>
     </div>
   </div>
 
   <!-- Achievements & Honors -->
   <div class="section-title">Achievements & Honors</div>
   <ul class="bullet-list">
-    <li><strong>LandTech Innovation Hackathon 2026 – Finalist:</strong> Qualified for Final Round with Team InnoSphere (JOMI-SHARE).</li>
-    <li><strong>AI Innovation Hackathon 2026 – Finalist:</strong> Selected for Final Round with Team TRIMATRIX at Daffodil International University.</li>
-    <li><strong>Unlock the Algorithm – Finalist:</strong> Finalist recognition in Unlock the Algorithm Contest by DIU CPC.</li>
-    <li><strong>DIU Mathematics Olympiad – Finalist:</strong> Preliminary Round Finalist by DIU Mathematical Society (DIUMS).</li>
-    <li><strong>Shapla Cub Award (2018):</strong> Highest National Honor in Cub Scouting by Bangladesh Scouts, signed by Prime Minister.</li>
+    <li><strong>LandTech Innovation Hackathon 2026:</strong> Finalist — Qualified for the Final Round with Team InnoSphere (JOMI-SHARE).</li>
+    <li><strong>AI Innovation Hackathon 2026:</strong> Finalist — Selected for the Final Round with Team TRIMATRIX at Daffodil International University.</li>
+    <li><strong>Unlock the Algorithm:</strong> Finalist — Unlock the Algorithm Contest organized by DIU CPC.</li>
+    <li><strong>DIU Mathematics Olympiad:</strong> Finalist — Preliminary Round Finalist organized by DIU Mathematical Society (DIUMS).</li>
+    <li><strong>Shapla Cub Award (2018):</strong> Received the highest national honor in Cub Scouting by Bangladesh Scouts, signed by the Prime Minister.</li>
   </ul>
 
 </body>
