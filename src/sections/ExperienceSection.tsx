@@ -43,7 +43,7 @@ export default function ExperienceSection() {
                 <span
                   className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
                     isCurrent
-                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 [data-theme=light]:bg-emerald-50 [data-theme=light]:text-emerald-700 [data-theme=light]:border-emerald-200'
+                      ? 'bg-[#75A2B5]/15 text-[#75A2B5] border border-[#75A2B5]/30 [data-theme=light]:bg-[#EAF2F5] [data-theme=light]:text-[#527F93] [data-theme=light]:border-[#C8DCE5]'
                       : 'bg-amber-500/20 text-amber-400 border border-amber-500/30 [data-theme=light]:bg-amber-50 [data-theme=light]:text-amber-700 [data-theme=light]:border-amber-200'
                   }`}
                 >
