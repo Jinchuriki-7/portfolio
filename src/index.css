@@ -46,7 +46,7 @@
   --input-text: #252923;
   --input-placeholder: #85877F;
   --input-border: #E6E2D8;
-  --shader-opacity: 0.30;
+  --shader-opacity: 0.85;
   --badge-profile-bg: #527F93;
   --badge-profile-text: #FCFBF7;
   --badge-profile-border: #F4F1E9;
@@ -84,7 +84,7 @@
   --input-text: #F1F5F2;
   --input-placeholder: #82958A;
   --input-border: #2B3932;
-  --shader-opacity: 0.75;
+  --shader-opacity: 0.85;
   --badge-profile-bg: #75A2B5;
   --badge-profile-text: #101613;
   --badge-profile-border: #101613;
@@ -212,7 +212,7 @@
 }
 
 [data-theme="light"] .shader-container {
-  opacity: 0.45;
+  filter: saturate(0.85) brightness(1.05);
 }
 
 /* Typography Helpers */

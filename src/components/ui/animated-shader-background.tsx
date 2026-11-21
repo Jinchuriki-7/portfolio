@@ -3,8 +3,9 @@ import * as THREE from 'three';
 
 /**
  * AnimatedShaderBackground
- * High-performance, slender WebGL dynamic aurora light streaks.
- * Razor-thin luminous filaments with zero background grey halos or capsule bodies.
+ * High-performance WebGL shooting star / filament light trails.
+ * Strictly bounded in length and width so they stay elegant, discrete,
+ * and never expand or blob over time.
  */
 export default function AnimatedShaderBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,57 +40,65 @@ export default function AnimatedShaderBackground() {
           // Normalized, aspect-corrected coordinates centered on screen
           vec2 uv = (gl_FragCoord.xy - iResolution.xy * 0.5) / iResolution.y;
 
-          // Diagonal tilt (-32 degrees)
-          float angle = -0.55;
-          mat2 rot = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
-          vec2 p = rot * uv * 2.8;
+          // 38-degree diagonal tilt matching the shooting light streaks angle
+          float ang = 0.66;
+          mat2 rot = mat2(cos(ang), -sin(ang), sin(ang), cos(ang));
+          vec2 p = rot * uv;
 
-          vec3 finalColor = vec3(0.0);
-          float finalAlpha = 0.0;
+          vec3 col = vec3(0.0);
+          float alpha = 0.0;
 
-          // Render 4 slender, delicate, glowing light filaments - NO grey capsule body
-          for (float i = 0.0; i < 4.0; i++) {
-            float t = iTime * 0.45 + i * 1.57;
+          // 16 discrete, slender shooting star filaments that stay strictly small and thin
+          for (float i = 0.0; i < 16.0; i++) {
+            // Pseudo-random fixed lane, speed, and length per streak
+            float lane = (fract(sin(i * 12.9898 + 1.5) * 43758.5453) - 0.5) * 2.4;
+            float speed = 0.28 + fract(sin(i * 78.233 + 3.7) * 43758.5453) * 0.32;
+            float len = 0.16 + fract(sin(i * 45.164 + 7.1) * 43758.5453) * 0.20; // Strictly 80px - 150px length
 
-            // Gentle sinusoidal undulation with small, strictly bounded amplitude
-            float wave = sin(p.x * 1.8 + t) * 0.12 + cos(p.x * 3.2 - t * 0.7) * 0.06;
+            // Periodic progress along diagonal (glides smoothly across screen)
+            float phase = fract(sin(i * 91.345 + 5.2) * 43758.5453);
+            float progress = fract(iTime * speed * 0.22 + phase) * 4.0 - 2.0;
 
-            // Controlled separation between filaments
-            float yPos = wave + (i - 1.5) * 0.38;
+            float dx = p.x - progress;
+            float dy = p.y - lane;
 
-            // Distance to filament center line
-            float dist = abs(p.y - yPos);
+            // Only render within the short bounds of the streak (strictly small!)
+            if (dx > 0.0 && dx < len) {
+              // Softly tapering tail from bright head to fading tail
+              float headGlow = exp(-dx * 60.0) * 0.4;
+              float tailFade = pow(1.0 - (dx / len), 2.0);
 
-            // Razor-thin core with steep quadratic dropoff - completely transparent beyond 3-4px
-            float core = 0.0035 / (dist * dist * 450.0 + 0.0035);
+              // Razor-thin width (2 - 3 pixels wide)
+              float core = exp(-abs(dy) * 400.0);
+              float halo = exp(-abs(dy) * 80.0) * 0.30;
 
-            // Soft longitudinal fade at screen edges
-            float endFade = smoothstep(2.6, 0.8, abs(p.x));
-            core *= endFade;
+              float intensity = (core + halo) * (tailFade + headGlow);
 
-            // Distinct vibrant neon colors matching Farhanul's signature palette
-            vec3 streakColor;
-            if (i < 1.0) {
-              streakColor = vec3(0.22, 0.75, 0.85); // Bright Cyan / Steel Blue
-            } else if (i < 2.0) {
-              streakColor = vec3(0.30, 0.85, 0.65); // Neon Mint / Emerald
-            } else if (i < 3.0) {
-              streakColor = vec3(0.46, 0.64, 0.95); // Dusty Blue
-            } else {
-              streakColor = vec3(0.65, 0.55, 0.95); // Subtle Lavender / Violet
+              // Authentic colors matching screenshot: Cyan, Mint Green, Lavender Purple, Dusty Blue
+              vec3 streakColor;
+              float colIdx = mod(i, 4.0);
+              if (colIdx < 1.0) {
+                streakColor = vec3(0.25, 0.88, 0.95); // Cyan
+              } else if (colIdx < 2.0) {
+                streakColor = vec3(0.38, 0.92, 0.65); // Mint Green
+              } else if (colIdx < 3.0) {
+                streakColor = vec3(0.70, 0.55, 0.98); // Lavender / Violet
+              } else {
+                streakColor = vec3(0.46, 0.68, 0.88); // Dusty / Steel Blue
+              }
+
+              col += streakColor * intensity;
+              alpha += intensity * 0.90;
             }
-
-            finalColor += streakColor * core;
-            finalAlpha += core * 0.85;
           }
 
-          // Strict clamping - alpha is 0.0 everywhere except directly on the thin beams
-          finalAlpha = clamp(finalAlpha, 0.0, 0.95);
+          // Ambient subtle background light filament
+          float ambient = exp(-abs(p.y - 0.25) * 12.0) * 0.05;
+          col += vec3(0.35, 0.55, 0.68) * ambient;
+          alpha += ambient * 0.4;
 
-          // Tone map color to prevent over-saturation
-          finalColor = finalColor / (1.0 + finalColor);
-
-          gl_FragColor = vec4(finalColor, finalAlpha);
+          alpha = clamp(alpha, 0.0, 0.85);
+          gl_FragColor = vec4(col, alpha);
         }
       `,
     });
@@ -100,7 +109,6 @@ export default function AnimatedShaderBackground() {
 
     let frameId: number;
     const animate = () => {
-      // Bounded periodic time to eliminate any floating-point precision loss over long durations
       material.uniforms.iTime.value = (performance.now() * 0.001) % 628.3185;
       renderer.render(scene, camera);
       frameId = requestAnimationFrame(animate);
