@@ -21,7 +21,7 @@ export default function AnimatedShaderBackground() {
     <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
       {/* 1. Subtle Developer Technical Grid Pattern */}
       <div
-        className="absolute inset-0 opacity-[0.45] [data-theme=dark]:opacity-[0.25] transition-opacity duration-500"
+        className="absolute inset-0 opacity-[0.25] [data-theme=dark]:opacity-[0.18] transition-opacity duration-500"
         style={{
           backgroundImage: `
             linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
@@ -35,7 +35,7 @@ export default function AnimatedShaderBackground() {
 
       {/* 2. Delicate Dot Matrix Nodes at Grid Intersections */}
       <div
-        className="absolute inset-0 opacity-[0.35] [data-theme=dark]:opacity-[0.20] transition-opacity duration-500"
+        className="absolute inset-0 opacity-[0.18] [data-theme=dark]:opacity-[0.14] transition-opacity duration-500"
         style={{
           backgroundImage: 'radial-gradient(var(--accent) 1px, transparent 1px)',
           backgroundSize: '48px 48px',
@@ -44,19 +44,19 @@ export default function AnimatedShaderBackground() {
         }}
       />
 
-      {/* 3. Floating Ambient Aurora Glow Blooms (Hardware-Accelerated Smooth CSS) */}
-      <div className="absolute top-[-8%] left-[-5%] w-[55vw] h-[55vw] max-w-[650px] max-h-[650px] rounded-full bg-[#75A2B5]/25 [data-theme=dark]:bg-[#75A2B5]/18 blur-[110px] animate-ambient-drift-1" />
-      <div className="absolute top-[18%] right-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-[#527F93]/22 [data-theme=dark]:bg-[#527F93]/20 blur-[120px] animate-ambient-drift-2" />
-      <div className="absolute top-[52%] left-[8%] w-[45vw] h-[45vw] max-w-[550px] max-h-[550px] rounded-full bg-[#38BDF8]/18 [data-theme=dark]:bg-[#38BDF8]/12 blur-[105px] animate-ambient-drift-3" />
+      {/* 3. Floating Ambient Aurora Glow Blooms (Soft, Subtle & Never Overpowering) */}
+      <div className="absolute top-[-8%] left-[-5%] w-[55vw] h-[55vw] max-w-[650px] max-h-[650px] rounded-full bg-[#75A2B5]/[0.07] [data-theme=dark]:bg-[#75A2B5]/[0.14] blur-[120px] animate-ambient-drift-1" />
+      <div className="absolute top-[18%] right-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-[#527F93]/[0.06] [data-theme=dark]:bg-[#527F93]/[0.12] blur-[130px] animate-ambient-drift-2" />
+      <div className="absolute top-[52%] left-[8%] w-[45vw] h-[45vw] max-w-[550px] max-h-[550px] rounded-full bg-[#75A2B5]/[0.05] [data-theme=dark]:bg-[#38BDF8]/[0.08] blur-[115px] animate-ambient-drift-3" />
 
       {/* 4. Interactive Spotlight Cursor Follow (Subtle) */}
       <div
-        className="absolute w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-opacity duration-500 blur-[90px]"
+        className="absolute w-[450px] h-[450px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-opacity duration-500 blur-[90px]"
         style={{
           left: `${mousePos.x}px`,
           top: `${mousePos.y}px`,
           background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
-          opacity: mousePos.x > 0 ? 0.12 : 0,
+          opacity: mousePos.x > 0 ? 0.05 : 0,
         }}
       />
     </div>
